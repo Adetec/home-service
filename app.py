@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Import modules
-from flask import Flask
+from flask import Flask, render_template
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model import Base, User
@@ -18,7 +18,7 @@ session = DBsession()
 
 @app.route('/')
 def home():
-    return 'Home page'
+    return render_template('home.html')
 
 @app.route('/admin')
 def admin():
