@@ -7,6 +7,12 @@ from sqlalchemy.orm import sessionmaker
 from model import Base, User
 from flask import session as login_session
 from flask_uploads import UploadSet, configure_uploads, IMAGES
+from flask_httpauth import HTTPBasicAuth
+import smtplib
+from email.message import EmailMessage
+
+
+auth = HTTPBasicAuth()
 
 
 app = Flask(__name__)
@@ -15,11 +21,47 @@ photos = UploadSet('photos', IMAGES)
 app.config['UPLOADED_PHOTOS_DEST'] = 'static/img'
 configure_uploads(app, photos)
 
+EMAIL_ADDRESS = 'adetech.home.service@gmail.com'
+EMAIL_PASSWORD = 'uhelsctayopsytlq'
+
+def send_activation_email(username, user_email, code):
+    msg = EmailMessage()
+    msg['Subject'] = 'Home service | Activate your account'
+    msg['From'] = EMAIL_ADDRESS
+    msg['To'] = user_email
+    msg.set_content('Welcome ' + username + ' among us to HOME SERVICE APP. Please activate your account using this code: ' + code)
+    msg.add_alternative('<div dir="rtl"><p> مرحبا بك <strong style="color:darkslateblue;">' + username + '</strong> في تطبيقنا المتواضع HOME SERVICE ،</p><p> يجب عليك تفعيل حسابك لللإستفادة من خدماتنا <strong style="color:darkslateblue;">' + code + '</strong></p></div>', subtype='html')
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+
+        smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+
+        # subject = 'تفعيل حسابك'
+        # body = ' مرحبا بك ' + username + 'في تطبيقنا المتواضع HOME SERVICE ، يجب عليك تفعيل حسابك لللإستفادة من خدماتنا ' + code
+
+        # msg = 'Subject: ' + subject + '\n\n' + body
+
+        try:
+            return smtp.send_message(msg)
+        except:
+            print('Email not sent')
+
 # Connect to the database
 engine = create_engine('sqlite:///data.db?check_same_thread=False')
 # Create database session
 DBsession = sessionmaker(bind=engine)
 session = DBsession()
+
+
+
+@auth.verify_password
+def verify_password(username, password):
+    user = session.query(User).filter_by(name = username).first()
+    if not user or not user.verify_password(password):
+        return False
+    else:
+        user = user
+        return True
+
 
 
 @app.route('/')
@@ -31,7 +73,9 @@ def admin():
     users = session.query(User).all()
     return 'My name is ' + users[0].name + ' and I\'m ' + users[0].m_type + ' here!'
 
+
 @app.route('/users')
+# @auth.login_required
 def display_users():
     users = session.query(User).all()
     return render_template('coucou.html', users=users)
@@ -57,6 +101,7 @@ def signup():
             session.add(user)
             session.commit()
             print(user.name + ' is added')
+            send_activation_email(user.name, user.email, '1984')
         except:
             print('Something went wrong')
         users = session.query(User).all()
