@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block main %}
+<div class="container row">
+    {% if users %}
+        {% for user in users %}
+            <div class="col s12 m12 z-depth-3">
+                <h2 class="green-text center">{{ user.name }}</h2>
+                <p class="indigo-text">Id: <span class="blue-text">{{ user.id }}</span></p>
+                <p class="indigo-text">Email: <span class="blue-text">{{ user.email }}</span></p>
+                <p class="indigo-text">Pass: <span class="blue-text">{{ user.password_hash }}</span></p>
+                <img class="responsive-img" src="static/img/{{ user.image }}" alt="">
+                
+            </div>
+        {% endfor %}
+</div>
+{% else %}
+        <div class="container">
+            <h1 class="red-text center">مكان حتى واحد!</h1>
+        </div>
+{% endif %}
+{% endblock %}

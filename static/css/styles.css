@@ -1,0 +1,15 @@
+html[dir="rtl"] .icon {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+.input-field .prefix {
+    left: 3rem;
+}
+
+.customized-icons {
+    font-family: 'Material Icons'
+}
