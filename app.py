@@ -94,16 +94,18 @@ def register():
 
         # user.hash_password(password)
         print(user.name, user.password)
-        try:
-            session.add(user)
-            session.commit()
-            print(user.name + ' is added')
-            send_activation_email(user.name, user.email, '1984')
-        except:
-            print('Something went wrong')
-        users = session.query(User).all()
-        flash(f'{user.name} added')
-        return (redirect(url_for('display_users')))
+        if form.validate_on_submit():
+            try:
+                session.add(user)
+                session.commit()
+                print(user.name + ' is added')
+                send_activation_email(user.name, user.email, '1984')
+                users = session.query(User).all()
+                flash(f'{user.name} added')
+                return (redirect(url_for('display_users')))
+            except:
+                print('Something went wrong')
+        return render_template('register.html', form=form)
     else:
         return render_template('register.html', form=form)
 
