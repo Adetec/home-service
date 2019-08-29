@@ -15,7 +15,7 @@ class User(Base):
     name = Column(String(250), nullable=False, index=True)
     email = Column(String(250), nullable=False)
     m_type = Column(String(50), nullable=False)
-    password_hash = Column(String(64))
+    password_hash = Column(String(64), nullable=False)
     image = Column(String(250), nullable=False, default='profile.jpg')
 
     def hash_password(self, password):
