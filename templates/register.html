@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block main %}
+    <div dir="ltr" class="row">
+        <form class="col s12 m12" method="POST" action="">
+                {{ form.hidden_tag() }}
+            <div class="input-field col s12 m6">
+                {{ form.username(class="validate") }}
+                <label for="name">{{ form.username.label }}</label>
+            </div>
+            <div class="input-field col s12 m6">
+                    {{ form.email(class="validate") }}
+                    <label for="email">{{ form.email.label }}</label>
+                </div>
+            <div class="input-field col s12 m6">
+                {{ form.password(class="validate") }}
+                <label for="password">{{ form.password.label }}</label>
+            </div>
+            <div class="input-field col s12 m6">
+                {{ form.confirm_password(class="validate") }}
+                <label for="conf-password">{{ form.confirm_password.label }}</label>
+            </div>
+            <div class="row">
+            <div class="file-field input-field col s12 m12">
+                    {{ form.submit(class="btn") }}
+            </div>
+            </div>
+        </form>
+    </div>
+            
+{% endblock %}

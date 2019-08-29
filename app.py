@@ -6,6 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model import Base, User
 from flask import session as login_session
+from forms import RegistrationForm, LoginForm
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 from flask_httpauth import HTTPBasicAuth
 import smtplib
@@ -16,6 +17,7 @@ auth = HTTPBasicAuth()
 
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'Super_secret_key'
 photos = UploadSet('photos', IMAGES)
 
 app.config['UPLOADED_PHOTOS_DEST'] = 'static/img'
@@ -108,6 +110,12 @@ def signup():
         return (redirect(url_for('display_users')))
     else:
         return (render_template('sign-up.html'))
+
+@app.route('/register', methods=['POST', 'GET'])
+def register():
+    form = RegistrationForm()
+    return render_template('register.html', form=form)
+
         
 
 # Run the app in the '__main__' scope
