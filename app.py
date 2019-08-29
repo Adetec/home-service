@@ -37,12 +37,6 @@ def send_activation_email(username, user_email, code):
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
 
         smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-
-        # subject = 'تفعيل حسابك'
-        # body = ' مرحبا بك ' + username + 'في تطبيقنا المتواضع HOME SERVICE ، يجب عليك تفعيل حسابك لللإستفادة من خدماتنا ' + code
-
-        # msg = 'Subject: ' + subject + '\n\n' + body
-
         try:
             return smtp.send_message(msg)
         except:
@@ -78,10 +72,10 @@ def display_users():
 def register():
     form = RegistrationForm()
     if request.method == 'POST':
-        # filename = photos.save(request.files['file'])
         username = form.username.data
         email = form.email.data
         password=form.password.data
+
         # Hash user password
         hashed_passowrd = bcrypt.generate_password_hash(password).decode('utf-8')
         if username is None or password is None:
@@ -92,8 +86,7 @@ def register():
             password=hashed_passowrd,
             m_type='admin')
 
-        # user.hash_password(password)
-        print(user.name, user.password)
+        # Check register validation
         if form.validate_on_submit():
             try:
                 session.add(user)
