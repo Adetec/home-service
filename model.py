@@ -12,7 +12,7 @@ class User(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False, index=True)
-    email = Column(String(250), nullable=False)
+    email = Column(String(250), nullable=False, unique=True)
     m_type = Column(String(50), nullable=False)
     password = Column(String(64), nullable=False)
     # Default Image credit is licensed by CC BY 3.0 "https://www.onlinewebfonts.com/icon/191958"

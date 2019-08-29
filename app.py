@@ -12,6 +12,7 @@ from flask_uploads import UploadSet, configure_uploads, IMAGES
 from flask_httpauth import HTTPBasicAuth
 import smtplib
 from email.message import EmailMessage
+from wtforms.validators import ValidationError
 
 
 auth = HTTPBasicAuth()
@@ -85,7 +86,6 @@ def register():
             email=request.form['email'],
             password=hashed_passowrd,
             m_type='admin')
-
         # Check register validation
         if form.validate_on_submit():
             try:
@@ -101,10 +101,3 @@ def register():
         return render_template('register.html', form=form)
     else:
         return render_template('register.html', form=form)
-
-        
-
-# Run the app in the '__main__' scope
-if __name__ == '__main__':
-    app.debug = True
-    app.run(host='0.0.0.0', port=5000)
