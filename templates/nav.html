@@ -15,7 +15,7 @@
                     <li><a class="radius red btn" href="#">خروج</a></li>
                 </ul>
                 <ul class="right hide-on-med-and-down row">
-                    <li><a class="radius btn" href="#">دخول</a></li>
+                    <li><a class="radius btn" href="{{ url_for('login') }}">دخول</a></li>
                 </ul>
                 <ul class="right hide-on-med-and-down row">
                     <li><a class="radius btn" href="{{ url_for('register') }}">تسجيل الدخول</a></li>
@@ -41,7 +41,7 @@
                 <li><a class="radius red darken-4 btn" href="#">خروج</a></li>
             </ul>
         <ul>
-            <li><a class="radius indigo darken-4 btn" href="#">دخول</a></li>
+            <li><a class="radius indigo darken-4 btn" href="{{ url_for('login') }}">دخول</a></li>
         </ul>
         <ul>
             <li><a class="radius indigo darken-4 btn" href="{{ url_for('register') }}">تسجيل الدخول</a></li>

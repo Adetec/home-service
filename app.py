@@ -13,6 +13,7 @@ from flask_httpauth import HTTPBasicAuth
 import smtplib
 from email.message import EmailMessage
 from wtforms.validators import ValidationError
+from flask_login import LoginManager
 
 
 auth = HTTPBasicAuth()
@@ -101,3 +102,9 @@ def register():
         return render_template('register.html', form=form)
     else:
         return render_template('register.html', form=form)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+@app.route('/login')
+def login():
+    return 'login'

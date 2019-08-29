@@ -6,12 +6,12 @@ from flask_wtf.file import FileField, FileAllowed
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from model import User
 
-
 # Connect to the database
 engine = create_engine('sqlite:///data.db?check_same_thread=False')
 # Create database session
 DBsession = sessionmaker(bind=engine)
 session = DBsession()
+
 
 class RegistrationForm(FlaskForm):
     username = StringField('الإسم',
