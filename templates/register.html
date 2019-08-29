@@ -7,7 +7,7 @@
                 <label for="name">{{ form.username.label }}</label>
                 {% if form.username.errors %}
                     {{ form.username(class="") }}
-                    <div class="red darken-3 white-text z-depth-1 center-align">
+                    <div class="red-text darken-3-text center-align pulse">
                         {% for error in form.username.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
@@ -20,7 +20,7 @@
             <div class="input-field col s12 m6">
                 {% if form.email.errors %}
                     {{ form.email(class="", type="email") }}
-                    <div class="red darken-3 white-text z-depth-1 center-align">
+                    <div class="red-text darken-3-text center-align pulse">
                         {% for error in form.email.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
@@ -34,7 +34,7 @@
             <div class="input-field col s12 m6">
                 {% if form.password.errors %}
                     {{ form.password(class="", type="password") }}
-                    <div class="red darken-3 white-text z-depth-1 center-align">
+                    <div class="red-text darken-3-text center-align pulse">
                         {% for error in form.password.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
@@ -47,7 +47,7 @@
             <div class="input-field col s12 m6">
                 {% if form.confirm_password.errors %}
                     {{ form.confirm_password(class="", type="password") }}
-                    <div class="red darken-3 white-text z-depth-1 center-align">
+                    <div class="red-text darken-3-text center-align pulse">
                         {% for error in form.confirm_password.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
@@ -59,7 +59,7 @@
             </div>
             <div class="row">
             <div class="file-field input-field col s12 m12">
-                    {{ form.submit(class="btn indigo") }}
+                    {{ form.submit(class="btn-large indigo") }}
             </div>
             </div>
         </form>
