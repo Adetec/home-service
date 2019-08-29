@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Import modules
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, flash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model import Base, User
@@ -102,6 +102,7 @@ def register():
         except:
             print('Something went wrong')
         users = session.query(User).all()
+        flash(f'{user.name} added')
         return (redirect(url_for('display_users')))
     else:
         return render_template('register.html', form=form)
