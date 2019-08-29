@@ -57,17 +57,6 @@ session = DBsession()
 bcrypt = Bcrypt(app)
 
 
-''' @auth.verify_password
-def verify_password(username, password):
-    user = session.query(User).filter_by(name = username).first()
-    if not user or not user.verify_password(password):
-        return False
-    else:
-        user = user
-        return True '''
-
-
-
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -85,12 +74,14 @@ def display_users():
     return render_template('coucou.html', users=users)
 
 
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
+@app.route('/register', methods=['POST', 'GET'])
+def register():
+    form = RegistrationForm()
     if request.method == 'POST':
-        filename = photos.save(request.files['file'])
-        password=request.form['password']
-        username = request.form['name']
+        # filename = photos.save(request.files['file'])
+        username = form.username.data
+        email = form.email.data
+        password=form.password.data
         # Hash user password
         hashed_passowrd = bcrypt.generate_password_hash(password).decode('utf-8')
         if username is None or password is None:
@@ -98,7 +89,6 @@ def signup():
         user = User(
             name=username,
             email=request.form['email'],
-            image=filename,
             password=hashed_passowrd,
             m_type='admin')
 
@@ -114,12 +104,7 @@ def signup():
         users = session.query(User).all()
         return (redirect(url_for('display_users')))
     else:
-        return (render_template('sign-up.html'))
-
-@app.route('/register', methods=['POST', 'GET'])
-def register():
-    form = RegistrationForm()
-    return render_template('register.html', form=form)
+        return render_template('register.html', form=form)
 
         
 
