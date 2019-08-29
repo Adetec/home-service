@@ -15,16 +15,16 @@ class User(Base):
     name = Column(String(250), nullable=False, index=True)
     email = Column(String(250), nullable=False)
     m_type = Column(String(50), nullable=False)
-    password_hash = Column(String(64), nullable=False)
+    password = Column(String(64), nullable=False)
     image = Column(String(250), nullable=False, default='profile.jpg')
-
+    '''
     def hash_password(self, password):
         self.password_hash = pwd_context.hash(password)
 
     def verify_password(self, password):
         return pwd_context.verify(password, self.password_hash)
 
-
+    '''
     @property
     def serialize(self):
         return {
@@ -32,7 +32,7 @@ class User(Base):
             'name': self.name,
             'email': self.email,
             'm_type': self.m_type,
-            'password_hash': self.password_hash,
+            'password': self.password,
             'image': self.image
         }
 

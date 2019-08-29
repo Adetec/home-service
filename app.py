@@ -6,6 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model import Base, User
 from flask import session as login_session
+from flask_bcrypt import Bcrypt
 from forms import RegistrationForm, LoginForm
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 from flask_httpauth import HTTPBasicAuth
@@ -53,16 +54,17 @@ engine = create_engine('sqlite:///data.db?check_same_thread=False')
 DBsession = sessionmaker(bind=engine)
 session = DBsession()
 
+bcrypt = Bcrypt(app)
 
 
-@auth.verify_password
+''' @auth.verify_password
 def verify_password(username, password):
     user = session.query(User).filter_by(name = username).first()
     if not user or not user.verify_password(password):
         return False
     else:
         user = user
-        return True
+        return True '''
 
 
 
@@ -89,16 +91,19 @@ def signup():
         filename = photos.save(request.files['file'])
         password=request.form['password']
         username = request.form['name']
+        # Hash user password
+        hashed_passowrd = bcrypt.generate_password_hash(password).decode('utf-8')
         if username is None or password is None:
             abort(400)
         user = User(
             name=username,
             email=request.form['email'],
             image=filename,
+            password=hashed_passowrd,
             m_type='admin')
 
-        user.hash_password(password)
-        print(user.name, user.password_hash)
+        # user.hash_password(password)
+        print(user.name, user.password)
         try:
             session.add(user)
             session.commit()
