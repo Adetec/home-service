@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from flask_wtf.file import FileField, FileAllowed
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 
 class RegistrationForm(FlaskForm):
@@ -10,6 +11,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('كلمة السر', validators=[DataRequired()])
     confirm_password = PasswordField('تأكيد كلمة السر',
                                     validators=[DataRequired(), EqualTo('password')])
+    picture = FileField('تحميل الصورة', validators=[FileAllowed(['jpg', 'png'])])
     submit = SubmitField('تسجيل')
 
 
