@@ -5,28 +5,24 @@
                 <ul class="hide-on-med-and-down">
                     <li><a href="{{ url_for('display_users') }}">المستخدمين</a></li>
                     <li><a href="#">اتصل بنا</a></li>
-                </ul>
-                {% if logged_user %}
-                <ul class="right hide-on-med-and-down row">
+                    <!-- Dropdown Trigger -->
                     <li>
-                        <div class="btn indigo btn-floating tooltipped" data-position="bottom" data-tooltip="I am login_session['username']">
-                            <img class="responsive-img" src="" alt="">
+                        <a class='dropdown-trigger hover' href='#' data-target='dropdown1'>الخدمات</a>
+                    </li>
+                </ul>
+                <ul class="right hide-on-med-and-down row">
+                {% if logged_user %}
+                    <li>
+                        <div class="btn white btn-floating tooltipped" data-position="bottom" data-tooltip="I am login_session['username']">
+                            <img class="responsive-img" src="static/img/users-profile/{{ logged_user.image }}" alt="">
                         </div>
                     </li>
                     <li><a class="radius red btn" href="#">خروج</a></li>
-                </ul>
                 {% else %}
-                    <ul class="right hide-on-med-and-down row">
-                        <li><a class="radius indigo btn" href="{{ url_for('login') }}">دخول</a></li>
-                    </ul>
-                    
-                    <ul class="right hide-on-med-and-down row">
-                        <li><a class="radius indigo btn" href="{{ url_for('register') }}">تسجيل الدخول</a></li>
-                    </ul>
-                
+                    <li><a class="radius indigo btn" href="{{ url_for('login') }}">دخول</a></li>
+                    <li><a class="radius indigo btn" href="{{ url_for('register') }}">تسجيل الدخول</a></li>
                 {% endif %}
-            <!-- Dropdown Trigger -->
-            <a class='dropdown-trigger indigo btn' href='#' data-target='dropdown1'>الخدمات</a>
+                </ul>
     
             <!-- Dropdown Structure -->
             <ul id='dropdown1' class='dropdown-content indigo darken-4 z-depth-4'>
@@ -53,7 +49,7 @@
         </ul>
         <!-- Dropdown Trigger -->
         <ul>
-            <li><a class='dropdown-trigger indigo btn' href='#' data-target='dropdown2'>API ENDPOINTS</a></li>
+            <li><a class='dropdown-trigger indigo btn' href='#' data-target='dropdown2'>الخدمات</a></li>
         </ul>
     
         <!-- Dropdown Structure -->
