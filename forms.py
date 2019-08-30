@@ -4,7 +4,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from flask_wtf.file import FileField, FileAllowed
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from model import User
+from models import User
 
 # Connect to the database
 engine = create_engine('sqlite:///data.db?check_same_thread=False')

@@ -4,7 +4,7 @@
 from flask import Flask, render_template, url_for, request, redirect, flash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model import Base, User
+from models import Base, User
 from flask import session as login_session
 from flask_bcrypt import Bcrypt
 from forms import RegistrationForm, LoginForm
@@ -67,7 +67,7 @@ def admin():
 # @auth.login_required
 def display_users():
     users = session.query(User).all()
-    return render_template('coucou.html', users=users)
+    return render_template('users.html', users=users)
 
 
 @app.route('/register', methods=['POST', 'GET'])
