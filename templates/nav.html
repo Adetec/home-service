@@ -3,8 +3,8 @@
             <a href="/" class="brand-logo center">بيتي</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="hide-on-med-and-down">
-                    <li><a href="#">زر 1</a></li>
-                    <li><a href="#">زر 2</a></li>
+                    <li><a href="{{ url_for('display_users') }}">المستخدمين</a></li>
+                    <li><a href="#">اتصل بنا</a></li>
                 </ul>
                 <ul class="right hide-on-med-and-down row">
                     <li>
@@ -35,8 +35,8 @@
     </nav>
     
     <ul class="sidenav indigo lighten-5" id="mobile-demo">
-            <li><a href="#">زر 1</a></li>
-                    <li><a href="#">زر 2</a></li>
+            <li><a href="{{ url_for('display_users') }}">المستخدمين</a></li>
+                    <li><a href="#">اتصل بنا</a></li>
             <ul>
                 <li><a class="radius red darken-4 btn" href="#">خروج</a></li>
             </ul>
