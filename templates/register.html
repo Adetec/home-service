@@ -4,7 +4,7 @@
         <form class="col s12 m12" method="POST" action="">
                 {{ form.hidden_tag() }}
             <div class="input-field col s12 m6">
-                <label for="name">{{ form.username.label }}</label>
+                {{ form.username.label }}
                 {% if form.username.errors %}
                     {{ form.username(class="") }}
                     <div class="red-text darken-3-text center-align pulse">
@@ -28,7 +28,7 @@
                 {% else %}
                     {{ form.email(class="", type="email") }}
                 {% endif %}
-                <label for="email">{{ form.email.label }}</label>
+                {{ form.email.label }}
             </div>
 
             <div class="input-field col s12 m6">
@@ -42,7 +42,7 @@
                 {% else %}
                     {{ form.password(class="", type="password") }}
                 {% endif %}
-                <label for="password">{{ form.password.label }}</label>
+                {{ form.password.label }}
             </div>
             <div class="input-field col s12 m6">
                 {% if form.confirm_password.errors %}
@@ -55,11 +55,11 @@
                 {% else %}
                     {{ form.confirm_password(class="", type="password") }}
                 {% endif %}
-                <label for="password">{{ form.confirm_password.label }}</label>
+                {{ form.confirm_password.label }}
             </div>
             <div class="row">
             <div class="file-field input-field col s12 m12">
-                    {{ form.submit(class="btn-large indigo") }}
+                {{ form.submit(class="btn-large indigo") }}
             </div>
             </div>
         </form>
