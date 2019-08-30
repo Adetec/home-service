@@ -6,6 +6,7 @@
                     <li><a href="{{ url_for('display_users') }}">المستخدمين</a></li>
                     <li><a href="#">اتصل بنا</a></li>
                 </ul>
+                {% if logged_user %}
                 <ul class="right hide-on-med-and-down row">
                     <li>
                         <div class="btn indigo btn-floating tooltipped" data-position="bottom" data-tooltip="I am login_session['username']">
@@ -14,12 +15,16 @@
                     </li>
                     <li><a class="radius red btn" href="#">خروج</a></li>
                 </ul>
-                <ul class="right hide-on-med-and-down row">
-                    <li><a class="radius indigo btn" href="{{ url_for('login') }}">دخول</a></li>
-                </ul>
-                <ul class="right hide-on-med-and-down row">
-                    <li><a class="radius indigo btn" href="{{ url_for('register') }}">تسجيل الدخول</a></li>
-                </ul>
+                {% else %}
+                    <ul class="right hide-on-med-and-down row">
+                        <li><a class="radius indigo btn" href="{{ url_for('login') }}">دخول</a></li>
+                    </ul>
+                    
+                    <ul class="right hide-on-med-and-down row">
+                        <li><a class="radius indigo btn" href="{{ url_for('register') }}">تسجيل الدخول</a></li>
+                    </ul>
+                
+                {% endif %}
             <!-- Dropdown Trigger -->
             <a class='dropdown-trigger indigo btn' href='#' data-target='dropdown1'>الخدمات</a>
     

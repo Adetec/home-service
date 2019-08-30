@@ -113,7 +113,7 @@ def login():
             login_user(user, remember=form.remember.data)
             flash(f'مرحبا {user.name}')
             print(f'Remember me stat: {form.remember.data}')
-            return redirect(url_for('home'))
+            return render_template('home.html', logged_user=user)
         else:
             return render_template('login.html', form=form)
     return render_template('login.html', form=form)
