@@ -28,6 +28,7 @@ configure_uploads(app, photos)
 
 EMAIL_ADDRESS = 'adetech.home.service@gmail.com'
 EMAIL_PASSWORD = 'uhelsctayopsytlq'
+login_manager = LoginManager(app)
 
 def send_activation_email(username, user_email, code):
     msg = EmailMessage()
@@ -103,8 +104,6 @@ def register():
     else:
         return render_template('register.html', form=form)
 
-login_manager = LoginManager()
-login_manager.init_app(app)
 @app.route('/login')
 def login():
     return 'login'
