@@ -1,13 +1,21 @@
 # Import SQLAlchemy
+from flask import Flask
 from sqlalchemy import Column, ForeignKey, Integer, String, LargeBinary, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
+from flask_login import LoginManager, UserMixin
 
 Base = declarative_base()
+login_manager = LoginManager(Flask(__name__))
+
+# Load logged user
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 # Create Needed models for database tables
-class User(Base):
+class User(Base, UserMixin):
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
