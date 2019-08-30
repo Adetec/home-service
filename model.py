@@ -1,5 +1,5 @@
 # Import SQLAlchemy
-from sqlalchemy import Column, ForeignKey, Integer, String, LargeBinary
+from sqlalchemy import Column, ForeignKey, Integer, String, LargeBinary, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
@@ -17,6 +17,7 @@ class User(Base):
     password = Column(String(64), nullable=False)
     # Default Image credit is licensed by CC BY 3.0 "https://www.onlinewebfonts.com/icon/191958"
     image = Column(String(250), nullable=False, default='profile.svg')
+    is_active = Column(Boolean, nullable=False, default=False)
     
     # Method for API enpoints
     @property
