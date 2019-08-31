@@ -12,7 +12,7 @@ def load_user(user_id):
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
-    full_name = db.Column(db.String(64))
+    full_name = db.Column(db.String(64), default='no full name')
     email = db.Column(db.String(120), unique=True, nullable=False)
     user_type = db.Column(db.String(20))
     # Default Image credit is licensed by CC BY 3.0 "https://www.onlinewebfonts.com/icon/191958"
