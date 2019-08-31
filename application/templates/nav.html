@@ -17,7 +17,7 @@
                             <img class="responsive-img" src="static/img/users-profile/{{ current_user.image_file }}" alt="">
                         </div>
                     </li>
-                    <li><a class="radius red btn" href="{{ url_for('logout') }}">خروج</a></li>
+                    <li><a class="radius red darken-3 btn" href="{{ url_for('logout') }}">خروج</a></li>
                 {% else %}
                     <li><a class="radius indigo btn" href="{{ url_for('login') }}">دخول</a></li>
                     <li><a class="radius indigo btn" href="{{ url_for('register') }}">تسجيل الدخول</a></li>
