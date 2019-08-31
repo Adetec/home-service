@@ -13,7 +13,7 @@ from flask_httpauth import HTTPBasicAuth
 import smtplib
 from email.message import EmailMessage
 from wtforms.validators import ValidationError
-from flask_login import LoginManager, login_user
+from flask_login import LoginManager, login_user, current_user
 
 
 auth = HTTPBasicAuth()
@@ -104,6 +104,11 @@ def register():
     else:
         return render_template('register.html', form=form)
 
+# Load logged user
+@login_manager.user_loader
+def load_user(id):
+    return session.query(User).get(int(id))
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -112,7 +117,7 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             flash(f'مرحبا {user.name}')
-            print(f'Remember me stat: {form.remember.data}')
+            print(f'Remember me stat: {form.remember.data}, Current user: {current_user.is_authenticated}')
             return render_template('home.html', logged_user=user)
         else:
             return render_template('login.html', form=form)

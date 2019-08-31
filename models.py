@@ -9,10 +9,6 @@ from flask_login import LoginManager, UserMixin
 Base = declarative_base()
 login_manager = LoginManager(Flask(__name__))
 
-# Load logged user
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
 
 # Create Needed models for database tables
 class User(Base, UserMixin):
