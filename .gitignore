@@ -1,4 +1,4 @@
 __pycache__
 *.pyc
 *.db
-static/img/users-profile
+application/static/img/users-profile

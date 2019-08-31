@@ -11,13 +11,13 @@
                     </li>
                 </ul>
                 <ul class="right hide-on-med-and-down row">
-                {% if logged_user %}
+                {% if current_user.is_authenticated %}
                     <li>
                         <div class="btn white btn-floating tooltipped" data-position="bottom" data-tooltip="I am login_session['username']">
-                            <img class="responsive-img" src="static/img/users-profile/{{ logged_user.image }}" alt="">
+                            <img class="responsive-img" src="static/img/users-profile/{{ current_user.image_file }}" alt="">
                         </div>
                     </li>
-                    <li><a class="radius red btn" href="#">خروج</a></li>
+                    <li><a class="radius red btn" href="{{ url_for('logout') }}">خروج</a></li>
                 {% else %}
                     <li><a class="radius indigo btn" href="{{ url_for('login') }}">دخول</a></li>
                     <li><a class="radius indigo btn" href="{{ url_for('register') }}">تسجيل الدخول</a></li>
