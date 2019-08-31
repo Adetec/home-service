@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="row container">
-        <form class="col s12 m12" method="POST" action="">
+        <form class="col s12 m12" method="POST" action="" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
             <div class="input-field col s12 m6">
                 {{ form.username.label }}
@@ -50,6 +50,21 @@
                 {% else %}
                     {{ form.full_name(class="") }}
                 {% endif %}
+            </div>
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>تغيير الصورة</span>
+                </div>
+                <div class="file-path-wrapper">
+                    {{ form.picture(class="file-path validate") }}
+                </div>
+                <div class="red-text darken-3-text center-align pulse">
+                    {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div>
             <div class="row">
             <div class="file-field input-field col s12 m12">
