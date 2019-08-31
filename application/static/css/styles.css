@@ -22,3 +22,7 @@ html[dir="rtl"] .icon {
 .customized-icons {
     font-family: 'Material Icons'
 }
+
+.material-tooltip {
+    background-color: #3f51b5;
+}
