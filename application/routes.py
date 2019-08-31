@@ -1,6 +1,7 @@
 # Import modules
 import os
 import secrets
+from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from application import app, db, bcrypt
 from application.forms import RegistrationForm, LoginForm, UpdateProfileForm
@@ -60,14 +61,20 @@ def display_users():
     users = User.query.all()
     return render_template('users.html', users=users)
 
-def save_picture(picture_from_form):
-
+def save_profile_picture(picture_from_form):
+    # Generate hex picture filename
     hex_random = secrets.token_hex(8)
     _ , file_extension = os.path.splitext(picture_from_form.filename)
     picture_filname = f'profil{hex_random}{file_extension}'
+    # Set the picture path
     picture_path = os.path.join(app.root_path, 'static/img/users-profile', picture_filname)
     print(f'Picture path: {picture_path}')
-    picture_from_form.save(picture_path)
+    # resize the picture
+    output_size = (256, 256)
+    image = Image.open(picture_from_form)
+    image.thumbnail(output_size)
+    # Finally Save it
+    image.save(picture_path)
 
     return picture_filname
 
@@ -76,7 +83,7 @@ def profile():
     form = UpdateProfileForm()
     if form.validate_on_submit():
         if form.picture.data:
-            picture_file = save_picture(form.picture.data)
+            picture_file = save_profile_picture(form.picture.data)
             current_user.image_file = picture_file
         current_user.username = form.username.data
         current_user.full_name = form.full_name.data
