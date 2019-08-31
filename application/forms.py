@@ -1,7 +1,7 @@
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from application.models import User
 
@@ -15,6 +15,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('كلمة السر', validators=[DataRequired()])
     confirm_password = PasswordField('تأكيد كلمة السر',
                                      validators=[DataRequired(), EqualTo('password')])
+    user_type = SelectField('طبيعة الحساب', validators=[DataRequired()], choices=[(None, 'طبيعة الحساب'), ('client', 'زبون'), ('worker', 'مهني'), ('enterprener', 'مقاول'), ('company', 'شركة')])
     submit = SubmitField('تسجيل')
 
     def validate_username(self, username):
@@ -27,6 +28,7 @@ class RegistrationForm(FlaskForm):
         if user:
             raise ValidationError('عفوا، هذا البريد محجوز، برجاء إختيار بريدا آخر')
 
+    
 
 class LoginForm(FlaskForm):
     email = StringField('البريد الإلكتروني',

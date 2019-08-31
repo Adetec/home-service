@@ -1,4 +1,5 @@
-body {
+body,
+.select-wrapper input.select-dropdown {
     font-family: 'Changa', serif;
 }
 
@@ -17,6 +18,19 @@ html[dir="rtl"] .icon {
 [type="checkbox"]:checked + span:not(.lever):before {
     border-right: 4px solid #3f51b5;
     border-bottom: 4px solid #3f51b5;
+}
+
+.input-field.col label {
+    right: .75rem !important;
+}
+
+.select-wrapper .caret {
+    fill: #3f51b5;
+    right: 96%;
+}
+
+.dropdown-content li {
+    text-align: right;
 }
 
 .customized-icons {

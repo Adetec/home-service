@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block main %}
     <div class="row container">
-        <form class="col s12 m12" method="POST" action="">
+        
+        <form class="col s12 m8" method="POST" action="">
                 {{ form.hidden_tag() }}
-            <div class="input-field col s12 m6">
+            <div class="input-field col s12 m12">
                 {{ form.username.label }}
                 {% if form.username.errors %}
                     {{ form.username(class="") }}
@@ -17,7 +18,7 @@
                 {% endif %}
             </div>
 
-            <div class="input-field col s12 m6">
+            <div class="input-field col s12 m12">
                 {% if form.email.errors %}
                     {{ form.email(class="", type="email") }}
                     <div class="red-text darken-3-text center-align pulse">
@@ -31,7 +32,7 @@
                 {{ form.email.label }}
             </div>
 
-            <div class="input-field col s12 m6">
+            <div class="input-field col s12 m12">
                 {% if form.password.errors %}
                     {{ form.password(class="", type="password") }}
                     <div class="red-text darken-3-text center-align pulse">
@@ -44,7 +45,7 @@
                 {% endif %}
                 {{ form.password.label }}
             </div>
-            <div class="input-field col s12 m6">
+            <div class="input-field col s12 m12">
                 {% if form.confirm_password.errors %}
                     {{ form.confirm_password(class="", type="password") }}
                     <div class="red-text darken-3-text center-align pulse">
@@ -58,11 +59,28 @@
                 {{ form.confirm_password.label }}
             </div>
             <div class="row">
-            <div class="file-field input-field col s12 m12">
-                {{ form.submit(class="btn-large indigo") }}
-            </div>
+                <div class="input-field col s12 m12">
+                    {% if form.user_type.errors %}
+                        {{ form.user_type(class="") }}
+                        <div class="red-text darken-3-text center-align pulse">
+                            {% for error in form.user_type.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.user_type(class="") }}
+                    {% endif %}
+                </div>
+                <div class="file-field input-field col s12 m12">
+                    {{ form.submit(class="btn-large indigo") }}
+                </div>
             </div>
         </form>
+
+        <div class="col m4">
+            <h2 class="indigo-text">سعداء بلحاقك</h2>
+            <img class="responsive-img" src="static/img/nh-logo.png" alt="">
+        </div>
     </div>
             
 {% endblock %}
