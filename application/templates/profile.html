@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block main %}
+    <div class="container row">
+        <div class="">
+            <h2 class="header">{{ current_user.username }}</h2>
+            <div class="card horizontal">
+                <div class="card-image">
+                <img class="responsiv-img circle" src="static/img/users-profile/{{ current_user.image_file }}">
+                </div>
+                <div class="card-stacked">
+                <div class="card-content">
+                    <p class="indigo-text">الرقم: <span class="blue-text">{{ current_user.id }}</span></p>
+                    <p class="indigo-text">البريد الإلكتروني: <span class="blue-text">{{ current_user.email }}</span></p>
+                    <p class="indigo-text">مفعل: <span class="blue-text">{{ current_user.is_active }}</span></p>
+                    <p class="indigo-text">طبيعة المستخدم: <span class="blue-text">{{ current_user.user_type }}</span></p>
+                </div>
+                <div class="card-action">
+                    <a class="indigo-text left" href="#">المزيد من التفاصيل</a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

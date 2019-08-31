@@ -59,4 +59,6 @@ def display_users():
     return render_template('users.html', users=users)
 
 
-
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')

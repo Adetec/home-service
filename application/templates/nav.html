@@ -13,9 +13,11 @@
                 <ul class="right hide-on-med-and-down row">
                 {% if current_user.is_authenticated %}
                     <li>
-                        <div class="btn white btn-floating tooltipped" data-position="bottom" data-tooltip="{{ current_user.username }}">
-                            <img class="responsive-img" src="static/img/users-profile/{{ current_user.image_file }}" alt="">
-                        </div>
+                        <a href="{{ url_for('profile') }}">
+                            <div class="btn white btn-floating tooltipped" data-position="bottom" data-tooltip="{{ current_user.username }}">
+                                <img class="responsive-img" src="static/img/users-profile/{{ current_user.image_file }}" alt="">
+                            </div>
+                        </a>
                     </li>
                     <li><a class="radius red darken-3 btn" href="{{ url_for('logout') }}">خروج</a></li>
                 {% else %}
