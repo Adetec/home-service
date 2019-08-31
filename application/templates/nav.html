@@ -13,7 +13,7 @@
                 <ul class="right hide-on-med-and-down row">
                 {% if current_user.is_authenticated %}
                     <li>
-                        <div class="btn white btn-floating tooltipped" data-position="bottom" data-tooltip="I am login_session['username']">
+                        <div class="btn white btn-floating tooltipped" data-position="bottom" data-tooltip="{{ current_user.username }}">
                             <img class="responsive-img" src="static/img/users-profile/{{ current_user.image_file }}" alt="">
                         </div>
                     </li>
