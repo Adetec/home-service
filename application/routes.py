@@ -13,7 +13,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html')
+    return render_template('home.html', title='Need Help!')
 
 
 
@@ -31,7 +31,7 @@ def register():
         db.session.commit()
         flash('قد تم تسجيلك بنجاح', 'success')
         return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form)
+    return render_template('register.html', form=form, title='NH | حساب جديد')
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -47,7 +47,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('الرجاء التأكد من بريدك الإلكتروني أو كلمة السر', 'danger')
-    return render_template('login.html', title='Login', form=form)
+    return render_template('login.html', form=form, title='NH | تسجيل دخول')
 
 
 @app.route("/logout")
@@ -59,7 +59,7 @@ def logout():
 # @auth.login_required
 def display_users():
     users = User.query.all()
-    return render_template('users.html', users=users)
+    return render_template('users.html', users=users, title='NH | المستخدمين')
 
 def save_profile_picture(picture_from_form):
     # Generate hex picture filename
@@ -93,4 +93,4 @@ def profile():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.full_name.data = current_user.full_name
-    return render_template('profile.html', form=form)
+    return render_template('profile.html', form=form, title='NH | حسابي')
