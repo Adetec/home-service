@@ -22,4 +22,40 @@
             </div>
         </div>
     </div>
+    <div class="row container">
+        <form class="col s12 m12" method="POST" action="">
+                {{ form.hidden_tag() }}
+            <div class="input-field col s12 m6">
+                {{ form.username.label }}
+                {% if form.username.errors %}
+                    {{ form.username(class="") }}
+                    <div class="red-text darken-3-text center-align pulse">
+                        {% for error in form.username.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.username(class="") }}
+                {% endif %}
+            </div>
+            <div class="input-field col s12 m6">
+                {{ form.full_name.label }}
+                {% if form.full_name.errors %}
+                    {{ form.full_name(class="") }}
+                    <div class="red-text darken-3-text center-align pulse">
+                        {% for error in form.full_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.full_name(class="") }}
+                {% endif %}
+            </div>
+            <div class="row">
+            <div class="file-field input-field col s12 m12">
+                {{ form.submit(class="btn-large indigo") }}
+            </div>
+            </div>
+        </form>
+    </div>
 {% endblock %}
