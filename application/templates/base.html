@@ -17,9 +17,7 @@
     <!-- Start header container -->
     <header>
         <div class="back"></div>
-        <div class="navbar-fixed">
-            {% include 'nav.html' %}
-        </div>
+        {% include 'nav.html' %}
     </header>
     <!-- End header container -->
 
@@ -70,6 +68,7 @@
             $('input#input_text, textarea#textarea2').characterCounter();
             $('select').formSelect();
             $('.parallax').parallax();
+            $(".dropdown-trigger").dropdown();
         });
     </script>
 </body>

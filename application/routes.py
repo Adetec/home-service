@@ -4,8 +4,8 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from application import app, db, bcrypt
-from application.forms import RegistrationForm, LoginForm, UpdateProfileForm, CategoryForm
-from application.models import User, Category
+from application.forms import RegistrationForm, LoginForm, UpdateProfileForm, CategoryForm, ServiceForm
+from application.models import User, Category, Service
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -129,5 +129,27 @@ def add_category():
         db.session.add(category)
         db.session.commit()
         flash('قد تم إظافة الصنف بنجاح', 'success')
-        return redirect(url_for('login'))
+        return redirect(url_for('home'))
     return render_template('new-category.html', form=form, title='NH | صنف جديد')
+
+
+
+
+
+# Service routes:
+@app.route('/service/new', methods=['GET', 'POST'])
+def add_service():
+    print('ID => ' + str(current_user.id))
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = ServiceForm()
+    if form.validate_on_submit():
+        service = Service(service_name=form.service_name.data, description=form.description.data, category_id=1, user_id=current_user.id)
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data, 'services')
+            service.image_file = picture_file
+        db.session.add(service)
+        db.session.commit()
+        flash('قد تم إظافة الصنف بنجاح', 'success')
+        return redirect(url_for('home'))
+    return render_template('new-service.html', form=form, title='NH | خدمة جديدة')

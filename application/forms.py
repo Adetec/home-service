@@ -1,9 +1,9 @@
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, TextAreaField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from application.models import User, Category
+from application.models import User, Category, Service
 
 
 class RegistrationForm(FlaskForm):
@@ -57,6 +57,14 @@ class CategoryForm(FlaskForm):
     category_name = StringField('الصنف', validators=[DataRequired()])
     description = TextAreaField('وصف الصنف', validators=[DataRequired()])
     picture = FileField('تحميل صورة الصنف', validators=[FileAllowed(['jpg', 'png', 'svg'])])
+    submit = SubmitField('إظافة')
+
+
+class ServiceForm(FlaskForm):
+    service_name = StringField('الخدمة', validators=[DataRequired()])
+    description = TextAreaField('وصف الخدمة', validators=[DataRequired()])
+    picture = FileField('تحميل صورة الخدمة', validators=[FileAllowed(['jpg', 'png', 'svg'])])
+    category_id = IntegerField('الصنف', validators=[DataRequired()])
     submit = SubmitField('إظافة')
 
     

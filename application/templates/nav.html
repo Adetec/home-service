@@ -4,7 +4,8 @@
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="hide-on-med-and-down">
                     <li><a class="white-text" href="{{ url_for('display_users') }}">المستخدمين</a></li>
-                    <li><a class="white-text" href="#">اتصل بنا</a></li>
+                    <li><a class="white-text" href="{{ url_for('add_category') }}">صنف جديد</a></li>
+                    <li><a class="white-text" href="{{ url_for('add_service') }}">خدمة جديدة</a></li>
                     <!-- Dropdown Trigger -->
                     <li>
                         <a class="white-text" class='dropdown-trigger hover' href='#' data-target='dropdown1'>الخدمات</a>

@@ -74,8 +74,10 @@ class Service(db.Model):
     def serialize(self):
         return {
             'id': self.id,
-            'category_name': self.category_name,
+            'service_name': self.category_name,
             'description': self.description,
+            'user_id': self.user_id,
+            'category_id': self.category_id,
             'image_file': self.image_file
         }
 

@@ -4,3 +4,4 @@ __pycache__
 .VSCODE
 application/static/img/users-profile
 application/static/img/categories
+application/static/img/services
