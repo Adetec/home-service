@@ -17,10 +17,15 @@
         <div class="row container">
             <h2 class="header indigo-text">الخدمات حسب الصنف</h2>
             {% if categories %}
-                {% for category in categories %}
-                    <p class="indigo-text">{{ category.category_name }}</p>
-                    <p class="">{{ category.description }}</p>
-                {% endfor %}
+                <div class="carousel carousel-slider">
+                    {% for category in categories %}
+                    <a class="carousel-item" href="#cat{{ category.id }}">
+                        <img class="responsive-img" src="static/img/categories/{{ category.image_file }}">
+                        <p class="indigo-text">{{ category.category_name }}</p>
+                        <p class="">{{ category.description }}</p>
+                    </a>
+                    {% endfor %}
+                </div>
             {% endif %}
         </div>
     </div>
