@@ -19,6 +19,13 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='profile.svg')
     password = db.Column(db.String(64), nullable=False)
     services = db.relationship('Service', backref='owner', lazy=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    last_login = db.Column(db.DateTime)
+    Address_first_line = db.Column(db.String(64), default='')
+    Address_second_line = db.Column(db.String(64), default='')
+    city = db.Column(db.String(20), default='')
+    lat = db.Column(db.Float(20))
+    lon = db.Column(db.Float(20))
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
@@ -32,6 +39,13 @@ class User(db.Model, UserMixin):
             'full_name': self.full_name,
             'email': self.email,
             'user_type': self.user_type,
+            'created_at': self.created_at,
+            'last_login': self.last_login,
+            'Address_first_line': self.Address_first_line,
+            'Address_second_line': self.Address_second_line,
+            'city': self.city,
+            'lat': self.lat,
+            'lon': self.lon,
             'password': self.password,
             'image_file': self.image_file
         }

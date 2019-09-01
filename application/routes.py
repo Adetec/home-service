@@ -1,6 +1,7 @@
 # Import modules
 import os
 import secrets
+from datetime import datetime
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from application import app, db, bcrypt
@@ -46,6 +47,8 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
+            user.last_login = datetime.now()
+            db.session.commit()
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('الرجاء التأكد من بريدك الإلكتروني أو كلمة السر', 'danger')

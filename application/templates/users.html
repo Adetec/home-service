@@ -15,6 +15,8 @@
                             <p class="indigo-text">الرقم: <span class="blue-text">{{ user.id }}</span></p>
                             <p class="indigo-text">البريد الإلكتروني: <span class="blue-text">{{ user.email }}</span></p>
                             <p class="indigo-text">مفعل: <span class="blue-text">{{ user.is_active }}</span></p>
+                            <p class="indigo-text">تاريخ التسجيل: <span class="blue-text">{{ user.created_at }}</span></p>
+                            <p class="indigo-text">تاريخ آخر دخول: <span class="blue-text">{{ user.last_login }}</span></p>
                             <p class="indigo-text">طبيعة المستخدم: <span class="blue-text">{{ user.user_type }}</span></p>
                         </div>
                         <div class="card-action">
