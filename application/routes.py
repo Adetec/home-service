@@ -80,13 +80,13 @@ def save_profile_picture(picture_from_form):
     return picture_filname
 
 
-def save_category_picture(picture_from_form):
+def save_picture(picture_from_form, folder):
     # Generate hex picture filename
     hex_random = secrets.token_hex(8)
     _ , file_extension = os.path.splitext(picture_from_form.filename)
     picture_filname = f'profil{hex_random}{file_extension}'
     # Set the picture path
-    picture_path = os.path.join(app.root_path, 'static/img/categories', picture_filname)
+    picture_path = os.path.join(app.root_path, f'static/img/{folder}', picture_filname)
     print(f'Picture path: {picture_path}')
     # resize the picture
     # output_size = (256, 256)
@@ -124,7 +124,7 @@ def add_category():
     if form.validate_on_submit():
         category = Category(category_name=form.category_name.data, description=form.description.data)
         if form.picture.data:
-            picture_file = save_category_picture(form.picture.data)
+            picture_file = save_picture(form.picture.data, 'categories')
             category.image_file = picture_file
         db.session.add(category)
         db.session.commit()
