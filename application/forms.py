@@ -64,7 +64,7 @@ class ServiceForm(FlaskForm):
     service_name = StringField('الخدمة', validators=[DataRequired()])
     description = TextAreaField('وصف الخدمة', validators=[DataRequired()])
     picture = FileField('تحميل صورة الخدمة', validators=[FileAllowed(['jpg', 'png', 'svg'])])
-    category_id = IntegerField('الصنف', validators=[DataRequired()])
+    category_id = IntegerField('الصنف', validators=[])
     submit = SubmitField('إظافة')
 
     
