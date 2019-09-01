@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block main %}
+    <div class="container row">
+        <form class="col s12 m12" method="POST" action="" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="file-field input-field col s12 m12">
+                    <div class="btn">
+                        <span>إظافة صورة</span>
+                    </div>
+                    <div class="file-path-wrapper">
+                        {{ form.picture(class="file-path") }}
+                    </div>
+                    <div class="red-text darken-3-text center-align pulse">
+                        {% if form.picture.errors %}
+                            {% for error in form.picture.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            <div class="input-field col s12 m6">
+                {{ form.category_name.label }}
+                {% if form.category_name.errors %}
+                    {{ form.category_name(class="") }}
+                    <div class="red-text darken-3-text center-align pulse">
+                        {% for error in form.category_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.category_name(class="") }}
+                {% endif %}
+            </div>
+            <div class="input-field col s12 m12">
+                {{ form.description.label }}
+                {% if form.description.errors %}
+                    {{ form.description(class="") }}
+                    <div class="red-text darken-3-text center-align pulse">
+                        {% for error in form.description.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.description(class="") }}
+                {% endif %}
+            </div>
+    
+            <div class="row">
+            <div class="input-field col s12 m12">
+                {{ form.submit(class="btn-large indigo left") }}
+            </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

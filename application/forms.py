@@ -54,12 +54,9 @@ class UpdateProfileForm(FlaskForm):
 
 
 class CategoryForm(FlaskForm):
-    cat_name = StringField('الصنف', validators=[DataRequired()])
+    category_name = StringField('الصنف', validators=[DataRequired()])
     description = TextAreaField('وصف الصنف', validators=[DataRequired()])
-    picture = FileField('تحميل صورة الصنف', validators=[FileAllowed(['jpg', 'png'])])
+    picture = FileField('تحميل صورة الصنف', validators=[FileAllowed(['jpg', 'png', 'svg'])])
     submit = SubmitField('إظافة')
 
-    def validate_category_name(self, category_name):
-        category = category.query.filter_by(category_name=category_name.data).first()
-        if category:
-            raise ValidationError('عفوا، هذا الصنف قد تم اختياره، برجاء إختيار صنف آخر')
+    

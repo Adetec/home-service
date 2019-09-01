@@ -3,3 +3,4 @@ __pycache__
 *.db
 .VSCODE
 application/static/img/users-profile
+application/static/img/categories

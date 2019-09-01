@@ -13,7 +13,8 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html', title='Need Help!')
+    categories = Category.query.all()
+    return render_template('home.html', categories=categories, title='Need Help!')
 
 
 
@@ -65,7 +66,7 @@ def save_profile_picture(picture_from_form):
     # Generate hex picture filename
     hex_random = secrets.token_hex(8)
     _ , file_extension = os.path.splitext(picture_from_form.filename)
-    picture_filname = f'profil{hex_random}{file_extension}'
+    picture_filname = f'profile-{hex_random}{file_extension}'
     # Set the picture path
     picture_path = os.path.join(app.root_path, 'static/img/users-profile', picture_filname)
     print(f'Picture path: {picture_path}')
@@ -75,6 +76,24 @@ def save_profile_picture(picture_from_form):
     image.thumbnail(output_size)
     # Finally Save it
     image.save(picture_path)
+
+    return picture_filname
+
+
+def save_category_picture(picture_from_form):
+    # Generate hex picture filename
+    hex_random = secrets.token_hex(8)
+    _ , file_extension = os.path.splitext(picture_from_form.filename)
+    picture_filname = f'profil{hex_random}{file_extension}'
+    # Set the picture path
+    picture_path = os.path.join(app.root_path, 'static/img/categories', picture_filname)
+    print(f'Picture path: {picture_path}')
+    # resize the picture
+    # output_size = (256, 256)
+    # image = Image.open(picture_from_form)
+    # image.thumbnail(output_size)
+    # Finally Save it
+    picture_from_form.save(picture_path)
 
     return picture_filname
 
@@ -97,15 +116,18 @@ def profile():
 
 
 # Category routes:
-@app.route('/category/new')
+@app.route('/category/new', methods=['GET', 'POST'])
 def add_category():
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
-    form = CategoryForm
+    form = CategoryForm()
     if form.validate_on_submit():
-        category = Category(category_name=form.category_name.data, description=form.description.data, image_file=image_file, user_type=form.user_type.data)
-        db.session.add(user)
+        category = Category(category_name=form.category_name.data, description=form.description.data)
+        if form.picture.data:
+            picture_file = save_category_picture(form.picture.data)
+            category.image_file = picture_file
+        db.session.add(category)
         db.session.commit()
-        flash('قد تم تسجيلك بنجاح', 'success')
+        flash('قد تم إظافة الصنف بنجاح', 'success')
         return redirect(url_for('login'))
-    return render_template('register.html', form=form, title='NH | حساب جديد')
+    return render_template('new-category.html', form=form, title='NH | صنف جديد')
