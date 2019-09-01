@@ -16,7 +16,7 @@
                     <li>
                         <a href="{{ url_for('profile') }}">
                             <div class="btn transparent btn-floating tooltipped" data-position="bottom" data-tooltip="{{ current_user.username }}">
-                                <img class="responsive-img" src="static/img/users-profile/{{ current_user.image_file }}" alt="">
+                                <img class="responsive-img" src="{{ url_for('static', filename='img/users-profile/') }}{{ current_user.image_file }}" alt="">
                             </div>
                         </a>
                     </li>
