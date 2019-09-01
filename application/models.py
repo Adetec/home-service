@@ -40,7 +40,7 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     category_name = db.Column(db.String(20), unique=True, nullable=False)
     description = db.Column(db.Text)
-    image_file = db.Column(db.String(20), nullable=False, default='profile.svg')
+    image_file = db.Column(db.String(20), nullable=False, default='category.svg')
     services = db.relationship('Service', backref='parent', lazy=True)
 
     def __repr__(self):
@@ -67,7 +67,7 @@ class Service(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
 
     def __repr__(self):
-        return f"Category('{self.category_name}', '{self.id}', '{self.image_file}')"
+        return f"Service('{self.service_name}', '{self.id}', '{self.image_file}')"
 
     # Method for API enpoints
     @property

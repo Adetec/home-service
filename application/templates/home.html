@@ -34,4 +34,26 @@
         <div class="parallax"><img src="{{ url_for('static', filename='img/workers.svg') }}"></div>
     </div>
 </section>
+<section>
+    <div class="section white">
+        <div class="row container">
+            <h2 class="header center indigo-text">الخدمات</h2>
+            {% if services %}
+                <div class="carousel">
+                    {% for service in services %}
+                    <a class="carousel-item" href="#serv{{ service.id }}">
+                        <span class="indigo-text">{{ service.service_name }}</span>
+                        <p class="">{{ service.description }}</p>
+                        <img class="responsive-img" src="static/img/services/{{ service.image_file }}">
+                    </a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="parallax-container">
+        <!-- Image credit: https://undraw.co -->
+        <div class="parallax"><img src="{{ url_for('static', filename='img/workers.svg') }}"></div>
+    </div>
+</section>
 {% endblock %}

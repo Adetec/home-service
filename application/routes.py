@@ -14,7 +14,8 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route("/home")
 def home():
     categories = Category.query.all()
-    return render_template('home.html', categories=categories, title='Need Help!')
+    services = Service.query.all()
+    return render_template('home.html', categories=categories, services=services, title='Need Help!')
 
 
 
@@ -84,7 +85,7 @@ def save_picture(picture_from_form, folder):
     # Generate hex picture filename
     hex_random = secrets.token_hex(8)
     _ , file_extension = os.path.splitext(picture_from_form.filename)
-    picture_filname = f'profil{hex_random}{file_extension}'
+    picture_filname = f'{hex_random}{file_extension}'
     # Set the picture path
     picture_path = os.path.join(app.root_path, f'static/img/{folder}', picture_filname)
     print(f'Picture path: {picture_path}')
@@ -139,17 +140,16 @@ def add_category():
 # Service routes:
 @app.route('/service/new', methods=['GET', 'POST'])
 def add_service():
-    print('ID => ' + str(current_user.id))
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
     form = ServiceForm()
     if form.validate_on_submit():
-        service = Service(service_name=form.service_name.data, description=form.description.data, category_id=1, user_id=current_user.id)
+        service = Service(service_name=form.service_name.data, description=form.description.data, category_id=1, owner=current_user)
         if form.picture.data:
             picture_file = save_picture(form.picture.data, 'services')
             service.image_file = picture_file
         db.session.add(service)
         db.session.commit()
-        flash('قد تم إظافة الصنف بنجاح', 'success')
+        flash('قد تم إظافة الخدمة بنجاح', 'success')
         return redirect(url_for('home'))
     return render_template('new-service.html', form=form, title='NH | خدمة جديدة')
