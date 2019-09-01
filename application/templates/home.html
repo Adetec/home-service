@@ -3,7 +3,7 @@
 <section>
     <div class="section white">
         <div class="row container">
-            <h2 class="header indigo-text">بيتي للخدمات</h2>
+            <h2 class="header center indigo-text">بيتي للخدمات</h2>
             <p class="grey-text text-darken-3 lighten-3">اللهم أسألك أن تيسير لي هذا الامتحان، وتجعل الخيرة فيه إنك على كل شي قدير، اللهم إني أسألك بمقاعد العز من عرشك، ومنتهى الرحمة من كتابك، واسمك الأعظم وكلماتك، أن تفتح عليّ فتوح العارفين.
         </div>
     </div>
@@ -15,14 +15,14 @@
 <section>
     <div class="section white">
         <div class="row container">
-            <h2 class="header indigo-text">الخدمات حسب الصنف</h2>
+            <h2 class="header center indigo-text">الخدمات حسب الصنف</h2>
             {% if categories %}
-                <div class="carousel carousel-slider">
+                <div class="carousel">
                     {% for category in categories %}
                     <a class="carousel-item" href="#cat{{ category.id }}">
-                        <img class="responsive-img" src="static/img/categories/{{ category.image_file }}">
-                        <p class="indigo-text">{{ category.category_name }}</p>
+                        <span class="indigo-text">{{ category.category_name }}</span>
                         <p class="">{{ category.description }}</p>
+                        <img class="responsive-img" src="static/img/categories/{{ category.image_file }}">
                     </a>
                     {% endfor %}
                 </div>
