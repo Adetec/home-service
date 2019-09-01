@@ -4,8 +4,8 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from application import app, db, bcrypt
-from application.forms import RegistrationForm, LoginForm, UpdateProfileForm
-from application.models import User
+from application.forms import RegistrationForm, LoginForm, UpdateProfileForm, CategoryForm
+from application.models import User, Category
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -94,3 +94,18 @@ def profile():
         form.username.data = current_user.username
         form.full_name.data = current_user.full_name
     return render_template('profile.html', form=form, title='NH | حسابي')
+
+
+# Category routes:
+@app.route('/category/new')
+def add_category():
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = CategoryForm
+    if form.validate_on_submit():
+        category = Category(category_name=form.category_name.data, description=form.description.data, image_file=image_file, user_type=form.user_type.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('قد تم تسجيلك بنجاح', 'success')
+        return redirect(url_for('login'))
+    return render_template('register.html', form=form, title='NH | حساب جديد')

@@ -1,9 +1,9 @@
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from application.models import User
+from application.models import User, Category
 
 
 class RegistrationForm(FlaskForm):
@@ -51,3 +51,15 @@ class UpdateProfileForm(FlaskForm):
             user = User.query.filter_by(username=username.data).first()
             if user:
                 raise ValidationError('عفوا، هذا الإسم قد تم اختياره، برجاء إختيار إسم آخر')
+
+
+class CategoryForm(FlaskForm):
+    cat_name = StringField('الصنف', validators=[DataRequired()])
+    description = TextAreaField('وصف الصنف', validators=[DataRequired()])
+    picture = FileField('تحميل صورة الصنف', validators=[FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('إظافة')
+
+    def validate_category_name(self, category_name):
+        category = category.query.filter_by(category_name=category_name.data).first()
+        if category:
+            raise ValidationError('عفوا، هذا الصنف قد تم اختياره، برجاء إختيار صنف آخر')

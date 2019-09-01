@@ -38,7 +38,7 @@ class User(db.Model, UserMixin):
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     cat_name = db.Column(db.String(20), unique=True, nullable=False)
-    description = db.Column(db.String(250))
+    description = db.Column(db.Text)
     image_file = db.Column(db.String(20), nullable=False, default='profile.svg')
 
     def __repr__(self):
@@ -50,7 +50,7 @@ class Category(db.Model):
         return {
             'id': self.id,
             'cat_name': self.cat_name,
-            'full_name': self.description,
+            'description': self.description,
             'image_file': self.image_file
         }
 db.create_all()
