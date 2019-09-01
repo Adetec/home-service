@@ -8,9 +8,14 @@ body,
     height: 100vh;
     background: url('../img/background.svg');
     background-attachment: fixed;
-    background-size: cover;
+    background-size: contain;
     position: fixed;
+    background-repeat: no-repeat;
     z-index: -1;
+}
+
+.fit-h {
+    height: 100vh;
 }
 
 html[dir="rtl"] .icon {
