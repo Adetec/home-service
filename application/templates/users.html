@@ -18,6 +18,9 @@
                             <p class="indigo-text">تاريخ التسجيل: <span class="blue-text">{{ user.created_at }}</span></p>
                             <p class="indigo-text">تاريخ آخر دخول: <span class="blue-text">{{ user.last_login }}</span></p>
                             <p class="indigo-text">طبيعة المستخدم: <span class="blue-text">{{ user.user_type }}</span></p>
+                            <p class="indigo-text">العنوان: <span class="blue-text">
+                                {{ user.address_first_line }} {{ user.address_second_line }} - {{ user.city }}
+                            </span></p>
                         </div>
                         <div class="card-action">
                             <a class="indigo-text left" href="#">المزيد من التفاصيل</a>

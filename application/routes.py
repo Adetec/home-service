@@ -110,12 +110,18 @@ def profile():
             current_user.image_file = picture_file
         current_user.username = form.username.data
         current_user.full_name = form.full_name.data
+        current_user.address_first_line = form.address_first_line.data
+        current_user.address_second_line = form.address_second_line.data
+        current_user.city = form.city.data
         db.session.commit()
         flash('قد تم تعديل معلوماتك بنجاح')
         return redirect(url_for('profile'))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.full_name.data = current_user.full_name
+        form.address_first_line.data = current_user.address_first_line
+        form.address_second_line.data = current_user.address_second_line
+        form.city.data = current_user.city
     return render_template('profile.html', form=form, title='NH | حسابي')
 
 

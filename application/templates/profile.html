@@ -66,6 +66,45 @@
                     {{ form.full_name(class="") }}
                 {% endif %}
             </div>
+            <div class="input-field col s12 m6">
+                {{ form.address_first_line.label }}
+                {% if form.address_first_line.errors %}
+                    {{ form.address_first_line(class="") }}
+                    <div class="red-text darken-3-text center-align pulse">
+                        {% for error in form.address_first_line.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.address_first_line(class="") }}
+                {% endif %}
+            </div>
+            <div class="input-field col s12 m6">
+                {{ form.address_second_line.label }}
+                {% if form.address_second_line.errors %}
+                    {{ form.address_second_line(class="") }}
+                    <div class="red-text darken-3-text center-align pulse">
+                        {% for error in form.address_second_line.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.address_second_line(class="") }}
+                {% endif %}
+            </div>
+            <div class="input-field col s12 m6">
+                {{ form.city.label }}
+                {% if form.city.errors %}
+                    {{ form.city(class="") }}
+                    <div class="red-text darken-3-text center-align pulse">
+                        {% for error in form.city.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.city(class="") }}
+                {% endif %}
+            </div>
     
             <div class="row">
             <div class="input-field col s12 m12">

@@ -44,6 +44,9 @@ class UpdateProfileForm(FlaskForm):
     full_name = StringField('الإسم الكامل',
                            validators=[Length(min=2, max=20)])
     picture = FileField('تحميل الصورة الشخصية', validators=[FileAllowed(['jpg', 'png'])])
+    address_first_line = StringField('العنوان', validators=[])
+    address_second_line = StringField('2العنوان', validators=[])
+    city = StringField('الولاية', validators=[])
     submit = SubmitField('تعديل')
 
     def validate_username(self, username):
