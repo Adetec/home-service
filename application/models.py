@@ -21,6 +21,7 @@ class User(db.Model, UserMixin):
     services = db.relationship('Service', backref='owner', lazy=True)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     last_login = db.Column(db.DateTime)
+    is_connected = db.Column(db.Boolean, default=False)
     address_first_line = db.Column(db.String(64), default='')
     address_second_line = db.Column(db.String(64), default='')
     city = db.Column(db.String(20), default='')

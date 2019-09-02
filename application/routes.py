@@ -48,6 +48,7 @@ def login():
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             user.last_login = datetime.now()
+            user.is_connected = True
             db.session.commit()
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
@@ -57,6 +58,9 @@ def login():
 
 @app.route("/logout")
 def logout():
+    user = current_user
+    user.is_connected = False
+    db.session.commit()
     logout_user()
     return redirect(url_for('home'))
 
