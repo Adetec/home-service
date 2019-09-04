@@ -32,7 +32,7 @@
                 {% if categories %}
                     {% for cat in categories %}
                         <li class="divider" tabindex="-1"></li>
-                        <li><a href="#" target="_BLANK" class="">{{ cat.category_name }}</a></li>
+                        <li><a href="{{ url_for('category_details', id=cat.id) }}" class="">{{ cat.category_name }}</a></li>
                     {% endfor %}
                 {% endif %}
             </ul>
@@ -59,7 +59,7 @@
                 {% if categories %}
                     {% for cat in categories %}
                         <li class="divider" tabindex="-1"></li>
-                        <li><a href="#" target="_BLANK" class="">{{ cat.category_name }}</a></li>
+                        <li><a href="{{ url_for('category_details', id=cat.id) }}" class="">{{ cat.category_name }}</a></li>
                     {% endfor %}
                 {% endif %}
             </ul>

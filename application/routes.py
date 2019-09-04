@@ -146,6 +146,12 @@ def add_category():
         return redirect(url_for('home'))
     return render_template('new-category.html', form=form, title='NH | صنف جديد')
 
+@app.route('/category/<int:id>')
+def category_details(id):
+    category = Category.query.get_or_404(id)
+
+    return render_template('category.html', category=category)
+
 
 
 
