@@ -68,7 +68,13 @@
             $('input#input_text, textarea#textarea2').characterCounter();
             $('select').formSelect();
             $('.parallax').parallax();
-            $(".dropdown-trigger").dropdown();
+            $(".dropdown-trigger").dropdown({
+                inDuration: 300,
+                outDuration: 100,
+                belowOrigin: true,
+                alignment: 'left',
+                constrainWidth: false
+            });
         });
     </script>
 </body>
