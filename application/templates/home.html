@@ -41,9 +41,10 @@
             {% if services %}
                 <div class="carousel">
                     {% for service in services %}
-                    <a class="carousel-item" href="#serv{{ service.id }}">
-                        <span class="indigo-text">{{ service.service_name }}</span>
-                        <p class="">{{ service.description }}</p>
+                    <a class="carousel-item center" href="#serv{{ service.id }}">
+                        <p class="indigo-text">{{ service.service_name }}</p>
+                        <p class="red-text">{{ service.parent.category_name }}</p>
+                        <p class="green-text">{{ service.owner.full_name }}</p>
                         <img class="responsive-img" src="static/img/services/{{ service.image_file }}">
                     </a>
                     {% endfor %}

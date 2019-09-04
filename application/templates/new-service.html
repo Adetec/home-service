@@ -44,6 +44,18 @@
                     {{ form.description(class="") }}
                 {% endif %}
             </div>
+            <div class="input-field col s12 m12">
+                {% if form.category_id.errors %}
+                    {{ form.category_id(class="") }}
+                    <div class="red-text darken-3-text center-align pulse">
+                        {% for error in form.category_id.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.category_id(class="") }}
+                {% endif %}
+            </div>
     
             <div class="row">
             <div class="input-field col s12 m12">

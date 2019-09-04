@@ -156,8 +156,10 @@ def add_service():
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
     form = ServiceForm()
+    print(form.category_id.data)
     if form.validate_on_submit():
-        service = Service(service_name=form.service_name.data, description=form.description.data, category_id=1, owner=current_user)
+        category = Category.query.filter_by(id=int(form.category_id.data))
+        service = Service(service_name=form.service_name.data, description=form.description.data, category_id=form.category_id.data, owner=current_user)
         if form.picture.data:
             picture_file = save_picture(form.picture.data, 'services')
             service.image_file = picture_file

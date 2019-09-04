@@ -64,10 +64,14 @@ class CategoryForm(FlaskForm):
 
 
 class ServiceForm(FlaskForm):
+    categories = Category.query.all()
+    cat_ids = []
+    for cat in categories:
+        cat_ids.append((str(cat.id), cat.category_name))
     service_name = StringField('الخدمة', validators=[DataRequired()])
     description = TextAreaField('وصف الخدمة', validators=[DataRequired()])
     picture = FileField('تحميل صورة الخدمة', validators=[FileAllowed(['jpg', 'png', 'svg'])])
-    category_id = IntegerField('الصنف', validators=[])
+    category_id = SelectField('الصنف', validators=[], choices=cat_ids)
     submit = SubmitField('إظافة')
 
     
