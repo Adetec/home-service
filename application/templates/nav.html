@@ -37,32 +37,32 @@
                 {% endif %}
             </ul>
         </div>
+        <ul class="sidenav white lighten-5" id="mobile-demo">
+                <li><a href="{{ url_for('display_users') }}">المستخدمين</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
+                <ul>
+                    <li><a class="radius red darken-4 btn" href="#">خروج</a></li>
+                </ul>
+            <ul>
+                <li><a class="radius darken-4" href="{{ url_for('login') }}">دخول</a></li>
+            </ul>
+            <ul>
+                <li><a class="radius darken-4" href="{{ url_for('register') }}">تسجيل الدخول</a></li>
+            </ul>
+            <!-- Dropdown Trigger -->
+            <ul>
+                <li><a class='dropdown-trigger btn' href='#' data-target='dropdown2'>الخدمات</a></li>
+            </ul>
+        
+            <!-- Dropdown Structure -->
+            <ul id='dropdown2' class='dropdown-content white darken-4 z-depth-4'>
+                {% if categories %}
+                    {% for cat in categories %}
+                        <li class="divider" tabindex="-1"></li>
+                        <li><a href="#" target="_BLANK" class="">{{ cat.category_name }}</a></li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </ul>
     </nav>
     
-    <ul class="sidenav white lighten-5" id="mobile-demo">
-            <li><a href="{{ url_for('display_users') }}">المستخدمين</a></li>
-                    <li><a href="#">اتصل بنا</a></li>
-            <ul>
-                <li><a class="radius red darken-4 btn" href="#">خروج</a></li>
-            </ul>
-        <ul>
-            <li><a class="radius darken-4" href="{{ url_for('login') }}">دخول</a></li>
-        </ul>
-        <ul>
-            <li><a class="radius darken-4" href="{{ url_for('register') }}">تسجيل الدخول</a></li>
-        </ul>
-        <!-- Dropdown Trigger -->
-        <ul>
-            <li><a class='dropdown-trigger btn' href='#' data-target='dropdown2'>الخدمات</a></li>
-        </ul>
-    
-        <!-- Dropdown Structure -->
-        <ul id='dropdown2' class='dropdown-content white darken-4 z-depth-4'>
-            {% if categories %}
-                {% for cat in categories %}
-                    <li class="divider" tabindex="-1"></li>
-                    <li><a href="#" target="_BLANK" class="">{{ cat.category_name }}</a></li>
-                {% endfor %}
-            {% endif %}
-        </ul>
-    </ul>
