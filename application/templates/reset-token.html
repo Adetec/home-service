@@ -5,17 +5,30 @@
                 {{ form.hidden_tag() }}
 
             <div class="input-field col s12 m12">
-                {% if form.email.errors %}
-                    {{ form.email(class="", type="email") }}
+                {% if form.password.errors %}
+                    {{ form.password(class="", type="email") }}
                     <div class="red-text darken-3-text center-align pulse">
-                        {% for error in form.email.errors %}
+                        {% for error in form.password.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.email(class="", type="email") }}
+                    {{ form.password(class="", type="password") }}
                 {% endif %}
-                {{ form.email.label }}
+                {{ form.password.label }}
+            </div>
+            <div class="input-field col s12 m12">
+                {% if form.confirm_password.errors %}
+                    {{ form.confirm_password(class="", type="email") }}
+                    <div class="red-text darken-3-text center-align pulse">
+                        {% for error in form.confirm_password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.confirm_password(class="", type="password") }}
+                {% endif %}
+                {{ form.confirm_password.label }}
             </div>
             <div class="row">
                 <div class="file-field input-field col s12 m12">

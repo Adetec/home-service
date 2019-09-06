@@ -39,8 +39,11 @@
                         <span>تذكرني</span>  
                     </label>
                 </div>
-                <div class="file-field input-field col s12 m6">
+                <div class="file-field input-field col s12 m4">
                     {{ form.submit(class="btn-large indigo") }}
+                </div>
+                <div class="col s12 m4">
+                    <a href="{{ url_for('reset_request') }}">نسيت كلمة المرور؟</a>
                 </div>
             </div>
         </form>

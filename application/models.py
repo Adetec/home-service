@@ -34,9 +34,9 @@ class User(db.Model, UserMixin):
     
     
     # Methods for reseting user password
-    def get_reset_token(self, time_expires=30000):
+    def get_reset_token(self, time_expires):
         s = Serializer(app.config['SECRET_KEY'], time_expires)
-        return s.dumps({user_id: self.id}).decode('utf-8')
+        return s.dumps({'user_id': self.id}).decode('utf-8')
     
     @staticmethod
     def verify_reset_token(token):

@@ -4,11 +4,12 @@ import secrets
 from datetime import datetime
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, jsonify
-from application import app, db, bcrypt
+from application import app, db, bcrypt, mail
 from application.forms import (RegistrationForm, LoginForm, UpdateProfileForm,
                 CategoryForm, ServiceForm, RequestResetForm, ResetPasswordForm)
 from application.models import User, Category, Service
 from flask_login import login_user, current_user, logout_user, login_required
+from flask_mail import Message
 
 
 
@@ -131,7 +132,24 @@ def profile():
 
 
 def send_reset_email(user):
-    pass
+    token = user.get_reset_token(30000)
+    # '<div dir="rtl"><p> مرحبا بك <strong style="color:darkslateblue;">' + username + '</strong> في تطبيقنا المتواضع HOME SERVICE ،</p><p> يجب عليك تفعيل حسابك لللإستفادة من خدماتنا <strong style="color:darkslateblue;">' + code + '</strong></p></div>', subtype='html'
+    msg = Message(
+        'تغيير كلمة المرور',
+        sender='adetech.home.service@gmail.com',
+        recipients=[user.email],
+    )
+    msg.html = f'''
+    <div dir="rtl">
+    <h3>مرحبا <strong>{user.username}</strong></h3>
+    <p>بناءعلى طلبك بتغيير كلمة المرور، يمكنكم فعل ذلك من <a href="{url_for('reset_token', token=token, _external=True)}" target="_BLANK">هنا</a></p>
+    <p>إذا لم تقم بذلك، برجاء تجاهل هذه الرسالة</p>
+    </div>
+    '''
+    try:
+        mail.send(msg)
+    except:
+        print('Error encured while sendin a reset email! ')
 
 
 @app.route('/reset_request', methods=['GET', 'POST'])
@@ -148,7 +166,7 @@ def reset_request():
 
 
 @app.route('/reset_token/<token>', methods=['GET', 'POST'])
-def reset_token():
+def reset_token(token):
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     user = User.verify_reset_token(token)
@@ -156,6 +174,12 @@ def reset_token():
         flash('الطلب غير صحيح أو قد انتهت صلاحيته')
         return redirect(url_for('reset_request'))
     form = ResetPasswordForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user.password = hashed_password
+        db.session.commit()
+        flash('قد تم تغيير كلمة المرور بنجاح', 'success')
+        return redirect(url_for('login'))
     return render_template('reset-token.html', form=form, title='NH | تغيير كلمة المرور')
 
 
@@ -181,8 +205,6 @@ def category_details(id):
     category = Category.query.get_or_404(id)
 
     return render_template('category.html', category=category)
-
-
 
 
 

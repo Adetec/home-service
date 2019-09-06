@@ -76,7 +76,7 @@ class ServiceForm(FlaskForm):
 
 
 class RequestResetForm(FlaskForm):
-    email = StringField('Email',
+    email = StringField('بريدك الإلكتروني الذي سجلت به',
                         validators=[DataRequired(), Email()])
     submit = SubmitField('ارسال الطلب')
 
@@ -87,7 +87,7 @@ class RequestResetForm(FlaskForm):
 
 
 class ResetPasswordForm(FlaskForm):
-    password = PasswordField('Password', validators=[DataRequired()])
-    confirm_password = PasswordField('Confirm Password',
+    password = PasswordField('كلمة المرور', validators=[DataRequired()])
+    confirm_password = PasswordField('إعادة كتابة كلمة المرور',
                                      validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Reset Password')
+    submit = SubmitField('تغيير كلمة المرور')
