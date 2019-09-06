@@ -3,7 +3,7 @@ import os
 import secrets
 from datetime import datetime
 from PIL import Image
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, jsonify
 from application import app, db, bcrypt
 from application.forms import RegistrationForm, LoginForm, UpdateProfileForm, CategoryForm, ServiceForm
 from application.models import User, Category, Service
@@ -174,3 +174,28 @@ def add_service():
         flash('قد تم إظافة الخدمة بنجاح', 'success')
         return redirect(url_for('home'))
     return render_template('new-service.html', form=form, title='NH | خدمة جديدة')
+
+
+
+'''
+    * * * * * * * * * * *
+    *   API EndPoints   *
+    * * * * * * * * * * *
+'''
+
+@app.route('/API/1.0')
+def home_endpoint():
+    users = User.query.all()
+    categories = db.session.query(Category).all()
+    services = db.session.query(Service).all()
+        
+    u = []
+    c = []
+    s = []
+    for user in users:
+        u.append(user.serialize)
+    for category in categories:
+        c.append(category.serialize)
+    for service in services:
+        s.append(service.serialize)
+    return jsonify(users=u, categories=c, services=s)
