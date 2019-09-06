@@ -5,7 +5,8 @@ from datetime import datetime
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, jsonify
 from application import app, db, bcrypt
-from application.forms import RegistrationForm, LoginForm, UpdateProfileForm, CategoryForm, ServiceForm
+from application.forms import (RegistrationForm, LoginForm, UpdateProfileForm,
+                CategoryForm, ServiceForm, RequestResetForm, ResetPasswordForm)
 from application.models import User, Category, Service
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -127,6 +128,35 @@ def profile():
         form.address_second_line.data = current_user.address_second_line
         form.city.data = current_user.city
     return render_template('profile.html', form=form, title='NH | حسابي')
+
+
+def send_reset_email(user):
+    pass
+
+
+@app.route('/reset_request', methods=['GET', 'POST'])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        send_reset_email(user)
+        flash('قد تم إرسال تعليمات إعادة تغيير كلمة المرور، برجاء تفقد بريدك')
+        return redirect(url_for('home'))
+    return render_template('reset-request.html', form=form, title='NH | طلب تغيير كلمة المرور')
+
+
+@app.route('/reset_token/<token>', methods=['GET', 'POST'])
+def reset_token():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    user = User.verify_reset_token(token)
+    if not user:
+        flash('الطلب غير صحيح أو قد انتهت صلاحيته')
+        return redirect(url_for('reset_request'))
+    form = ResetPasswordForm()
+    return render_template('reset-token.html', form=form, title='NH | تغيير كلمة المرور')
 
 
 # Category routes:

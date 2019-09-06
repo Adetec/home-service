@@ -74,4 +74,20 @@ class ServiceForm(FlaskForm):
     category_id = SelectField('الصنف', validators=[], choices=cat_ids)
     submit = SubmitField('إظافة')
 
-    
+
+class RequestResetForm(FlaskForm):
+    email = StringField('Email',
+                        validators=[DataRequired(), Email()])
+    submit = SubmitField('ارسال الطلب')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is None:
+            raise ValidationError('عذرا، لايوجد حساب مسجل لدينا بهذا البريد. أعد المحاولة من جديد')
+
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password',
+                                     validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Reset Password')
