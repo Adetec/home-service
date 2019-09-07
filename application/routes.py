@@ -232,6 +232,13 @@ def update_category(id):
 
 
 # Service routes:
+@app.route('/service/<int:id>')
+def service_details(id):
+    service = Service.query.get_or_404(id)
+
+    return render_template('service.html', service=service)
+
+
 @app.route('/service/new', methods=['GET', 'POST'])
 def add_service():
     if not current_user.is_authenticated:
