@@ -8,17 +8,22 @@
                 <img class="responsiv-img circle" src="{{ url_for('static', filename='img/categories/'+category.image_file) }}">
                 </div>
                 <div class="card-stacked">
-                <div class="card-content">
-                    <p class="indigo-text">الرقم: <span class="blue-text">{{ category.id }}</span></p>
-                    <p class="indigo-text">الصنف: <span class="blue-text">{{ category.category_name }}</span></p>
-                    <p class="indigo-text">وصف الصنف: <span class="blue-text">{{ category.description }}</span></p>
-                    <ul>
-                        
-                    </ul>
-                </div>
-                <div class="card-action">
-                    <a class="indigo-text left" href="#">المزيد من التفاصيل</a>
-                </div>
+                    <div class="card-content">
+                        <p class="indigo-text">الرقم: <span class="blue-text">{{ category.id }}</span></p>
+                        <p class="indigo-text">الصنف: <span class="blue-text">{{ category.category_name }}</span></p>
+                        <p class="indigo-text">وصف الصنف: <span class="blue-text">{{ category.description }}</span></p>
+                        <ul>
+                            
+                        </ul>
+                    </div>
+                    <div class="card-action">
+                        {% if current_user.user_type == 'admin' %}
+                            <a class="indigo-text left" href="{{ url_for('update_category', id=category.id) }}">تعديل</a>
+                            <a class="red-text left" href="#">حذف</a>
+                        {% else %}
+                            <a class="indigo-text left" href="#">المزيد من التفاصيل</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
