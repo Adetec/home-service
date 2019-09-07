@@ -251,6 +251,34 @@ def add_service():
     return render_template('new-service.html', form=form, title='NH | خدمة جديدة')
 
 
+@app.route('/service/<int:id>/update', methods=['GET', 'POST'])
+def update_service(id):
+    service = Service.query.filter_by(id=id).first()
+    category = Category.query.all()
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
+    elif not current_user.id == service.user_id:
+        flash('عذرا لست مصرحا لتعديل هذه الخدمة')
+        return redirect(url_for('home'))
+    form = ServiceForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data, 'services')
+            service.image_file = picture_file
+        service.service_name = form.service_name.data
+        service.description = form.description.data
+        service.description = form.description.data
+        service.category_id = form.category_id.data
+        db.session.commit()
+        flash('قد تم تحديث الخدمة بنجاح', 'success')
+        return redirect(url_for('home'))
+    elif request.method == 'GET':
+        form.service_name.data = service.service_name
+        form.description.data = service.description
+        form.category_id.data = service.category_id
+    return render_template('new-service.html', form=form, title='NH | تفيير الخدمة')
+
+
 
 '''
     * * * * * * * * * * *
