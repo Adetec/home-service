@@ -72,7 +72,7 @@ class ServiceForm(FlaskForm):
     description = TextAreaField('وصف الخدمة', validators=[DataRequired()])
     picture = FileField('تحميل صورة الخدمة', validators=[FileAllowed(['jpg', 'png', 'svg'])])
     category_id = SelectField('الصنف', validators=[], choices=cat_ids)
-    submit = SubmitField('إظافة')
+    submit = SubmitField('تحديث')
 
 
 class RequestResetForm(FlaskForm):
