@@ -206,6 +206,29 @@ def category_details(id):
 
     return render_template('category.html', category=category)
 
+@app.route('/category/<int:id>/update', methods=['GET', 'POST'])
+def update_category(id):
+    category = Category.query.filter_by(id=id).first()
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
+    elif not current_user.user_type == 'admin':
+        flash('عذرا لست مصرحا لتعديل هذا الصنف')
+        return redirect(url_for('home'))
+    form = CategoryForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data, 'categories')
+            category.image_file = picture_file
+        category.category_name = form.category_name.data
+        category.description = form.description.data
+        db.session.commit()
+        flash('قد تم تحديث الصنف بنجاح', 'success')
+        return redirect(url_for('home'))
+    elif request.method == 'GET':
+        form.category_name.data = category.category_name
+        form.description.data = category.description
+    return render_template('new-category.html', form=form, title='NH | تفيير الصنف')
+
 
 
 # Service routes:
