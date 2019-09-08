@@ -120,7 +120,7 @@ def profile():
         current_user.address_second_line = form.address_second_line.data
         current_user.city = form.city.data
         db.session.commit()
-        flash('قد تم تعديل معلوماتك بنجاح')
+        flash('قد تم تعديل معلوماتك بنجاح', 'success')
         return redirect(url_for('profile'))
     elif request.method == 'GET':
         form.username.data = current_user.username
@@ -160,7 +160,7 @@ def reset_request():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         send_reset_email(user)
-        flash('قد تم إرسال تعليمات إعادة تغيير كلمة المرور، برجاء تفقد بريدك')
+        flash('قد تم إرسال تعليمات إعادة تغيير كلمة المرور، برجاء تفقد بريدك', 'info')
         return redirect(url_for('home'))
     return render_template('reset-request.html', form=form, title='NH | طلب تغيير كلمة المرور')
 
@@ -171,7 +171,7 @@ def reset_token(token):
         return redirect(url_for('home'))
     user = User.verify_reset_token(token)
     if not user:
-        flash('الطلب غير صحيح أو قد انتهت صلاحيته')
+        flash('الطلب غير صحيح أو قد انتهت صلاحيته', 'warning')
         return redirect(url_for('reset_request'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
@@ -212,7 +212,7 @@ def update_category(id):
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
     elif not current_user.user_type == 'admin':
-        flash('عذرا لست مصرحا لتعديل هذا الصنف')
+        flash('عذرا لست مصرحا لتعديل هذا الصنف', 'danger')
         return redirect(url_for('home'))
     form = CategoryForm()
     if form.validate_on_submit():
@@ -265,7 +265,7 @@ def update_service(id):
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
     elif not current_user.id == service.user_id:
-        flash('عذرا لست مصرحا لتعديل هذه الخدمة')
+        flash('عذرا لست مصرحا لتعديل هذه الخدمة', 'danger')
         return redirect(url_for('home'))
     form = ServiceForm()
     if form.validate_on_submit():

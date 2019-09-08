@@ -25,17 +25,11 @@
     <!-- Start main container -->
     <main class="container">
         <!-- Flash messages -->
-        {% with  messages = get_flashed_messages() %}
+        {% with  messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-            {% for message in messages %}
-                <div id="flash" class="modal">
-                    <div class="modal-content center">
-                        <h4 class="indigo-text">Flash message</h4>
-                        <div class="black-text">{{ message }}</div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#!" class="indigo lighten-1 modal-close circle waves-effect waves-green btn-floating"><i class="white-text material-icons">check</i></a>
-                    </div>
+            {% for category, message in messages %}
+                <div id="flash" class="alert alert-{{ category }} text-center">
+                    {{ message }}
                 </div>
             {% endfor %}
         {% endif %}
