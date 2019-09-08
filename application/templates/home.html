@@ -1,21 +1,22 @@
 {% extends 'base.html' %}
 {% block main %}
 <section>
-    <div class="section transparent fit-h valign-wrapper">
-        <div class="row container">
-            <h2 class="header center indigo-text">خدمات بيتي</h2>
+    <div class="bg-section abs diag"></div>
+    <div class="">
+        <div class="">
+            <h2 class="intro">خدمات بيتي</h2>
             <p class="indigo-text text-darken-3 lighten-3">اللهم أسألك أن تيسير لي هذا الامتحان، وتجعل الخيرة فيه إنك على كل شي قدير، اللهم إني أسألك بمقاعد العز من عرشك، ومنتهى الرحمة من كتابك، واسمك الأعظم وكلماتك، أن تفتح عليّ فتوح العارفين.
         </div>
     </div>
-    <div class="parallax-container">
+    <div class="">
         <!-- Image credit: https://undraw.co -->
-        <div class="parallax"><img src="{{ url_for('static', filename='img/handyman-working-renovating-build-tools_53876-31569.jpg') }}"></div>
+        <div class=""><img class="img-fluid" src="{{ url_for('static', filename='img/handyman-working-renovating-build-tools_53876-31569.jpg') }}"></div>
     </div>
 </section>
 <section>
-    <div class="section white">
-        <div class="row container">
-            <h2 class="header center indigo-text">الخدمات حسب الصنف</h2>
+    <div class="">
+        <div class="">
+            <h2 class="">الخدمات حسب الصنف</h2>
             {% if categories %}
                 <div class="carousel">
                     {% for category in categories %}
@@ -29,28 +30,38 @@
             {% endif %}
         </div>
     </div>
-    <div class="parallax-container">
+    <div class="">
         <!-- Image credit: https://undraw.co -->
-        <div class="parallax"><img src="{{ url_for('static', filename='img/people-renovating-house-concept_53876-20664.jpg') }}"></div>
+        <div class=""><img class="img-fluid" src="{{ url_for('static', filename='img/people-renovating-house-concept_53876-20664.jpg') }}"></div>
     </div>
 </section>
 <section>
-    <div class="section white">
-        <div class="row container">
-            <h2 class="header center indigo-text">الخدمات</h2>
-            {% if services %}
-                <div class="carousel">
-                    {% for service in services %}
-                    <a class="carousel-item center" href="#serv{{ service.id }}">
-                        <p class="indigo-text">{{ service.service_name }}</p>
-                        <p class="red-text">{{ service.parent.category_name }}</p>
-                        <p class="green-text">{{ service.owner.full_name }}</p>
-                        <img class="responsive-img" src="static/img/services/{{ service.image_file }}">
-                    </a>
-                    {% endfor %}
+    <h2 class="">الخدمات</h2>
+    {% if services %}
+        <div id="carouselServiceInterval" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-interval="100">
+                    <img class="d-block w-100" src="">
                 </div>
-            {% endif %}
+                {% for service in services %}
+                <div class="carousel-item" data-interval="3000">
+                    <img class="d-block w-100 img-fluid" src="static/img/services/{{ service.image_file }}">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{ service.service_name }}</h5>
+                        <p>{{ service.description }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#carouselServiceInterval" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselServiceInterval" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-    </div>
+    {% endif %}
 </section>
 {% endblock %}

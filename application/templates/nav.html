@@ -1,68 +1,57 @@
-<nav dir="" class="transparent">
-        <div class="nav-wrapper">
-            <a href="/" class="brand-logo white-text center">بيتي</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                <ul class="hide-on-med-and-down">
-                    <li><a class="white-text" href="{{ url_for('display_users') }}">المستخدمين</a></li>
-                    <li><a class="white-text" href="{{ url_for('add_category') }}">صنف جديد</a></li>
-                    <li><a class="white-text" href="{{ url_for('add_service') }}">خدمة جديدة</a></li>
-                    <!-- Dropdown Trigger -->
-                    <li>
-                        <a class='dropdown-trigger white-text' href='#' data-target='dropdown1'>الخدمات</a>
-                    </li>
-                </ul>
-                <ul class="right hide-on-med-and-down row">
-                {% if current_user.is_authenticated %}
-                    <li>
-                        <a href="{{ url_for('profile') }}">
-                            <div class="btn transparent btn-floating tooltipped" data-position="bottom" data-tooltip="{{ current_user.username }}">
-                                <img class="responsive-img" src="{{ url_for('static', filename='img/users-profile/') }}{{ current_user.image_file }}" alt="">
-                            </div>
-                        </a>
-                    </li>
-                    <li><a class="radius red darken-3 btn" href="{{ url_for('logout') }}">خروج</a></li>
-                {% else %}
-                    <li><a class="radius transparent white-text" href="{{ url_for('login') }}">دخول</a></li>
-                    <li><a class="radius transparent white-text" href="{{ url_for('register') }}">تسجيل الدخول</a></li>
-                {% endif %}
-                </ul>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="/">بيتي</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     
-            <!-- Dropdown Structure -->
-            <ul id='dropdown1' class='dropdown-content'>
-                {% if categories %}
-                    {% for cat in categories %}
-                        <li class="divider" tabindex="-1"></li>
-                        <li><a href="{{ url_for('category_details', id=cat.id) }}" class="">{{ cat.category_name }}</a></li>
-                    {% endfor %}
-                {% endif %}
-            </ul>
-        </div>
-        <ul class="sidenav white lighten-5" id="mobile-demo">
-                <li><a href="{{ url_for('display_users') }}">المستخدمين</a></li>
-                        <li><a href="#">اتصل بنا</a></li>
-                <ul>
-                    <li><a class="radius red darken-4 btn" href="#">خروج</a></li>
-                </ul>
-            <ul>
-                <li><a class="radius darken-4" href="{{ url_for('login') }}">دخول</a></li>
-            </ul>
-            <ul>
-                <li><a class="radius darken-4" href="{{ url_for('register') }}">تسجيل الدخول</a></li>
-            </ul>
-            <!-- Dropdown Trigger -->
-            <ul>
-                <li><a class='dropdown-trigger btn' href='#' data-target='dropdown2'>الخدمات</a></li>
-            </ul>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <!-- Links -->
+        <ul class="navbar-nav d-flex justify-content-start">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('display_users') }}">المستخدمين</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('add_category') }}">صنف جديد</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('add_service') }}">خدمة جديدة</a>
+            </li>
         
-            <!-- Dropdown Structure -->
-            <ul id='dropdown2' class='dropdown-content white darken-4 z-depth-4'>
-                {% if categories %}
-                    {% for cat in categories %}
-                        <li class="divider" tabindex="-1"></li>
-                        <li><a href="{{ url_for('category_details', id=cat.id) }}" class="">{{ cat.category_name }}</a></li>
-                    {% endfor %}
-                {% endif %}
-            </ul>
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    الخدمات
+                </a>
+                <div class="dropdown-menu">
+                    {% if categories %}
+                        {% for cat in categories %}
+                            <a class="dropdown-item" href="{{ url_for('category_details', id=cat.id) }}">{{ cat.category_name }}</a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </li>
         </ul>
-    </nav>
+        <ul class="navbar-nav d-flex justify-content-end">
+            {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link warning-txt" href="{{ url_for('logout') }}">خروج</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('profile') }}">
+                        <img id="user-nav-img" class="align-self-center mr-3 rounded-circle" src="{{ url_for('static', filename='img/users-profile/') }}{{ current_user.image_file }}" alt="">
+                    </a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('login') }}">دخول</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('register') }}">تسجيل الدخول</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
     
