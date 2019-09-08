@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block main %}
-    <div class="container row">
+    <section class="container row">
         <div class="">
             <h2 class="header">{{ category.category_name }}</h2>
             <div class="card horizontal">
@@ -27,5 +27,25 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+    <section class="container row">
+        <h2>الخدمات</h2>
+        {% for service in category.services %}
+            <div class="col s12 m6">
+                <div class="card">
+                <div class="card-image">
+                    <img class="responsive-img" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
+                    <span class="card-title indigo-text">{{ service.service_name }}</span>
+                </div>
+                <div class="card-content">
+                    <p>{{ service.user_id }}</p>
+                    <p>{{ service.description }}</p>
+                </div>
+                <div class="card-action">
+                    <a href="{{ url_for('service_details', id=service.id) }}">مهتم</a>
+                </div>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
 {% endblock %}
