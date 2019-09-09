@@ -28,6 +28,7 @@ class User(db.Model, UserMixin):
     city = db.Column(db.String(20), default='')
     lat = db.Column(db.Float(20))
     lon = db.Column(db.Float(20))
+    requests = db.relationship('ServiceRequest', backref='client', lazy=True)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
@@ -97,6 +98,7 @@ class Service(db.Model):
     image_file = db.Column(db.String(20), nullable=False, default='profile.svg')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
+    requests = db.relationship('ServiceRequest', backref='requested', lazy=True)
 
     def __repr__(self):
         return f"Service('{self.service_name}', '{self.id}', '{self.image_file}')"
@@ -112,6 +114,48 @@ class Service(db.Model):
             'category_id': self.category_id,
             'image_file': self.image_file
         }
+
+
+class ServiceRequest(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    client_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    service_id = db.Column(db.Integer, db.ForeignKey('service.id'), nullable=False)
+    requested_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    messages = db.relationship('ServiceRequestMessages', backref='discussion', lazy=True)
+
+    def __repr__(self):
+        return f"RequestService('{self.id}', '{self.service_id}', '{self.client_id}')"
+    
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'client_id': self.client_id,
+            'service_id': self.service_id,
+            'requested_at': self.requested_at
+        }
+
+
+class ServiceRequestMessages(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    service_request_id = db.Column(db.Integer, db.ForeignKey('service_request.id'), nullable=False)
+    message = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"ServiceRequestMessages('{self.id}', '{self.service_request_id}', '{self.message}', '{self.created_at}')"
+    
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'service_request_id': self.service_request_id,
+            'message': self.message,
+            'created_at': self.created_at
+        }
+
+
+
 
 
 db.create_all()

@@ -20,12 +20,43 @@
                         {% if current_user.user_type == 'admin' or current_user.id == service.user_id %}
                             <a class="indigo-text left" href="{{ url_for('update_service', id=service.id) }}">تعديل</a>
                             <a class="red-text left" href="#">حذف</a>
-                        {% else %}
-                            <a class="indigo-text left" href="{{ url_for('request_service', client_id=current_user.id, service_id=service.id) }}">طلب الخدمة</a>
                         {% endif %}
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <form class="col s12 m12" method="POST" action="">
+        {{ form.hidden_tag() }}
+
+        <div class="input-field col s12 m12">
+            {{ form.message.label }}
+            {% if form.message.errors %}
+                {{ form.message(class="") }}
+                <div class="red-text darken-3-text center-align pulse">
+                    {% for error in form.message.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.message(class="") }}
+            {% endif %}
+        </div>
+        
+        <div class="row">
+        <div class="input-field col s12 m12">
+            {{ form.submit(class="btn-large indigo left") }}
+        </div>
+        </div>
+    </form>
+    <div>
+        {% if request_messages %}
+            {% for message in request_messages %}
+                <div>
+                    <p>{{ message.message }}</p>
+                    <small>{{ message.created_at }}</small>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}

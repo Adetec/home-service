@@ -6,8 +6,8 @@ from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, jsonify
 from application import app, db, bcrypt, mail
 from application.forms import (RegistrationForm, LoginForm, UpdateProfileForm,
-                CategoryForm, ServiceForm, RequestResetForm, ResetPasswordForm)
-from application.models import User, Category, Service
+CategoryForm, ServiceForm, RequestResetForm, ResetPasswordForm, ServiceRequestMessagesForm)
+from application.models import User, Category, Service, ServiceRequest, ServiceRequestMessages
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 
@@ -284,6 +284,24 @@ def update_service(id):
         form.description.data = service.description
         form.category_id.data = service.category_id
     return render_template('new-service.html', form=form, title='NH | تفيير الخدمة')
+
+
+@app.route('/request_service/<int:client_id>/<int:service_id>/new', methods=['GET', 'POST'])
+def request_service(client_id, service_id):
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
+    service = Service.query.get(service_id)
+    form = ServiceRequestMessagesForm()
+    if form.validate_on_submit():
+        service_request = ServiceRequest(client_id=client_id, service_id=service_id)
+        db.session.add(service_request)
+        db.session.commit()
+        message = ServiceRequestMessages(service_request_id=service_request.id, message=form.message.data)
+        db.session.add(message)
+        db.session.commit()
+        return redirect(url_for('request_service', service=service, client_id=client_id, service_id=service_id))
+    request_messages = ServiceRequestMessages.query.all()
+    return render_template('request-service.html', service=service, form=form, request_messages=request_messages, title='NH | التواصل مع مقدم الخدمة')
 
 
 

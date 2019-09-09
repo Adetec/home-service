@@ -3,7 +3,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, TextAreaField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from application.models import User, Category, Service
+from application.models import User, Category, Service, ServiceRequest, ServiceRequestMessages
 
 
 class RegistrationForm(FlaskForm):
@@ -73,6 +73,10 @@ class ServiceForm(FlaskForm):
     picture = FileField('تحميل صورة الخدمة', validators=[FileAllowed(['jpg', 'png', 'svg'])])
     category_id = SelectField('الصنف', validators=[], choices=cat_ids)
     submit = SubmitField('تحديث')
+
+class ServiceRequestMessagesForm(FlaskForm):
+    message = TextAreaField('رسالة', validators=[DataRequired()])
+    submit = SubmitField('ارسال')
 
 
 class RequestResetForm(FlaskForm):
