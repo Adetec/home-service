@@ -7,15 +7,7 @@ body {
     width : 32px;
 }
 
-/* Home */
-.bg-section {
-    background: linear-gradient(150deg, #875A7B 20%, #62495B 80%) !important;
-}
 
 .diag {
     transform: skewY(-6deg);
-}
-
-.abs {
-    position: absolute;
 }

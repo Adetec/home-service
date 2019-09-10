@@ -55,9 +55,9 @@
             
             {% for m in service_request.messages %}
                 {% if m.message_sender.id == current_user.id %}
-                    <div>أنا: {{ m.message }}</div>
+                    <div class="text-left">أنا: {{ m.message }}</div>
                 {% else %}
-                    <div>{{ m.message_sender.username }}: {{ m.message }}</div>
+                    <div class="text-left text-primary">{{ m.message_sender.username }}: {{ m.message }}</div>
                 {% endif %}
             {% endfor %}
         {% endif %}
