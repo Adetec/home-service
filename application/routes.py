@@ -70,7 +70,8 @@ def logout():
 # @auth.login_required
 def display_users():
     users = User.query.all()
-    return render_template('users.html', users=users, title='NH | المستخدمين')
+    categories = Category.query.all()
+    return render_template('users.html', users=users, categories=categories, title='NH | المستخدمين')
 
 def save_profile_picture(picture_from_form):
     # Generate hex picture filename
@@ -109,6 +110,7 @@ def save_picture(picture_from_form, folder):
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
+    categories = Category.query.all()
     form = UpdateProfileForm()
     if form.validate_on_submit():
         if form.picture.data:
@@ -128,7 +130,7 @@ def profile():
         form.address_first_line.data = current_user.address_first_line
         form.address_second_line.data = current_user.address_second_line
         form.city.data = current_user.city
-    return render_template('profile.html', form=form, title='NH | حسابي')
+    return render_template('profile.html', form=form, categories=categories, title='NH | حسابي')
 
 
 def send_reset_email(user):
@@ -186,6 +188,7 @@ def reset_token(token):
 # Category routes:
 @app.route('/category/new', methods=['GET', 'POST'])
 def add_category():
+    categories = Category.query.all()
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
     form = CategoryForm()
@@ -198,7 +201,7 @@ def add_category():
         db.session.commit()
         flash('قد تم إظافة الصنف بنجاح', 'success')
         return redirect(url_for('home'))
-    return render_template('new-category.html', form=form, title='NH | صنف جديد')
+    return render_template('new-category.html', form=form, categories=categories, title='NH | صنف جديد')
 
 @app.route('/category/<int:id>')
 def category_details(id):
@@ -208,6 +211,7 @@ def category_details(id):
 
 @app.route('/category/<int:id>/update', methods=['GET', 'POST'])
 def update_category(id):
+    categories = Category.query.all()
     category = Category.query.filter_by(id=id).first()
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
@@ -227,20 +231,22 @@ def update_category(id):
     elif request.method == 'GET':
         form.category_name.data = category.category_name
         form.description.data = category.description
-    return render_template('new-category.html', form=form, title='NH | تفيير الصنف')
+    return render_template('new-category.html', form=form, categories=categories, title='NH | تفيير الصنف')
 
 
 
 # Service routes:
 @app.route('/service/<int:id>')
 def service_details(id):
+    categories = Category.query.all()
     service = Service.query.get_or_404(id)
 
-    return render_template('service.html', service=service)
+    return render_template('service.html', categories=categories, service=service)
 
 
 @app.route('/service/new', methods=['GET', 'POST'])
 def add_service():
+    categories = Category.query.all()
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
     form = ServiceForm()
@@ -255,13 +261,13 @@ def add_service():
         db.session.commit()
         flash('قد تم إظافة الخدمة بنجاح', 'success')
         return redirect(url_for('home'))
-    return render_template('new-service.html', form=form, title='NH | خدمة جديدة')
+    return render_template('new-service.html', form=form, categories=categories, title='NH | خدمة جديدة')
 
 
 @app.route('/service/<int:id>/update', methods=['GET', 'POST'])
 def update_service(id):
     service = Service.query.filter_by(id=id).first()
-    category = Category.query.all()
+    categories = Category.query.all()
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
     elif not current_user.id == service.user_id:
@@ -283,11 +289,12 @@ def update_service(id):
         form.service_name.data = service.service_name
         form.description.data = service.description
         form.category_id.data = service.category_id
-    return render_template('new-service.html', form=form, title='NH | تفيير الخدمة')
+    return render_template('new-service.html', form=form, categories=categories, title='NH | تفيير الخدمة')
 
 
 @app.route('/request_service/<int:client_id>/<int:service_id>/new', methods=['GET', 'POST'])
 def request_service(client_id, service_id):
+    categories = Category.query.all()
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
     service = Service.query.get(service_id)
@@ -309,7 +316,7 @@ def request_service(client_id, service_id):
     service_request = ServiceRequest.query.filter_by(service_id=service_id).first()
     
     client = User.query.get(client_id)
-    return render_template('request-service.html', client=client, service=service, form=form, service_request=service_request, title='NH | التواصل مع مقدم الخدمة')
+    return render_template('request-service.html', client=client, service=service, form=form, service_request=service_request, categories=categories, title='NH | التواصل مع مقدم الخدمة')
 
 
 
