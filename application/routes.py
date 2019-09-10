@@ -239,6 +239,8 @@ def update_category(id):
 @app.route('/service/<int:id>')
 def service_details(id):
     categories = Category.query.all()
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
     service = Service.query.get_or_404(id)
 
     return render_template('service.html', categories=categories, service=service)
