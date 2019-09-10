@@ -292,16 +292,24 @@ def request_service(client_id, service_id):
         return redirect(url_for('home'))
     service = Service.query.get(service_id)
     form = ServiceRequestMessagesForm()
+    sender = current_user.id
     if form.validate_on_submit():
-        service_request = ServiceRequest(client_id=client_id, service_id=service_id)
-        db.session.add(service_request)
-        db.session.commit()
-        message = ServiceRequestMessages(service_request_id=service_request.id, message=form.message.data)
-        db.session.add(message)
-        db.session.commit()
+        service_request = ServiceRequest.query.filter_by(service_id=service_id).first()
+        print(service_request)
+        if not service_request:
+            service_request = ServiceRequest(client_id=client_id, service_id=service_id)
+            db.session.add(service_request)
+            db.session.commit()
+        else:
+            service_request = ServiceRequest.query.filter_by(service_id=service_id).first()
+            message = ServiceRequestMessages(service_request_id=service_request.id, sender=sender, message=form.message.data)
+            db.session.add(message)
+            db.session.commit()
         return redirect(url_for('request_service', service=service, client_id=client_id, service_id=service_id))
-    request_messages = ServiceRequestMessages.query.all()
-    return render_template('request-service.html', service=service, form=form, request_messages=request_messages, title='NH | التواصل مع مقدم الخدمة')
+    service_request = ServiceRequest.query.filter_by(service_id=service_id).first()
+    
+    client = User.query.get(client_id)
+    return render_template('request-service.html', client=client, service=service, form=form, service_request=service_request, title='NH | التواصل مع مقدم الخدمة')
 
 
 

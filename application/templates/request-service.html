@@ -50,12 +50,15 @@
         </div>
     </form>
     <div>
-        {% if request_messages %}
-            {% for message in request_messages %}
-                <div>
-                    <p>{{ message.message }}</p>
-                    <small>{{ message.created_at }}</small>
-                </div>
+        
+        {% if service_request %}
+            
+            {% for m in service_request.messages %}
+                {% if m.message_sender.id == current_user.id %}
+                    <div>أنا: {{ m.message }}</div>
+                {% else %}
+                    <div>{{ m.message_sender.username }}: {{ m.message }}</div>
+                {% endif %}
             {% endfor %}
         {% endif %}
     </div>

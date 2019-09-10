@@ -29,6 +29,7 @@ class User(db.Model, UserMixin):
     lat = db.Column(db.Float(20))
     lon = db.Column(db.Float(20))
     requests = db.relationship('ServiceRequest', backref='client', lazy=True)
+    request_messages = db.relationship('ServiceRequestMessages', backref='message_sender', lazy=True)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
@@ -141,9 +142,9 @@ class ServiceRequestMessages(db.Model):
     service_request_id = db.Column(db.Integer, db.ForeignKey('service_request.id'), nullable=False)
     message = db.Column(db.Text)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    sender = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    def __repr__(self):
-        return f"ServiceRequestMessages('{self.id}', '{self.service_request_id}', '{self.message}', '{self.created_at}')"
+    
     
     @property
     def serialize(self):
@@ -151,7 +152,8 @@ class ServiceRequestMessages(db.Model):
             'id': self.id,
             'service_request_id': self.service_request_id,
             'message': self.message,
-            'created_at': self.created_at
+            'created_at': self.created_at,
+            'sender': self.sender
         }
 
 
