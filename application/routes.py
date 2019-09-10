@@ -205,9 +205,10 @@ def add_category():
 
 @app.route('/category/<int:id>')
 def category_details(id):
+    categories = Category.query.all()
     category = Category.query.get_or_404(id)
 
-    return render_template('category.html', category=category)
+    return render_template('category.html', categories=categories, category=category)
 
 @app.route('/category/<int:id>/update', methods=['GET', 'POST'])
 def update_category(id):
