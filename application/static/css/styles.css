@@ -11,3 +11,7 @@ body {
 .diag {
     transform: skewY(-6deg);
 }
+
+.media {
+    flex-flow: wrap;
+}
