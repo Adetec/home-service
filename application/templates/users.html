@@ -10,15 +10,17 @@
                     <p class="card-text">البريد الإلكتروني: <span class="text-muted">{{ user.email }}</span></p>
                     <p class="card-text">مفعل: <span class="text-muted">{{ user.is_active }}</span></p>
                     <p class="card-text">متصل حاليا: <span class="text-muted">{{ user.is_connected }}</span></p>
-                    <p class="card-text">تاريخ التسجيل: <span class="text-muted">{{ user.created_at }}</span></p>
+                    <p class="card-text">تاريخ التسجيل: <span class="text-muted">{{ moment(user.created_at).fromNow() }}</span></p>
                     <p class="card-text">طبيعة المستخدم: <span class="text-muted">{{ user.user_type }}</span></p>
                     <p class="card-text">العنوان:
                         <span class="text-muted">{{ user.address_first_line }} {{ user.address_second_line }} - {{ user.city }}</span>
                     </p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">تاريخ آخر دخول: {{ user.last_login }}</small>
-                    <a class="indigo-text left" href="#">المزيد من التفاصيل</a>
+                    <small class="text-muted">تاريخ آخر دخول: {{ moment(user.last_login).fromNow() }}</small>
+                    <div class="text-left">
+                        <a class="indigo-text left" href="#">المزيد من التفاصيل</a>
+                    </div>
                 </div>
             </div>
 

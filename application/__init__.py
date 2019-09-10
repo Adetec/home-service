@@ -5,9 +5,11 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_cors import CORS
 from flask_mail import Mail
+from flask_moment import Moment
 
 app = Flask(__name__)
 CORS(app)
+moment = Moment(app)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 db = SQLAlchemy(app)
