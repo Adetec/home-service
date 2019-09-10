@@ -1,85 +1,93 @@
 {% extends 'base.html' %}
 {% block main %}
-    <div class="row container">
+    <div class="mt-4 row">
         
-        <form class="col s12 m8" method="POST" action="">
+        <form class="col form-group col-sm-8 text-right" method="POST" action="">
                 {{ form.hidden_tag() }}
-            <div class="input-field col s12 m12">
-                {{ form.username.label }}
+            <div class="form-group">
+                {{ form.username.label(class="form-control-label") }}
                 {% if form.username.errors %}
-                    {{ form.username(class="") }}
+                    {{ form.username(class="form-control") }}
                     <div class="red-text darken-3-text center-align pulse">
                         {% for error in form.username.errors %}
-                            <span>{{ error }}</span>
+                            <div class="alert alert-danger">
+                                <span>{{ error }}</span>
+                            </div>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.username(class="") }}
+                    {{ form.username(class="form-control") }}
                 {% endif %}
             </div>
 
-            <div class="input-field col s12 m12">
+            <div class="form-group">
+                {{ form.email.label(class="form-control-label") }}
                 {% if form.email.errors %}
-                    {{ form.email(class="", type="email") }}
+                    {{ form.email(class="form-control", type="email") }}
                     <div class="red-text darken-3-text center-align pulse">
                         {% for error in form.email.errors %}
-                            <span>{{ error }}</span>
+                            <div class="alert alert-danger">
+                                <span>{{ error }}</span>
+                            </div>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.email(class="", type="email") }}
+                    {{ form.email(class="form-control", type="email") }}
                 {% endif %}
-                {{ form.email.label }}
             </div>
 
-            <div class="input-field col s12 m12">
+            <div class="form-group">
+                {{ form.password.label(class="form-control-label") }}
                 {% if form.password.errors %}
-                    {{ form.password(class="", type="password") }}
+                    {{ form.password(class="form-control", type="password") }}
                     <div class="red-text darken-3-text center-align pulse">
                         {% for error in form.password.errors %}
-                            <span>{{ error }}</span>
+                            <div class="alert alert-danger">
+                                <span>{{ error }}</span>
+                            </div>
                         {% endfor %}
                     </div>    
                 {% else %}
-                    {{ form.password(class="", type="password") }}
+                    {{ form.password(class="form-control", type="password") }}
                 {% endif %}
-                {{ form.password.label }}
             </div>
-            <div class="input-field col s12 m12">
+            <div class="form-group">
+                {{ form.confirm_password.label(class="form-control-label") }}
                 {% if form.confirm_password.errors %}
-                    {{ form.confirm_password(class="", type="password") }}
+                    {{ form.confirm_password(class="form-control", type="password") }}
                     <div class="red-text darken-3-text center-align pulse">
                         {% for error in form.confirm_password.errors %}
-                            <span>{{ error }}</span>
+                            <div class="alert alert-danger">
+                                <span>{{ error }}</span>
+                            </div>
                         {% endfor %}
                     </div>    
                 {% else %}
-                    {{ form.confirm_password(class="", type="password") }}
+                    {{ form.confirm_password(class="form-control", type="password") }}
                 {% endif %}
-                {{ form.confirm_password.label }}
             </div>
-            <div class="row">
-                <div class="input-field col s12 m12">
-                    {% if form.user_type.errors %}
-                        {{ form.user_type(class="") }}
-                        <div class="red-text darken-3-text center-align pulse">
-                            {% for error in form.user_type.errors %}
+            <div class="form-group">
+                {% if form.user_type.errors %}
+                    {{ form.user_type(class="form-control") }}
+                    <div class="form-group">
+                        {% for error in form.user_type.errors %}
+                            <div class="alert alert-danger">
                                 <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.user_type(class="") }}
-                    {% endif %}
-                </div>
-                <div class="file-field input-field col s12 m12">
-                    {{ form.submit(class="btn-large indigo") }}
-                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.user_type(class="") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-secondary float-left") }}
             </div>
         </form>
 
-        <div class="col m4">
-            <h2 class="indigo-text">سعداء بلحاقك</h2>
-            <img class="img-fluid" src="static/img/nh-logo.png" alt="">
+        <div class="col-sm-4 mt-auto mb-auto">
+            <h2 class="text-secondary text-center">سعداء بلحاقك</h2>
+            <img class="img-fluid mx-auto d-block" src="static/img/nh-logo.png" alt="">
         </div>
     </div>
             
