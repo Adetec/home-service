@@ -1,66 +1,62 @@
 {% extends 'base.html' %}
 {% block main %}
-    <div class="container row">
-        <form class="col s12 m12" method="POST" action="" enctype="multipart/form-data">
+    <div class="container">
+        <form class="form-group text-right" method="POST" action="" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
-                <div class="file-field input-field col s12 m12">
+                <div class="form-group">
                     <div class="btn">
-                        <span>إظافة صورة</span>
+                        {{ form.picture.label(class="form-control-label") }}
                     </div>
-                    <div class="file-path-wrapper">
-                        {{ form.picture(class="file-path") }}
+                    <div class="form-group">
+                        {{ form.picture(class="form-control-file") }}
                     </div>
-                    <div class="red-text darken-3-text center-align pulse">
+                    <div class="form-group">
                         {% if form.picture.errors %}
                             {% for error in form.picture.errors %}
+                            <div class="alert alert-danger">
                                 <span>{{ error }}</span>
+                            </div>
                             {% endfor %}
                         {% endif %}
                     </div>
                 </div>
-            <div class="input-field col s12 m6">
+            <div class="form-group">
                 {{ form.service_name.label }}
                 {% if form.service_name.errors %}
-                    {{ form.service_name(class="") }}
-                    <div class="red-text darken-3-text center-align pulse">
-                        {% for error in form.service_name.errors %}
+                    {{ form.service_name(class="form-control") }}
+                    <div class="form-group">
+                        {% for error in form.category_name.errors %}
+                        <div class="alert alert-danger">
                             <span>{{ error }}</span>
+                        </div>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.service_name(class="") }}
+                    {{ form.service_name(class="form-control") }}
                 {% endif %}
             </div>
-            <div class="input-field col s12 m12">
+            <div class="form-group">
                 {{ form.description.label }}
                 {% if form.description.errors %}
-                    {{ form.description(class="") }}
-                    <div class="red-text darken-3-text center-align pulse">
+                    {{ form.description(rows="10", class="form-control") }}
+                    <div class="form-group">
                         {% for error in form.description.errors %}
+                        <div class="alert alert-danger">
                             <span>{{ error }}</span>
+                        </div>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.description(class="") }}
+                    {{ form.description(rows="10", class="form-control") }}
                 {% endif %}
             </div>
-            <div class="input-field col s12 m12">
-                {% if form.category_id.errors %}
-                    {{ form.category_id(class="") }}
-                    <div class="red-text darken-3-text center-align pulse">
-                        {% for error in form.category_id.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.category_id(class="") }}
-                {% endif %}
+
+            <div class="form-group">
+                {{ form.category_id(class="form-control") }}
             </div>
     
-            <div class="row">
-            <div class="input-field col s12 m12">
-                {{ form.submit(class="btn-large indigo left") }}
-            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-secondary float-left") }}
             </div>
         </form>
     </div>
