@@ -23,7 +23,7 @@
                     <a class="carousel-item" href="#cat{{ category.id }}">
                         <span class="indigo-text">{{ category.category_name }}</span>
                         <p class="">{{ category.description }}</p>
-                        <img class="responsive-img" src="static/img/categories/{{ category.image_file }}">
+                        <img class="img-fluid" src="static/img/categories/{{ category.image_file }}">
                     </a>
                     {% endfor %}
                 </div>
@@ -46,7 +46,7 @@
                 {% for service in services %}
                 <div class="carousel-item" data-interval="3000">
                     <img class="d-block w-100 img-fluid" src="static/img/services/{{ service.image_file }}">
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption d-none d-md-block text-light bg-dark">
                         <h5>{{ service.service_name }}</h5>
                         <p>{{ service.description }}</p>
                     </div>
