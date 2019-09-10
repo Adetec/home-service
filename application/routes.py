@@ -25,6 +25,7 @@ def home():
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
+    categories = Category.query.all()
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = RegistrationForm()
@@ -36,11 +37,12 @@ def register():
         db.session.commit()
         flash('قد تم تسجيلك بنجاح', 'success')
         return redirect(url_for('login'))
-    return render_template('register.html', form=form, title='NH | حساب جديد')
+    return render_template('register.html', categories=categories, form=form, title='NH | حساب جديد')
 
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+    categories = Category.query.all()
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = LoginForm()
@@ -55,7 +57,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('الرجاء التأكد من بريدك الإلكتروني أو كلمة السر', 'danger')
-    return render_template('login.html', form=form, title='NH | تسجيل دخول')
+    return render_template('login.html', categories=categories, form=form, title='NH | تسجيل دخول')
 
 
 @app.route("/logout")
@@ -190,7 +192,7 @@ def reset_token(token):
 def add_category():
     categories = Category.query.all()
     if not current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('login'))
     form = CategoryForm()
     if form.validate_on_submit():
         category = Category(category_name=form.category_name.data, description=form.description.data)
@@ -251,7 +253,7 @@ def service_details(id):
 def add_service():
     categories = Category.query.all()
     if not current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('login'))
     form = ServiceForm()
     print(form.category_id.data)
     if form.validate_on_submit():
