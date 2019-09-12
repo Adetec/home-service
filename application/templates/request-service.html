@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block main %}
-    <div class="container media shadow mt-3 mb-4">
+    <div class="container media mt-3 mb-4">
         <img class="align-self-start mr-3" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
         <div class="media-body mr-3 text-right">
             <h2 class="text-primary text-center">{{ service.service_name }}</h2>  
@@ -20,18 +20,18 @@
                         <li class="media p-3">
                             <img src="{{ url_for('static', filename='img/users-profile/'+ m.message_sender.image_file) }}" class="img-comment mr-3 img-fluid shadow" alt="{{ m.message_sender.username}}">
                             <div class="media-body mr-3">
-                                <h5 class="mt-0 mb-1 text-info"> <small class="text-muted text-center">{{ moment(m.created_at).fromNow() }}</small> أنا </h5>
+                                <h5 class="mt-0 mb-1 text-info"> أنا <small class="text-muted text-center">{{ moment(m.created_at).fromNow() }}</small></h5>
                                 {{ m.message}}
                             </div>
                         </li>
 
                     {% elif (m.message_sender.id == service.user_id) or  (m.message_sender.id != client_id and current_user.id == service.user_id) %}
-                        <li class="media text-left p-3">
+                        <li class="media p-3">
+                            <img src="{{ url_for('static', filename='img/users-profile/'+ m.message_sender.image_file) }}" class="img-comment mr-3 img-fluid shadow" alt="{{ m.message_sender.username}}">
                             <div class="media-body mr-3">
-                                <h5 class="mt-0 mb-1 text-info"><small class="text-muted text-center">{{ moment(m.created_at).fromNow() }}</small> {{ m.message_sender.username }}</h5>
+                                <h5 class="mt-0 mb-1 text-info">{{ m.message_sender.username }} <small class="text-muted text-center">{{ moment(m.created_at).fromNow() }}</small></h5>
                                 {{ m.message}}
                             </div>
-                            <img src="{{ url_for('static', filename='img/users-profile/'+ m.message_sender.image_file) }}" class="img-comment align-left mr-3 img-fluid shadow" alt="{{ m.message_sender.username}}">
                         </li>
                     {% endif %}             
                 {% else %}
