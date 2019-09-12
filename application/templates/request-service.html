@@ -1,76 +1,37 @@
 {% extends 'base.html' %}
 {% block main %}
-    <div class="container row">
-        <div class="">
-            <h2 class="header">{{ service.service_name }}</h2>
-            <div class="card horizontal">
-                <div class="card-image">
-                <img class="img-fluid" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
-                </div>
-                <div class="card-stacked">
-                    <div class="card-content">
-                        <p class="indigo-text">الرقم: <span class="blue-text">{{ service.id }}</span></p>
-                        <p class="indigo-text">الصنف: <span class="blue-text">{{ service.service_name }}</span></p>
-                        <p class="indigo-text">وصف الصنف: <span class="blue-text">{{ service.description }}</span></p>
-                        <ul>
-                            
-                        </ul>
-                    </div>
-                    <div class="card-action">
-                        {% if current_user.user_type == 'admin' or current_user.id == service.user_id %}
-                            <a class="indigo-text left" href="{{ url_for('update_service', id=service.id) }}">تعديل</a>
-                            <a class="red-text left" href="#">حذف</a>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
+    <div class="container media shadow mt-3 mb-4">
+        <img class="align-self-start mr-3" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
+        <div class="media-body mr-3 text-right">
+            <h2 class="text-primary text-center">{{ service.service_name }}</h2>  
+            <p class="text-muted">الرقم: <span class="text-info">{{ service.id }}</span></p>
+            <p class="text-muted">الصنف: <span class="text-info">{{ service.service_name }}</span></p>
+            <p class="text-muted">وصف الصنف: <span class="text-info">{{ service.description }}</span></p>
         </div>
     </div>
-    <form class="col s12 m12" method="POST" action="">
-        {{ form.hidden_tag() }}
-
-        <div class="input-field col s12 m12">
-            {{ form.message.label }}
-            {% if form.message.errors %}
-                {{ form.message(class="") }}
-                <div class="red-text darken-3-text center-align pulse">
-                    {% for error in form.message.errors %}
-                        <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-            {% else %}
-                {{ form.message(class="") }}
-            {% endif %}
-        </div>
-        
-        <div class="row">
-        <div class="input-field col s12 m12">
-            {{ form.submit(class="btn-large indigo left") }}
-        </div>
-        </div>
-    </form>
     
-    <div>
+    
+    <div class="container border">
         {% if service_request.service_id == service.id %}
-        <ul class="list-unstyled">
+        <ul class="list-unstyled pr-0 text-right overflow-auto">
             {% for m in service_request.messages %}
                 {% if service_request.id == service_request.id %}
                     {% if m.message_sender.id == current_user.id %}
-                        <li class="media border p-3">
+                        <li class="media p-3">
                             <img src="{{ url_for('static', filename='img/users-profile/'+ m.message_sender.image_file) }}" class="img-comment mr-3 img-fluid shadow" alt="{{ m.message_sender.username}}">
-                            <div class="media-body">
-                                <h5 class="mt-0 mb-1">أنا</h5>
+                            <div class="media-body mr-3">
+                                <h5 class="mt-0 mb-1 text-info">أنا</h5>
                                 {{ m.message}}
                             </div>
                         </li>
 
                     {% elif (m.message_sender.id == service.user_id) or  (m.message_sender.id != client_id and current_user.id == service.user_id) %}
-                        <li class="media border p-3 my-4">
-                            <img src="{{ url_for('static', filename='img/users-profile/'+ m.message_sender.image_file) }}" class="img-comment mr-3 img-fluid shadow" alt="{{ m.message_sender.username}}">
-                            <div class="media-body">
-                                <h5 class="mt-0 mb-1">{{ m.message_sender.username }}</h5>
+                        <li class="media text-left p-3">
+                            <div class="media-body mr-3">
+                                <h5 class="mt-0 mb-1 text-info">{{ m.message_sender.username }}</h5>
                                 {{ m.message}}
                             </div>
+                            <img src="{{ url_for('static', filename='img/users-profile/'+ m.message_sender.image_file) }}" class="img-comment align-left mr-3 img-fluid shadow" alt="{{ m.message_sender.username}}">
                         </li>
                     {% endif %}             
                 {% else %}
@@ -79,6 +40,30 @@
         </ul>
 {% endif %}
     </div>
+
+    <form class="form-group container text-right" method="POST" action="">
+            {{ form.hidden_tag() }}
+    
+            <div class="form-group">
+                {{ form.message.label(class="form-control-label") }}
+                {% if form.message.errors %}
+                    {{ form.message(class="form-control") }}
+                    <div class="form-group">
+                        {% for error in form.message.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.message(class="form-control") }}
+                {% endif %}
+            </div>
+            
+            <div class="row">
+            <div class="input-field col s12 m12">
+                {{ form.submit(class="btn btn-outline-dark float-left") }}
+            </div>
+            </div>
+        </form>
 
 {% endblock %}
 
