@@ -1,14 +1,14 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm bg-light navbar-primary">
     <!-- Brand -->
     <a class="navbar-brand" href="/">بيتي</a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <!-- Links -->
-        <ul class="navbar-nav d-flex justify-content-start">
+        <ul class="navbar-nav mx-auto d-flex justify-content-start text-right">
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('display_users') }}">المستخدمين</a>
             </li>
@@ -24,19 +24,19 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                     الخدمات
                 </a>
-                <div class="dropdown-menu bg-dark">
+                <div class="dropdown-menu border-0 bg-light text-right">
                     {% if categories %}
                         {% for cat in categories %}
-                            <a class="dropdown-item text-light" href="{{ url_for('category_details', id=cat.id) }}">{{ cat.category_name }}</a>
+                            <a class="dropdown-item text-primary" href="{{ url_for('category_details', id=cat.id) }}">{{ cat.category_name }}</a>
                         {% endfor %}
                     {% endif %}
                 </div>
             </li>
         </ul>
-        <ul class="navbar-nav d-flex justify-content-end">
+        <ul class="navbar-nav d-flex mr-auto justify-content-end">
             {% if current_user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link warning-txt" href="{{ url_for('logout') }}">خروج</a>
+                    <a class="nav-link" href="{{ url_for('logout') }}">خروج</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url_for('profile') }}">
