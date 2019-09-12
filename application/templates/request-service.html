@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block main %}
     <div class="container media mt-3 mb-4">
-        <img class="align-self-start mr-3" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
+        <img class="img-fluid align-self-start mr-3" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
         <div class="media-body mr-3 text-right">
             <h2 class="text-primary text-center">{{ service.service_name }}</h2>  
             <p class="text-muted">الرقم: <span class="text-info">{{ service.id }}</span></p>
