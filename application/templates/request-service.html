@@ -49,17 +49,36 @@
         </div>
         </div>
     </form>
+    
     <div>
-        
-        {% if service_request %}
-            
+        {% if service_request.service_id == service.id %}
+        <ul class="list-unstyled">
             {% for m in service_request.messages %}
-                {% if m.message_sender.id == current_user.id %}
-                    <div class="text-left">أنا: {{ m.message }}</div>
+                {% if service_request.id == service_request.id %}
+                    {% if m.message_sender.id == current_user.id %}
+                        <li class="media border p-3">
+                            <img src="{{ url_for('static', filename='img/users-profile/'+ m.message_sender.image_file) }}" class="img-comment mr-3 img-fluid shadow" alt="{{ m.message_sender.username}}">
+                            <div class="media-body">
+                                <h5 class="mt-0 mb-1">أنا</h5>
+                                {{ m.message}}
+                            </div>
+                        </li>
+
+                    {% elif (m.message_sender.id == service.user_id) and  (m.message_sender.id != client_id or current_user == service.user_id) %}
+                        <li class="media border p-3 my-4">
+                            <img src="{{ url_for('static', filename='img/users-profile/'+ m.message_sender.image_file) }}" class="img-comment mr-3 img-fluid shadow" alt="{{ m.message_sender.username}}">
+                            <div class="media-body">
+                                <h5 class="mt-0 mb-1">{{ m.message_sender.username }}</h5>
+                                {{ m.message}}
+                            </div>
+                        </li>
+                    {% endif %}             
                 {% else %}
-                    <div class="text-left text-primary">{{ m.message_sender.username }}: {{ m.message }}</div>
                 {% endif %}
             {% endfor %}
-        {% endif %}
+        </ul>
+{% endif %}
     </div>
+
 {% endblock %}
+

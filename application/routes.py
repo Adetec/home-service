@@ -303,6 +303,10 @@ def request_service(client_id, service_id):
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
     service = Service.query.get(service_id)
+    print(f'test: current user: {current_user.id} => client: {client_id} => service user: {service.user_id}')
+    if (current_user.id != client_id) and (current_user.id != service.user_id) :
+        flash('لايمكنك التوقب على أمور الناس', 'warning')
+        return redirect(url_for('home'))
     form = ServiceRequestMessagesForm()
     sender = current_user.id
     if form.validate_on_submit():

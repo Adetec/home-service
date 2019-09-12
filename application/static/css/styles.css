@@ -15,3 +15,8 @@ body {
 .media {
     flex-flow: wrap;
 }
+
+.img-comment {
+    width: 48px;
+    border-radius: 10px;
+}
