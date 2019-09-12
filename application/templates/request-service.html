@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block main %}
-    <div class="container media mt-3 mb-4">
+    <div class="container media mt-3 mb-4 shadow-sm">
         <img class="img-fluid align-self-start mr-3" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
         <div class="media-body mr-3 text-right">
             <h2 class="text-primary text-center">{{ service.service_name }}</h2>  
@@ -11,7 +11,7 @@
     </div>
     
     
-    <div class="container">
+    <div class="container shadow-sm">
         {% if service_request.service_id == service.id %}
         <ul class="list-unstyled pr-0 text-right overflow-auto">
             {% for m in service_request.messages %}
