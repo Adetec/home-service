@@ -2,11 +2,9 @@
 {% block main %}
     <div class="container row">
         <div class="">
-            <h2 class="header">{{ service.service_name }}</h2>
-            <div class="card horizontal">
-                <div class="card-image">
-                <img class="img-fluid" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
-                </div>
+            <h2 class="card-title">{{ service.service_name }}</h2>
+            <div class="card-body">
+                <img class="card-img-top" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
                 <div class="card-stacked">
                     <div class="card-content">
                         <p class="indigo-text">الرقم: <span class="blue-text">{{ service.id }}</span></p>

@@ -1,50 +1,39 @@
 {% extends 'base.html' %}
 {% block main %}
-    <section class="container row">
-        <div class="">
-            <h2 class="header">{{ category.category_name }}</h2>
-            <div class="card horizontal">
-                <div class="card-image">
-                <img class="img-fluid" src="{{ url_for('static', filename='img/categories/'+category.image_file) }}">
-                </div>
-                <div class="card-stacked">
-                    <div class="card-content">
-                        <p class="indigo-text">الرقم: <span class="blue-text">{{ category.id }}</span></p>
-                        <p class="indigo-text">الصنف: <span class="blue-text">{{ category.category_name }}</span></p>
-                        <p class="indigo-text">وصف الصنف: <span class="blue-text">{{ category.description }}</span></p>
-                        <ul>
-                            
-                        </ul>
-                    </div>
-                    <div class="card-action">
-                        {% if current_user.user_type == 'admin' %}
-                            <a class="indigo-text left" href="{{ url_for('update_category', id=category.id) }}">تعديل</a>
-                            <a class="red-text left" href="#">حذف</a>
-                        {% else %}
-                            <a class="indigo-text left" href="#">المزيد من التفاصيل</a>
-                        {% endif %}
-                    </div>
-                </div>
+    <section class="container card">
+        <img class="card-img-top" src="{{ url_for('static', filename='img/categories/'+category.image_file) }}">
+        <h2 class="card-title text-center">{{ category.category_name }}</h2>
+            <div class="card-body text-right">
+                <p class="card-text">الرقم: <span class="blue-text">{{ category.id }}</span></p>
+                <p class="card-text">الصنف: <span class="blue-text">{{ category.category_name }}</span></p>
+                <p class="card-text">وصف الصنف: <span class="blue-text">{{ category.description }}</span></p>
+                <ul>
+                    
+                </ul>
             </div>
-        </div>
+            <div class="card-footer">
+                {% if current_user.user_type == 'admin' %}
+                    <a class="card-link left" href="{{ url_for('update_category', id=category.id) }}">تعديل</a>
+                    <a class="card-link left" href="#">حذف</a>
+                {% else %}
+                    <a class="card-link left" href="#">المزيد من التفاصيل</a>
+                {% endif %}
+            </div>
     </section>
-    <section class="container row">
-        <h2>الخدمات</h2>
+    <h2 class="card-header text-center">الخدمات</h2>
+    <section class="card-group container">
         {% for service in category.services %}
-            <div class="col s12 m6">
-                <div class="card">
-                <div class="card-image">
-                    <img class="img-fluid" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
-                    <span class="card-title indigo-text">{{ service.service_name }}</span>
-                </div>
-                <div class="card-content">
-                    <p>{{ service.user_id }}</p>
-                    <p>{{ service.description }}</p>
-                </div>
-                <div class="card-action">
-                    <a href="{{ url_for('service_details', id=service.id) }}">مهتم</a>
-                </div>
-                </div>
+            <div class="card">
+                <img class="card-img-top" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
+                <h3 class="card-title text-center">{{ service.service_name }}</h3>
+        
+            <div class="card-body text-right">
+                <p class="card-text">{{ service.user_id }}</p>
+                <p class="card-text">{{ service.description }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('service_details', id=service.id) }}">مهتم</a>
+            </div>
             </div>
         {% endfor %}
     </section>
