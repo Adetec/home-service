@@ -18,7 +18,7 @@
     {{ moment.include_moment() }}
     {{ moment.lang("ar-dz") }}
 </head>
-<body>
+<body class="bg-light">
     <!-- Start header container -->
     <header>
         <div class="back"></div>
@@ -27,7 +27,7 @@
     <!-- End header container -->
 
     <!-- Start main container -->
-    <main class="container">
+    <main class="">
         <!-- Flash messages -->
         {% with  messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}

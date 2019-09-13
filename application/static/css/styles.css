@@ -2,11 +2,33 @@ body {
     font-family: 'Changa', serif;
 }
 
+#interface-section {
+    
+    background-color: transparent;
+    height: 90vh;
+}
+
 /* Nav */
+.navbar-brand {
+    font-size: 2rem;
+}
 #user-nav-img {
     width : 32px;
 }
 
+#interface-section::before {
+    background-image: url(https://cdn.shopify.com/s/files/1/0898/1228/products/487640422_cd03414d-ca82-4ba1-8129-2da76af5bab4_x700.jpg?v=1534384569);
+    background-size: cover;
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    opacity: 0.2;
+}
 
 .diag {
     transform: skewY(-6deg);
