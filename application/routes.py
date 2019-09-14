@@ -113,6 +113,7 @@ def save_picture(picture_from_form, folder):
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     categories = Category.query.all()
+    services = Service.query.all()   
     form = UpdateProfileForm()
     if form.validate_on_submit():
         if form.picture.data:
@@ -133,7 +134,7 @@ def profile():
         form.address_first_line.data = current_user.address_first_line
         form.address_second_line.data = current_user.address_second_line
         form.city.data = current_user.city
-    return render_template('profile.html', form=form, n_requests=n_requests, categories=categories, title='NH | حسابي')
+    return render_template('profile.html', form=form, n_requests=n_requests, categories=categories, services=services, title='NH | حسابي')
 
 
 def send_reset_email(user):
