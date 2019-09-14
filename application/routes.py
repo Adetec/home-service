@@ -346,7 +346,7 @@ def request_service(client_id, service_id):
         if sender == service.user_id:
             client = User.query.get(client_id)
             send_request_message(client, service, message.message, client_id, service_id)
-        return redirect(url_for('request_service', service=service, client_id=client_id, service_id=service_id))
+        return redirect(url_for('request_service', client_id=client_id, service_id=service_id))
     service_request = ServiceRequest.query.filter_by(service_id=service_id).first()
     
     client = User.query.get(client_id)
