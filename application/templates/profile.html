@@ -13,12 +13,12 @@
                 <span class="text-info">{{ current_user.address_first_line }} {{ current_user.address_second_line }} - {{ current_user.city }}</span>
             </p>
             <div>
-                <a class="btn btn-primary float-left" href="#"><span class="badge badge-light">{{ n_requests }}</span> طلباتي</a>
-                <a class="btn btn-info float-right" href="#">تعديل معلوماتي</a>
+                <a class="btn btn-primary float-left" href="#list-tab"><span class="badge badge-light">{{ n_requests }}</span> طلباتي</a>
+                <a class="btn btn-info float-right" href="#edit-profile">تعديل معلوماتي</a>
             </div>
         </div>
     </div>
-    <div class="container text-right mt-4 mb-4">
+    <div class="container text-right mt-4 mb-4 hide">
         <div class="row">
             <div class="col-6">
                 <div class="list-group" id="list-tab" role="tablist">
@@ -52,7 +52,7 @@
         </div>
     </div>
     <div class="container form-group text-right">
-        <form class="" method="POST" action="" enctype="multipart/form-data">
+        <form id="edit-profile" class="" method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <div class="form-group">
                 {{ form.picture.label(class="form-control-label") }}
@@ -136,11 +136,4 @@
             </div>
         </form>
     </div>
-    {% for service in services %}
-        {% for request in current_user.requests %}
-            {% if request.service_id == service.id %}
-                {{ service.service_name }} - موجود
-            {% endif %}
-        {% endfor %}
-    {% endfor %}
 {% endblock %}
