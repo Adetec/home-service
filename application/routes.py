@@ -127,12 +127,13 @@ def profile():
         flash('قد تم تعديل معلوماتك بنجاح', 'success')
         return redirect(url_for('profile'))
     elif request.method == 'GET':
+        n_requests = len(current_user.requests)
         form.username.data = current_user.username
         form.full_name.data = current_user.full_name
         form.address_first_line.data = current_user.address_first_line
         form.address_second_line.data = current_user.address_second_line
         form.city.data = current_user.city
-    return render_template('profile.html', form=form, categories=categories, title='NH | حسابي')
+    return render_template('profile.html', form=form, n_requests=n_requests, categories=categories, title='NH | حسابي')
 
 
 def send_reset_email(user):

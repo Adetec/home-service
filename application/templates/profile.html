@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block main %}
-    <div class="media mt-3">
+    <div class="container media mt-3">
         <img src="static/img/users-profile/{{ current_user.image_file }}" class="align-self-start mr-3" alt="current_user.username">
         <div class="media-body mr-3 text-right">
             <h5 class="text-primary text-center">{{ current_user.username }}</h5>
@@ -12,9 +12,12 @@
             <p class="text-muted">العنوان:
                 <span class="text-info">{{ current_user.address_first_line }} {{ current_user.address_second_line }} - {{ current_user.city }}</span>
             </p>
+            <div id="my-requests">
+                <a class="btn btn-primary float-left" href="#"> <span class="badge badge-light">{{ n_requests }}</span> طلباتي</a>
+            </div>
         </div>
     </div>
-    <div class="form-group text-right">
+    <div class="container form-group text-right">
         <form class="" method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <div class="form-group">
