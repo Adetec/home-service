@@ -22,6 +22,7 @@ class User(db.Model, UserMixin):
     services = db.relationship('Service', backref='owner', lazy=True)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     last_login = db.Column(db.DateTime)
+    is_active = db.Column(db.Boolean, default=False)
     is_connected = db.Column(db.Boolean, default=False)
     address_first_line = db.Column(db.String(64), default='')
     address_second_line = db.Column(db.String(64), default='')
@@ -68,7 +69,8 @@ class User(db.Model, UserMixin):
             'lon': self.lon,
             'password': self.password,
             'image_file': self.image_file,
-            'is_connected': self.is_connected
+            'is_connected': self.is_connected,
+            'is_active': self.is_active
         }
 
 class Category(db.Model):
