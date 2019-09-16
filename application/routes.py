@@ -5,8 +5,8 @@ from datetime import datetime
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, jsonify
 from application import app, db, bcrypt, mail
-from application.forms import (RegistrationForm, LoginForm, UpdateProfileForm,
-CategoryForm, ServiceForm, RequestResetForm, ResetPasswordForm, ServiceRequestMessagesForm)
+from application.forms import (RegistrationForm, LoginForm, UpdateProfileForm, CategoryForm,
+ServiceForm, RequestResetForm, ResetPasswordForm, ServiceRequestMessagesForm, EmailVerificationForm)
 from application.models import User, Category, Service, ServiceRequest, ServiceRequestMessages
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
@@ -21,6 +21,28 @@ def home():
     return render_template('home.html', categories=categories, services=services, title='Need Help!')
 
 
+def send_verification_email(user):
+    token = user.get_reset_token(30000)
+    
+    msg = Message(
+        f'مرحبا {user.username} في بيتك للخدمات',
+        sender='adetech.home.service@gmail.com',
+        recipients=[user.email],
+    )
+    msg.html = f'''
+    <div dir="rtl">
+    <h3>مرحبا <strong>{user.username}</strong></h3>
+    <p>بناء على تسجيلكم في موقعنا بيتي للخدمات، نريد منكم تأكيد بريدكم الإلكتروني من أجل تفعيل حسابكم والإستفادة من خدماتنا </p>
+    <p> يمكنكم فعل ذلك بالضغط من  <a href="{url_for('email_verification', token=token, _external=True)}" target="_BLANK">هنا</a></p>
+    <p>إذا لم تقم بذلك، برجاء تجاهل هذه الرسالة</p>
+    </div>
+    '''
+    try:
+        mail.send(msg)
+    except:
+        print('Error encured while sending a verification email! ')
+
+
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -30,14 +52,32 @@ def register():
         return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        print('cool')
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, email=form.email.data, password=hashed_password, user_type=form.user_type.data)
         db.session.add(user)
         db.session.commit()
-        flash('قد تم تسجيلك بنجاح', 'success')
+        flash('قد تم تسجيلك بنجاح، برجاء تفقد بريدك الالكتروني', 'success')
+        send_verification_email(user)
         return redirect(url_for('login'))
     return render_template('register.html', categories=categories, form=form, title='NH | حساب جديد')
+
+
+@app.route('/email_verification/<token>', methods=['GET', 'POST'])
+def email_verification(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    user = User.verify_reset_token(token)
+    if not user:
+        flash('طلب التفعيل غير صحيح أو قد انتهت صلاحيته', 'warning')
+        return redirect(url_for('reset_request'))
+    form = EmailVerificationForm()
+    if form.validate_on_submit():
+        
+        user.is_active = True
+        db.session.commit()
+        flash('قد تم تفعيل حسابك بنجاح', 'success')
+        return redirect(url_for('login'))
+    return render_template('email-verification.html', form=form, title='NH | تفعيل الحساب')
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -49,6 +89,9 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
+            if not user.is_active:
+                flash('حسابك ليس مفعل بعد، تفقد بريدك الإلكتروني من أجل تفعيل حسابك', 'info')
+                send_verification_email(user)
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             user.last_login = datetime.now()

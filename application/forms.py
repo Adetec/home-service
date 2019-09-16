@@ -95,3 +95,8 @@ class ResetPasswordForm(FlaskForm):
     confirm_password = PasswordField('إعادة كتابة كلمة المرور',
                                      validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('تغيير كلمة المرور')
+
+
+class EmailVerificationForm(FlaskForm):
+    
+    submit = SubmitField('تفعيل الحساب')
