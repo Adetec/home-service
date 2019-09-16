@@ -181,6 +181,29 @@ def send_request_message(reciever, service, message, client_id, service_id):
         print('Error encured while sending the email! ')
 
 
+def send_service_request_email(client, service, message, client_id, service_id):
+    user_sender = User.query.get(client.id)
+    msg = Message(
+        f'{user_sender.username} لديك زبون جديد',
+        sender='adetech.home.service@gmail.com',
+        recipients=[service.owner.email],
+    )
+    msg.html = f'''
+    <div style="padding:4px; font-size:1.3em; border:1px #17a2b8 solid;" dir="rtl">
+        <h3>مرحبا <strong style="color:#007bff;">{service.owner.username}</strong></h3>
+        <p><strong>{user_sender.username}</strong> مهتم بالخدمة المقدمة من طرفكم: <strong style="color:#007bff;">{service.service_name}</strong></p>
+        <p style="color:#17a2b8;">{message.message}</p>
+        <p>يمكنك التواصل معه أو الرد عليه من <a href="{(url_for('request_service', client_id=client_id, service_id=service_id, _external=True))}" target="_BLANK">هنا</a></p>
+    </div>
+    '''
+
+    try:
+        mail.send(msg)
+        flash(f'قد تم تبليغ {service.owner.username} عبر البريد الالكتروني، برجاء إنتظار رده.', 'success')
+    except:
+        print('Error encured while sending the email! ')
+
+
 @app.route('/reset_request', methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
@@ -337,17 +360,21 @@ def request_service(client_id, service_id):
     if form.validate_on_submit():
         service_request = ServiceRequest.query.filter_by(service_id=service_id).first()
         print(service_request)
+        client = User.query.get(client_id)
         if not service_request:
             service_request = ServiceRequest(client_id=client_id, service_id=service_id)
             db.session.add(service_request)
             db.session.commit()
+            message = ServiceRequestMessages(service_request_id=service_request.id, sender=sender, message=form.message.data)
+            db.session.add(message)
+            db.session.commit()
+            send_service_request_email(client, service, message, client_id, service_id)
         else:
             service_request = ServiceRequest.query.filter_by(service_id=service_id).first()
             message = ServiceRequestMessages(service_request_id=service_request.id, sender=sender, message=form.message.data)
             db.session.add(message)
             db.session.commit()
         if sender == service.user_id:
-            client = User.query.get(client_id)
             send_request_message(client, service, message.message, client_id, service_id)
         return redirect(url_for('request_service', client_id=client_id, service_id=service_id))
     service_request = ServiceRequest.query.filter_by(service_id=service_id).first()
