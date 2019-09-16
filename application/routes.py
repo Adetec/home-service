@@ -177,6 +177,7 @@ def send_request_message(reciever, service, message, client_id, service_id):
 
     try:
         mail.send(msg)
+        flash(f'قد تم تبليغ {reciever.username} عبر البريد الالكتروني، برجاء إنتظار رده.', 'success')
     except:
         print('Error encured while sending the email! ')
 
