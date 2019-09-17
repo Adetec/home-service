@@ -1,5 +1,6 @@
 # Import modules
 import os
+from threading import Thread
 import secrets
 from datetime import datetime
 from PIL import Image
@@ -19,14 +20,21 @@ def home():
     categories = Category.query.all()
     services = Service.query.all()
     all_notifications = Notification.query.all()
+    messages = ServiceRequestMessages.query.all()
     if current_user.is_authenticated:
         notifications = Notification.query.filter_by(user_id=current_user.id).all()
         n_notifications = len(notifications)
-        messages = ServiceRequestMessages.query.all()
     else:
         notifications = None
         n_notifications = 0
     return render_template('home.html', messages=messages, notifications=notifications, n_notifications=n_notifications, categories=categories, services=services, title='Need Help!')
+
+
+def send_async_email(app, msg):
+    with app.app_context():
+        mail.send(msg)
+        print('message sent')
+
 
 
 def send_verification_email(user):
@@ -46,7 +54,9 @@ def send_verification_email(user):
     </div>
     '''
     try:
-        mail.send(msg)
+        thr = Thread(target=send_async_email, args=[app, msg])
+        thr.start()
+        print('thread started')
     except:
         print('Error encured while sending a verification email! ')
 
@@ -205,7 +215,8 @@ def send_reset_email(user):
     </div>
     '''
     try:
-        mail.send(msg)
+        thr = Thread(target=send_async_email, args=[app, msg])
+        thr.start()
     except:
         print('Error encured while sendin a reset email! ')
 
@@ -250,7 +261,8 @@ def send_service_request_email(client, service, message, client_id, service_id):
     '''
 
     try:
-        mail.send(msg)
+        thr = Thread(target=send_async_email, args=[app, msg])
+        thr.start()
         flash(f'قد تم تبليغ {service.owner.username} عبر البريد الالكتروني، برجاء إنتظار رده.', 'success')
     except:
         print('Error encured while sending the email! ')
