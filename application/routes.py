@@ -18,12 +18,15 @@ from flask_mail import Message
 def home():
     categories = Category.query.all()
     services = Service.query.all()
+    all_notifications = Notification.query.all()
     if current_user.is_authenticated:
         notifications = Notification.query.filter_by(user_id=current_user.id).all()
         n_notifications = len(notifications)
+        messages = ServiceRequestMessages.query.all()
     else:
+        notifications = None
         n_notifications = 0
-    return render_template('home.html', notifications=n_notifications, categories=categories, services=services, title='Need Help!')
+    return render_template('home.html', messages=messages, notifications=notifications, n_notifications=n_notifications, categories=categories, services=services, title='Need Help!')
 
 
 def send_verification_email(user):

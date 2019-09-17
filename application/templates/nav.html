@@ -36,17 +36,31 @@
         <ul class="navbar-nav d-flex justify-content-around flex-row mr-auto justify-content-end">
             {% if current_user.is_authenticated %}
                 <li class="nav-item">
-                    {% if notifications == 0 %}
+                    {% if n_notifications == 0 %}
                         <a href="#">
                             <i class="material-icons align-middle">notifications_none</i>
                         </a>
                     {% else %}
-                        <a href="#">
+                        <a class="" href="#" id="notdrop" data-toggle="dropdown">
                             <span id="notif-badge" class="badge badge-pill badge-danger position-absolute">
-                                {{ notifications }}
+                                {{ n_notifications }}
                             </span>
                             <i id="notification" class="material-icons align-middle">notifications</i>
                         </a>
+                        <div class="dropdown-menu border-0 bg-light text-right position-absolute" aria-labelledby="notdrop">
+                                {% for message in messages %}
+                                    {% for notification in notifications %}
+                                        {% if notification.message == message.id and not notification.is_read %}
+                                            <a class="dropdown-item" href="#">
+                                                {{ message.message }}
+                                                <small class="text-muted">{{ message.message_sender.username }} </small>
+                                            </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-center text-info" href="#">كل الشعارات</a>
+                            </div>
                     {% endif %}
                 </li>
                 <li class="nav-item">
@@ -68,4 +82,3 @@
         </ul>
     </div>
 </nav>
-    
