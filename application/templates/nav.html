@@ -33,7 +33,7 @@
                 </div>
             </li>
         </ul>
-        <ul class="navbar-nav d-flex mr-auto justify-content-end">
+        <ul class="navbar-nav d-flex justify-content-around flex-row mr-auto justify-content-end">
             {% if current_user.is_authenticated %}
                 <li class="nav-item">
                     {% if notifications == 0 %}
@@ -42,7 +42,7 @@
                         </a>
                     {% else %}
                         <a href="#">
-                            <span class="badge badge-pill badge-danger position-absolute">
+                            <span id="notif-badge" class="badge badge-pill badge-danger position-absolute">
                                 {{ notifications }}
                             </span>
                             <i id="notification" class="material-icons align-middle">notifications</i>

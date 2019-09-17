@@ -54,3 +54,7 @@ body {
 #notification {
     line-height: inherit;
 }
+
+#notif-badge {
+    font-size: 50%;
+}
