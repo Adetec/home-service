@@ -244,6 +244,29 @@ def send_request_message(reciever, service, message, client_id, service_id):
         print('Error encured while sending the email! ')
 
 
+def send_to_service_owner_message(reciever, service, message, client_id, service_id):
+    user_sender = User.query.get(client_id)
+    msg = Message(
+        f'{user_sender.username} قد رد عليك',
+        sender='adetech.home.service@gmail.com',
+        recipients=[reciever.email],
+    )
+    msg.html = f'''
+    <div style="padding:4px; font-size:1.3em; border:1px #17a2b8 solid;" dir="rtl">
+        <h3>مرحبا <strong style="color:#007bff;">{reciever.username}</strong></h3>
+        <p><strong>{user_sender.username}</strong> قد رد عليك فيما يخص طلبه حول <strong style="color:#007bff;">{service.service_name}</strong></p>
+        <p id="message" style="color:#17a2b8;">{message}</p>
+        <p>يمكنك التواصل معه أو الرد عليه من <a href="{(url_for('request_service', client_id=client_id, service_id=service_id, _external=True))}" target="_BLANK">هنا</a></p>
+    </div>
+    '''
+
+    try:
+        mail.send(msg)
+        flash(f'قد تم تبليغ {reciever.username} عبر البريد الالكتروني، برجاء إنتظار رده.', 'success')
+    except:
+        print('Error encured while sending the email! ')
+
+
 def send_service_request_email(client, service, message, client_id, service_id):
     user_sender = User.query.get(client.id)
     msg = Message(
@@ -431,17 +454,21 @@ def request_service(client_id, service_id):
             message = ServiceRequestMessages(service_request_id=service_request.id, sender=sender, message=form.message.data)
             db.session.add(message)
             db.session.commit()
+            notification = Notification(user_id=service.owner.id, message=message.id)
             send_service_request_email(client, service, message, client_id, service_id)
         else:
             service_request = ServiceRequest.query.filter_by(service_id=service_id).first()
             message = ServiceRequestMessages(service_request_id=service_request.id, sender=sender, message=form.message.data)
             db.session.add(message)
             db.session.commit()
-        if sender == service.user_id:
-            send_request_message(client, service, message.message, client_id, service_id)
-            notification = Notification(user_id=client_id, message=message.id)
-            db.session.add(notification)
-            db.session.commit()
+            if sender == service.user_id:
+                notification = Notification(user_id=client.id, message=message.id)
+                send_request_message(client, service, message.message, client_id, service_id)
+            else:
+                notification = Notification(user_id=service.owner.id, message=message.id)
+                send_to_service_owner_message(service.owner, service, message.message, client_id, service_id)
+        db.session.add(notification)
+        db.session.commit()
         return redirect(url_for('request_service', client_id=client_id, service_id=service_id))
     service_request = ServiceRequest.query.filter_by(service_id=service_id).first()
     

@@ -52,8 +52,9 @@
                                     {% for notification in notifications %}
                                         {% if notification.message == message.id and not notification.is_read %}
                                             <a class="dropdown-item" href="#">
-                                                {{ message.message }}
-                                                <small class="text-muted">{{ message.message_sender.username }} </small>
+                                                <small class="text-primary">{{ message.message_sender.username }} </small>
+                                                    {{ message.message }}
+                                                <small class="text-muted">{{ moment(message.created_at).fromNow() }}</small>
                                             </a>
                                         {% endif %}
                                     {% endfor %}
