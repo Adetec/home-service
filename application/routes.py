@@ -18,7 +18,7 @@ from flask_mail import Message
 def home():
     categories = Category.query.all()
     services = Service.query.all()
-    return render_template('home.html', categories=categories, services=services, title='Need Help!')
+    return render_template('home.html', notifications=3, categories=categories, services=services, title='Need Help!')
 
 
 def send_verification_email(user):

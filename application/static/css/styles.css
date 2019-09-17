@@ -50,3 +50,7 @@ body {
 .hide {
     display: none;
 }
+
+#notification {
+    line-height: inherit;
+}

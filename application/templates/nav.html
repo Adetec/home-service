@@ -36,12 +36,26 @@
         <ul class="navbar-nav d-flex mr-auto justify-content-end">
             {% if current_user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('logout') }}">خروج</a>
+                    {% if notifications == 0 %}
+                        <a href="#">
+                            <i class="material-icons align-middle">notifications_none</i>
+                        </a>
+                    {% else %}
+                        <a href="#">
+                            <span class="badge badge-pill badge-danger position-absolute">
+                                {{ notifications }}
+                            </span>
+                            <i id="notification" class="material-icons align-middle">notifications</i>
+                        </a>
+                    {% endif %}
                 </li>
                 <li class="nav-item">
                     <a href="{{ url_for('profile') }}">
                         <img id="user-nav-img" class="align-self-center mr-3 rounded-circle" src="{{ url_for('static', filename='img/users-profile/') }}{{ current_user.image_file }}" alt="">
                     </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">خروج</a>
                 </li>
             {% else %}
                 <li class="nav-item">
