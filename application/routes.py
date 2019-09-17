@@ -7,7 +7,7 @@ from flask import render_template, url_for, flash, redirect, request, jsonify
 from application import app, db, bcrypt, mail
 from application.forms import (RegistrationForm, LoginForm, UpdateProfileForm, CategoryForm,
 ServiceForm, RequestResetForm, ResetPasswordForm, ServiceRequestMessagesForm, EmailVerificationForm)
-from application.models import User, Category, Service, ServiceRequest, ServiceRequestMessages
+from application.models import User, Category, Service, ServiceRequest, ServiceRequestMessages, Notification
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 
@@ -18,7 +18,12 @@ from flask_mail import Message
 def home():
     categories = Category.query.all()
     services = Service.query.all()
-    return render_template('home.html', notifications=3, categories=categories, services=services, title='Need Help!')
+    if current_user.is_authenticated:
+        notifications = Notification.query.filter_by(user_id=current_user.id).all()
+        n_notifications = len(notifications)
+    else:
+        n_notifications = 0
+    return render_template('home.html', notifications=n_notifications, categories=categories, services=services, title='Need Help!')
 
 
 def send_verification_email(user):
@@ -403,7 +408,6 @@ def request_service(client_id, service_id):
     sender = current_user.id
     if form.validate_on_submit():
         service_request = ServiceRequest.query.filter_by(service_id=service_id).first()
-        print(service_request)
         client = User.query.get(client_id)
         if not service_request:
             service_request = ServiceRequest(client_id=client_id, service_id=service_id)
@@ -420,6 +424,9 @@ def request_service(client_id, service_id):
             db.session.commit()
         if sender == service.user_id:
             send_request_message(client, service, message.message, client_id, service_id)
+            notification = Notification(user_id=client_id, message=message.id)
+            db.session.add(notification)
+            db.session.commit()
         return redirect(url_for('request_service', client_id=client_id, service_id=service_id))
     service_request = ServiceRequest.query.filter_by(service_id=service_id).first()
     

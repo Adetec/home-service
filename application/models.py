@@ -31,6 +31,7 @@ class User(db.Model, UserMixin):
     lon = db.Column(db.Float(20))
     requests = db.relationship('ServiceRequest', backref='client', lazy=True)
     request_messages = db.relationship('ServiceRequestMessages', backref='message_sender', lazy=True)
+    notifications = db.relationship('Notification', backref='user_notified', lazy=True)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
@@ -72,6 +73,24 @@ class User(db.Model, UserMixin):
             'is_connected': self.is_connected,
             'is_active': self.is_active
         }
+
+
+class Notification(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    is_read = db.Column(db.Boolean, default=False)
+    message = db.Column(db.Integer, db.ForeignKey('service_request_messages.id'), nullable=False)
+
+    # Method for API enpoints
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'is_read': self.is_read,
+            'messages': self.messages
+        }
+
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
