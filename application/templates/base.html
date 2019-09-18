@@ -10,6 +10,9 @@
     <script src="//code.jquery.com/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Changa&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Mabpox CDN -->
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.css' rel='stylesheet' />
     <!-- Bootstrap CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
@@ -17,6 +20,8 @@
     {{ moment.include_jquery() }}
     {{ moment.include_moment() }}
     {{ moment.lang("ar-dz") }}
+
+
 </head>
 <body class="bg-light">
     <!-- Start header container -->

@@ -499,3 +499,8 @@ def home_endpoint():
     for service in services:
         s.append(service.serialize)
     return jsonify(users=u, categories=c, services=s)
+
+
+@app.route('/map')
+def map():
+    return render_template('map.html')
