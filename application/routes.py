@@ -518,11 +518,12 @@ def services_endpoint():
     for service in services:
         user = User.query.filter_by(id=service.user_id).first()
         data.append({
-            'id':service.id,
-            'service_name':service.service_name,
-            'owner':user.username,
-            'lat':user.lat,
-            'lon':user.lon
+            'id': service.id,
+            'service_name': service.service_name,
+            'owner': user.username,
+            'lat': user.lat,
+            'lon': user.lon,
+            'owner_image': user.image_file
         })
-        
+
     return jsonify(data)

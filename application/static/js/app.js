@@ -18,22 +18,49 @@ let mainMap = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v9',
     center: [4.880334665390933, 35.70672634166958],
-    zoom: 5
+    zoom: 10
 });
 
 // Add zoom and rotation controls to the map.
 mainMap.addControl(new mapboxgl.NavigationControl());
 
-// get serices users geo cordinates:
-$.ajax({
-    type: "GET",
-    url: "/API/1.0/services",
-    contentType: "application/json; charset=utf-8",
-    dataType: "json",
-    success: function (response) {
-        response.forEach(service => {
-            console.log(service.id, service.service_name);
-            
-        });
-    }
-});
+mainMap.on('load', () => {
+    // get services users geo cordinates:
+    $.ajax({
+        type: "GET",
+        url: "/API/1.0/services",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            response.forEach(service => {
+                console.log(service.id, service.service_name, service.lat, service.lon);
+                mainMap.loadImage(`static/img/users-profile/${service.owner_image}`, function(error, image) {
+                    if (error) throw error;
+                    mainMap.addImage(`cat-${service.id}`, image);
+                    mainMap.addLayer({
+                        "id": `points-${service.id}`,
+                        "type": "symbol",
+                        "source": {
+                            "type": "geojson",
+                            "data": {
+                                "type": "FeatureCollection",
+                                "features": [{
+                                    "type": "Feature",
+                                    "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [service.lon, service.lat]
+                                    }
+                                }]
+                            }
+                        },
+                        "layout": {
+                            "icon-image": `cat-${service.id}`,
+                            "icon-size": 0.25
+                        }
+                    });
+                });
+                
+            });
+        }
+    });
+})
