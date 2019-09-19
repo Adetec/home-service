@@ -501,6 +501,16 @@ def home_endpoint():
     return jsonify(users=u, categories=c, services=s)
 
 
-@app.route('/map')
+@app.route('/map', methods=['GET', 'POST'])
 def map():
-    return render_template('map.html')
+    if request.method == 'POST':
+        data = request.get_json()
+        current_user.lat = data['lat']
+        current_user.lon = data['lng']
+        db.session.commit()
+        return request.data
+    else:
+        return render_template('map.html')
+
+
+    

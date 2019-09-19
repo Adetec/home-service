@@ -2,4 +2,8 @@
 {% block main %}
 <div id='map' class="d-flex"></div>
 <div class="alert alert-info" id="info"></div>
+<div class="alert alert-primary">
+    <p>{{ current_user.username }} coordinates:</p>
+    <p>{{ current_user.lat }}, {{ current_user.lon }}</p>
+</div>
 {% endblock %}
