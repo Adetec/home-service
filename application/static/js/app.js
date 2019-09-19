@@ -12,12 +12,27 @@ $(document).ready(function(){
     });
 });
 
+// get user coordinates
+let getUserCoor = () => {
+    lat = $('#user-lat')[0].textContent;
+    lng = $('#user-lon')[0].textContent;
+    if (lat == 'None') {
+        lat = 35.54707630042317;
+        lng = 6.126066400000013;
+    }
+    return {
+        lat: lat,
+        lng: lng
+    }
+}
+
+getUserCoor('{{ current_user.lat}}', '{{ current_user.lat}}')
 // Mapbox
 mapboxgl.accessToken = 'pk.eyJ1IjoiaG9tZXNlcnZpY2UiLCJhIjoiY2swcGh4eTk5MDEzczNtcG9laGh5eWx1biJ9.3FOluiVDosFsTuG9Ps6YGw';
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v10',
-    center: [6.126066400000013, 35.54707630042317], // starting position [lng, lat]
+    center: [getUserCoor().lng, getUserCoor().lat], // starting position [lng, lat]
     zoom: 12 // starting zoom
 });
 

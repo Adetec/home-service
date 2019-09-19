@@ -4,6 +4,6 @@
 <div class="alert alert-info" id="info"></div>
 <div class="alert alert-primary">
     <p>{{ current_user.username }} coordinates:</p>
-    <p>{{ current_user.lat }}, {{ current_user.lon }}</p>
+    <p> <span id="user-lat">{{ current_user.lat }}</span>, <span id="user-lon">{{ current_user.lon }}</span></p>
 </div>
 {% endblock %}

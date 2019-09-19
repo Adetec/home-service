@@ -508,9 +508,9 @@ def map():
         current_user.lat = data['lat']
         current_user.lon = data['lng']
         db.session.commit()
-        return request.data
-    else:
-        return render_template('map.html')
+        return jsonify(data)
+
+    return render_template('map.html')
 
 
     
