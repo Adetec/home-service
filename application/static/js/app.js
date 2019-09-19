@@ -23,3 +23,17 @@ let mainMap = new mapboxgl.Map({
 
 // Add zoom and rotation controls to the map.
 mainMap.addControl(new mapboxgl.NavigationControl());
+
+// get serices users geo cordinates:
+$.ajax({
+    type: "GET",
+    url: "/API/1.0/services",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function (response) {
+        response.forEach(service => {
+            console.log(service.id, service.service_name);
+            
+        });
+    }
+});

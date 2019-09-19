@@ -476,6 +476,16 @@ def request_service(client_id, service_id):
     return render_template('request-service.html', client=client, service=service, form=form, service_request=service_request, categories=categories, title='NH | التواصل مع مقدم الخدمة')
 
 
+@app.route('/map', methods=['GET', 'POST'])
+def map():
+    if request.method == 'POST':
+        data = request.get_json()
+        current_user.lat = data['lat']
+        current_user.lon = data['lng']
+        db.session.commit()
+        return jsonify(data)
+
+    return render_template('map.html')
 
 '''
     * * * * * * * * * * *
@@ -499,18 +509,20 @@ def home_endpoint():
     for service in services:
         s.append(service.serialize)
     return jsonify(users=u, categories=c, services=s)
-
-
-@app.route('/map', methods=['GET', 'POST'])
-def map():
-    if request.method == 'POST':
-        data = request.get_json()
-        current_user.lat = data['lat']
-        current_user.lon = data['lng']
-        db.session.commit()
-        return jsonify(data)
-
-    return render_template('map.html')
-
-
     
+
+@app.route('/API/1.0/services')
+def services_endpoint():
+    services = db.session.query(Service).all()
+    data = []
+    for service in services:
+        user = User.query.filter_by(id=service.user_id).first()
+        data.append({
+            'id':service.id,
+            'service_name':service.service_name,
+            'owner':user.username,
+            'lat':user.lat,
+            'lon':user.lon
+        })
+        
+    return jsonify(data)
