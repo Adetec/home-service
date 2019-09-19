@@ -12,3 +12,14 @@ $(document).ready(function(){
     });
 });
 
+// Create the main map
+mapboxgl.accessToken = 'pk.eyJ1IjoiaG9tZXNlcnZpY2UiLCJhIjoiY2swcGh4eTk5MDEzczNtcG9laGh5eWx1biJ9.3FOluiVDosFsTuG9Ps6YGw';
+let mainMap = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v9',
+    center: [4.880334665390933, 35.70672634166958],
+    zoom: 5
+});
+
+// Add zoom and rotation controls to the map.
+mainMap.addControl(new mapboxgl.NavigationControl());
