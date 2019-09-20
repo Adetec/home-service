@@ -70,32 +70,46 @@ mainMap.on('load', () => {
                 markerElement.style.backgroundSize = 'cover'
                  
                 markerElement.addEventListener('click', function() {
-                    let modal, modalDialog, modalContent;
+                    
 
-                    servicesLst = document.createElement('ul');
-                    modal = document.createElement('div');
-                    modalDialog = document.createElement('div');
-                    modalContent = document.createElement('div');
+                    serviceToast = document.createElement('div');
+                    serviceToast.classList.add('toast');
+                    serviceToast.setAttribute('data-autohide', 'false');
+                    
+                    serviceToastHeader = document.createElement('div');
+                    serviceToastHeader.textContent = marker.properties.owner
+                    serviceToastHeader.classList.add('toast-header');
+
+                    serviceToastBody = document.createElement('div');
+                    serviceToastBody.classList.add('toast-body');
+
+                    servicesLst = document.createElement('div');
+                    servicesLst.classList.add('text-right');
 
                     marker.properties.services.forEach(service => {
-                        let serviceList = document.createElement('li');
+
+                        let serviceList = document.createElement('div');
+                        serviceList.classList.add('text-right');
+
                         let serviceLink = document.createElement('a');
                         serviceLink.setAttribute('href',`/service/${service.id}`);
                         serviceLink.textContent = service.service_name
 
                         serviceList.appendChild(serviceLink)
                         servicesLst.appendChild(serviceList);
-                        console.log(serviceLink);
                     });
-                    modal.classList.add('modal', 'fade', 'bd-example-modal-lg');
-                    modalDialog.classList.add('modal-dialog', 'modal-lg');
-                    modalContent.classList.add('modal-content');
-                    modalContent.appendChild(servicesLst);
-                    modalDialog.appendChild(modalContent);
-                    modal.appendChild(modalDialog);
-                    $(modal).modal('toggle')
                     
-                    console.log(modal);
+                    serviceToastBody.appendChild(servicesLst)
+                    serviceToast.appendChild(serviceToastHeader);
+                    serviceToast.appendChild(serviceToastBody);
+                    console.log($(serviceToast));
+                    $('.toast').remove();
+                    $(markerElement).append(serviceToast);
+                    $('.toast').toast('show');
+                    
+                    
+                    
+                    // console.log(serviceToast);
                     
                 // window.alert(marker.properties.message);
                 });
