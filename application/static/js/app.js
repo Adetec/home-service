@@ -95,8 +95,21 @@ mainMap.on('load', () => {
                 el.addEventListener('click', function() {
                     geojson.features.forEach((m) => {
                         if (m.properties.owner == marker.properties.owner) {
+                            let modal, modalDialog, modalContent;
+
+                            modal = document.createElement('div');
+                            modalDialog = document.createElement('div');
+                            modalContent = document.createElement('div');
+
+                            modal.classList.add('modal', 'fade', 'bd-example-modal-lg');
+                            modalDialog.classList.add('modal-dialog', 'modal-lg');
+                            modalContent.classList.add('modal-content');
+                            modalContent.textContent = '{{ current_user.username }}';
+                            modalDialog.appendChild(modalContent);
+                            modal.appendChild(modalDialog);
+                            $(modal).modal('toggle')
                             
-                            console.log(m.properties);
+                            console.log(modal);
                         }
 
                     })
