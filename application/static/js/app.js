@@ -12,6 +12,12 @@ $(document).ready(function(){
     });
 });
 
+
+var geojson = {
+    "type": "FeatureCollection",
+    "features": []
+};
+
 // Create the main map
 mapboxgl.accessToken = 'pk.eyJ1IjoiaG9tZXNlcnZpY2UiLCJhIjoiY2swcGh4eTk5MDEzczNtcG9laGh5eWx1biJ9.3FOluiVDosFsTuG9Ps6YGw';
 let mainMap = new mapboxgl.Map({
@@ -34,7 +40,24 @@ mainMap.on('load', () => {
         success: function (response) {
             response.forEach(service => {
                 console.log(service.id, service.service_name, service.lat, service.lon);
-                mainMap.loadImage(`static/img/users-profile/${service.owner_image}`, function(error, image) {
+                let geoFeature = {
+                    "type": "Feature",
+                    "properties": {
+                        "message": service.service_name,
+                        "image": service.owner_image,
+                        "owner": service.owner,
+                        "iconSize": [60, 60]
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            service.lon,
+                            service.lat
+                        ]
+                    }
+                }
+                geojson.features.push(geoFeature)
+                /* mainMap.loadImage(`static/img/users-profile/${service.owner_image}`, function(error, image) {
                     if (error) throw error;
                     mainMap.addImage(`cat-${service.id}`, image);
                     mainMap.addLayer({
@@ -58,9 +81,34 @@ mainMap.on('load', () => {
                             "icon-size": 0.15
                         }
                     });
-                });
-                
+                }); */
             });
+            geojson.features.forEach(function(marker) {
+                // create a DOM element for the marker
+                var el = document.createElement('div');
+                el.className = 'marker';
+                el.style.backgroundImage = `url(static/img/users-profile/${marker.properties.image}`;
+                el.style.width = marker.properties.iconSize[0] + 'px';
+                el.style.height = marker.properties.iconSize[1] + 'px';
+                el.style.backgroundSize = 'cover'
+                 
+                el.addEventListener('click', function() {
+                    geojson.features.forEach((m) => {
+                        if (m.properties.owner == marker.properties.owner) {
+                            
+                            console.log(m.properties);
+                        }
+
+                    })
+                    
+                // window.alert(marker.properties.message);
+                });
+                 
+                // add marker to map
+                new mapboxgl.Marker(el)
+                .setLngLat(marker.geometry.coordinates)
+                .addTo(mainMap);
+                });
         }
     });
 })
