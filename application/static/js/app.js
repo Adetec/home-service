@@ -79,9 +79,13 @@ mainMap.on('load', () => {
 
                     marker.properties.services.forEach(service => {
                         let serviceList = document.createElement('li');
-                        serviceList.textContent = service.service_name
-                        console.log(service.service_name);
+                        let serviceLink = document.createElement('a');
+                        serviceLink.setAttribute('href',`/service/${service.id}`);
+                        serviceLink.textContent = service.service_name
+
+                        serviceList.appendChild(serviceLink)
                         servicesLst.appendChild(serviceList);
+                        console.log(serviceLink);
                     });
                     modal.classList.add('modal', 'fade', 'bd-example-modal-lg');
                     modalDialog.classList.add('modal-dialog', 'modal-lg');
