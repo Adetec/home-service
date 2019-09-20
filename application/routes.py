@@ -510,7 +510,7 @@ def home_endpoint():
         s.append(service.serialize)
     return jsonify(users=u, categories=c, services=s)
     
-
+# Gave it up temporarily
 @app.route('/API/1.0/services')
 def services_endpoint():
     services = db.session.query(Service).all()
@@ -520,10 +520,35 @@ def services_endpoint():
         data.append({
             'id': service.id,
             'service_name': service.service_name,
+            'owner_id': user.id,
             'owner': user.username,
             'lat': user.lat,
             'lon': user.lon,
             'owner_image': user.image_file
         })
+    return jsonify(data)
 
+
+@app.route('/API/1.0/owners')
+def owners_endpoint():
+    users = db.session.query(User).all()
+    data = []
+    for user in users:
+        if user.services:
+            services = []
+            for service in user.services:
+                services.append({
+                    'id': service.id,
+                    'service_name': service.service_name,
+                    'description': service.description,
+                    'image': service.image_file
+                })
+            data.append({
+                'id': user.id,
+                'owner': user.username,
+                'services': services,
+                'lat': user.lat,
+                'lon': user.lon,
+                'owner_image': user.image_file
+            })
     return jsonify(data)
