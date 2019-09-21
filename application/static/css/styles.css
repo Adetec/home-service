@@ -8,6 +8,10 @@ body {
     height: 90vh;
 }
 
+.carousel-item {
+    height: 600px;
+}
+
 /* Nav */
 .navbar-brand {
     font-size: 2rem;
@@ -83,3 +87,4 @@ body {
     position: absolute;
     top: 36px;
 }
+
