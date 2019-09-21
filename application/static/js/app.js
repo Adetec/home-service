@@ -24,7 +24,7 @@ let mainMap = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/homeservice/ck0r75ecu0las1cn2e454xnow',
     center: [6.094710824465892, 35.53808204473481],
-    zoom: 9
+    zoom: 11
 });
 
 // Add zoom and rotation controls to the map.
