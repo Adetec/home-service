@@ -1,0 +1,119 @@
+<!-- Footer -->
+<footer class="mt-5">
+
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left">
+  
+      <!-- Grid row -->
+      <div class="row">
+  
+        <!-- Grid column -->
+        <div class="col-md-3 mx-auto text-right">
+  
+          <!-- Links -->
+          <h5 class="font-weight-bold mt-3 mb-4">الخدمات</h5>
+            <ul class="list-unstyled">
+                {% if categories %}
+                    {% for cat in categories %}
+                        <li>
+                            <a href="{{ url_for('category_details', id=cat.id) }}">{{ cat.category_name }}</a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+          </ul>
+  
+        </div>
+        <!-- Grid column -->
+  
+        <hr class="clearfix w-100 d-md-none">
+  
+        <!-- Grid column -->
+        <div class="col-md-3 mx-auto">
+  
+          <!-- Links -->
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">عنوان آخر</h5>
+  
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!">سأقرر لاحقا</a>
+            </li>
+            <li>
+              <a href="#!">سأقرر لاحقا</a>
+            </li>
+            <li>
+              <a href="#!">سأقرر لاحقا</a>
+            </li>
+            <li>
+              <a href="#!">سأقرر لاحقا</a>
+            </li>
+          </ul>
+  
+        </div>
+        <!-- Grid column -->
+  
+        <hr class="clearfix w-100 d-md-none">
+  
+        <!-- Grid column -->
+        <div class="col-md-3 mx-auto">
+  
+          <!-- Links -->
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">عنوان آخر</h5>
+  
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!">سأقرر لاحقا</a>
+            </li>
+            <li>
+              <a href="#!">سأقرر لاحقا</a>
+            </li>
+            <li>
+              <a href="#!">سأقرر لاحقا</a>
+            </li>
+            <li>
+              <a href="#!">سأقرر لاحقا</a>
+            </li>
+          </ul>
+  
+        </div>
+        <!-- Grid column -->
+  
+        <hr class="clearfix w-100 d-md-none">
+  
+        <!-- Grid column -->
+        <div class="col-md-3 mx-auto">
+  
+          <!-- Links -->
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">عنوان آخر</h5>
+  
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!">سأقرر لاحقا</a>
+            </li>
+            <li>
+              <a href="#!">سأقرر لاحقا</a>
+            </li>
+            <li>
+              <a href="#!">سأقرر لاحقا</a>
+            </li>
+            <li>
+              <a href="#!">سأقرر لاحقا</a>
+            </li>
+          </ul>
+  
+        </div>
+        <!-- Grid column -->
+  
+      </div>
+      <!-- Grid row -->
+  
+    </div>
+    <!-- Footer Links -->
+  
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">برمجة وتصميم:
+      <a href="https://github/Adetec/"> عادل لصاق</a>
+    </div>
+    <!-- Copyright -->
+  
+  </footer>
+  <!-- Footer -->
