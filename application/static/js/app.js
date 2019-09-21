@@ -21,7 +21,7 @@ var geojson = {
 // Create the main map
 mapboxgl.accessToken = 'pk.eyJ1IjoiaG9tZXNlcnZpY2UiLCJhIjoiY2swcGh4eTk5MDEzczNtcG9laGh5eWx1biJ9.3FOluiVDosFsTuG9Ps6YGw';
 let mainMap = new mapboxgl.Map({
-    container: 'map',
+    container: 'main-map',
     style: 'mapbox://styles/homeservice/ck0r75ecu0las1cn2e454xnow',
     center: [6.094710824465892, 35.53808204473481],
     zoom: 11
