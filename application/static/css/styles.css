@@ -71,15 +71,18 @@ body {
 
 .marker {
     display: block;
-    border: none;
+    top: -32px;
+    left: -1px;
+    box-shadow: 1px 1px 15px #fff;
+    border: #fff solid 3px;
     border-radius: 50%;
     cursor: pointer;
     padding: 0;
 }
 
 .mapboxgl-marker svg {
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 90px;
 }
 
 .toast {

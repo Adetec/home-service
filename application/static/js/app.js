@@ -47,7 +47,7 @@ mainMap.on('load', () => {
                         "image": owner.owner_image,
                         "owner": owner.owner,
                         "services": owner.services,
-                        "iconSize": [30, 30]
+                        "iconSize": [45, 45]
                     },
                     "geometry": {
                         "type": "Point",
@@ -120,7 +120,7 @@ mainMap.on('load', () => {
                 new mapboxgl.Marker()
                 .setLngLat(marker.geometry.coordinates)
                 .addTo(mainMap)
-                 
+                
                 // create a marker icon & add it to the map
                 new mapboxgl.Marker(markerElement)
                 .setLngLat(marker.geometry.coordinates)
