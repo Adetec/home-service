@@ -73,6 +73,13 @@ body {
     padding: 0;
 }
 
+.mapboxgl-marker svg {
+    width: 60px;
+    height: 60px;
+}
+
 .toast {
     width: 400px;
+    position: absolute;
+    top: 36px;
 }

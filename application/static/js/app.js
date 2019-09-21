@@ -47,7 +47,7 @@ mainMap.on('load', () => {
                         "image": owner.owner_image,
                         "owner": owner.owner,
                         "services": owner.services,
-                        "iconSize": [60, 60]
+                        "iconSize": [30, 30]
                     },
                     "geometry": {
                         "type": "Point",
@@ -61,20 +61,22 @@ mainMap.on('load', () => {
                 
             });
             geojson.features.forEach(function(marker) {
+                
                 // create a DOM element for the marker
                 let markerElement = document.createElement('div');
                 markerElement.classList.add('marker');
                 markerElement.style.backgroundImage = `url(static/img/users-profile/${marker.properties.image}`;
                 markerElement.style.width = marker.properties.iconSize[0] + 'px';
                 markerElement.style.height = marker.properties.iconSize[1] + 'px';
-                markerElement.style.backgroundSize = 'cover'
+                markerElement.style.backgroundSize = 'cover';
+                
                  
                 markerElement.addEventListener('click', function() {
                     
 
                     serviceToast = document.createElement('div');
                     serviceToast.classList.add('toast');
-                    serviceToast.setAttribute('data-autohide', 'false');
+                    serviceToast.setAttribute('data-delay', '20000');
                     
                     serviceToastHeader = document.createElement('div');
                     serviceToastHeader.textContent = marker.properties.owner
@@ -113,8 +115,13 @@ mainMap.on('load', () => {
                     
                 // window.alert(marker.properties.message);
                 });
+
+                // create the service owner marker icon
+                new mapboxgl.Marker()
+                .setLngLat(marker.geometry.coordinates)
+                .addTo(mainMap)
                  
-                // add marker to map
+                // create a marker icon & add it to the map
                 new mapboxgl.Marker(markerElement)
                 .setLngLat(marker.geometry.coordinates)
                 .addTo(mainMap);
