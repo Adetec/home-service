@@ -9,7 +9,7 @@
             <!-- Three columns of text below the carousel -->
             <div class="row">
                 <div class="col-lg-4">
-                <div class="counter-container">
+                <div class="counter-container" data-aos="flip-right">
                     <div class="counter-value">{{ statics[0] }}</div>
                 </div>
                 <h2>المجالات</h2>
@@ -17,7 +17,7 @@
                 <p><a class="btn btn-secondary" href="#" role="button">عرض</a></p>
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-4">
-                <div class="counter-container">
+                <div class="counter-container" data-aos="flip-down">
                     <div class="counter-value">{{ statics[1] }}</div>
                 </div>
                 <h2>الخدمات</h2>
@@ -25,7 +25,7 @@
                 <p><a class="btn btn-secondary" href="#" role="button">عرض</a></p>
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-4">
-                <div class="counter-container">
+                <div class="counter-container" data-aos="flip-left">
                     <div class="counter-value">{{ statics[2] }}</div>
                 </div>
                 <h2>المتعاملين</h2>
@@ -36,11 +36,11 @@
         </div>
     </div>
 </section>
-<section class="container-fluid map-container">
+<section class="container-fluid map-container" data-aos="fade-up">
     <h2 class="display-5 font-weight-bolder text-center mt-auto text-primary">مواقع متعاملينا</h2>
     <div id='main-map' class="d-flex"></div>
 </section>
-<section>
+<section data-aos="flip-up">
     <h1 class="display-4 text-center">المجالات</h1>
     {% if categories %}
         <div id="carouselCategoryInterval" class="carousel slide" data-ride="carousel">
@@ -69,7 +69,7 @@
         </div>
     {% endif %}
 </section>
-<section>
+<section data-aos="flip-up">
     <h1 class="display-4 text-center">الخدمات</h1>
     {% if services %}
         <div id="carouselServiceInterval" class="carousel slide" data-ride="carousel">
