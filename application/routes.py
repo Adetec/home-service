@@ -12,7 +12,13 @@ from application.models import User, Category, Service, ServiceRequest, ServiceR
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 
-
+def count_service_owners():
+    users = User.query.all()
+    owners = []
+    for user in users:
+        if user.services:
+            owners.append(user)
+    return len(owners)
 
 @app.route("/")
 @app.route("/home")
@@ -20,6 +26,7 @@ def home():
     categories = Category.query.all()
     services = Service.query.all()
     all_notifications = Notification.query.all()
+    statics = [len(categories), len(services), count_service_owners()]
     messages = ServiceRequestMessages.query.all()
     if current_user.is_authenticated:
         notifications = Notification.query.filter_by(user_id=current_user.id).all()
@@ -27,7 +34,7 @@ def home():
     else:
         notifications = None
         n_notifications = 0
-    return render_template('home.html', messages=messages, notifications=notifications, n_notifications=n_notifications, categories=categories, services=services, title='Need Help!')
+    return render_template('home.html', messages=messages, notifications=notifications, n_notifications=n_notifications, categories=categories, services=services, statics=statics, title='Need Help!')
 
 
 def send_async_email(app, msg):
