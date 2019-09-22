@@ -10,6 +10,18 @@ $(document).ready(function(){
     $('#action-edit-profile').click(() => {
         $('#edit-profile').toggleClass('hide');
     });
+
+    // Animate counting
+    $('.counter-value').each(function () {
+        const $this = $(this);
+        jQuery({ Counter: 0 }).animate({ Counter: $this.text() }, {
+          duration: 3500,
+          easing: 'swing',
+          step: function () {
+            $this.text(Math.ceil(this.Counter));
+          }
+        });
+      });
 });
 
 

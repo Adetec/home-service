@@ -1,11 +1,30 @@
+
+
 body {
     font-family: 'Changa', serif;
 }
 
 #interface-section {
-    
     background-color: transparent;
-    height: 90vh;
+}
+
+section {
+    min-height: 100vh;
+}
+
+.counter-container {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border: #007bff 4px solid;
+}
+
+.counter-value {
+    position: relative;
+    padding: 1.25rem;
+    color: #007bff;
+    font-size: 2em;
 }
 
 .carousel-item {
@@ -21,13 +40,14 @@ body {
 }
 
 #interface-section::before {
-    /* background-image: url(https://cdn.shopify.com/s/files/1/0898/1228/products/487640422_cd03414d-ca82-4ba1-8129-2da76af5bab4_x700.jpg?v=1534384569); */
-    background-size: cover;
+    /* background-image: url(https://i.dlpng.com/static/png/1697233_thumb.png); */
+    /* background-size: cover; */
     content: "";
     display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: absolute;
+    background-repeat: no-repeat;
+    bottom: 0;
+    right: 0;
     width: 100%;
     height: 100%;
     z-index: -2;
