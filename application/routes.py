@@ -569,23 +569,33 @@ def get_notifications():
     if current_user.notifications:
         notifications = []
         for notification in current_user.notifications:
-            message = db.session.query(ServiceRequestMessages).get(notification.message)
-            sender = db.session.query(User).get(message.sender)
-            service_request = db.session.query(ServiceRequest).get(message.service_request_id)
-            notifications.append({
-                'id': notification.id,
-                'user_id': notification.user_id,
-                'sender': sender.username,
-                'service_request_id':service_request.id,
-                'client_id':service_request.client_id,
-                'message_id': message.id,
-                'message': message.message,
-                'is_read': notification.is_read
+            if not notification.is_read:
+                message = db.session.query(ServiceRequestMessages).get(notification.message)
+                sender = db.session.query(User).get(message.sender)
+                service_request = db.session.query(ServiceRequest).get(message.service_request_id)
+                notifications.append({
+                    'id': notification.id,
+                    'user_id': notification.user_id,
+                    'sender': sender.username,
+                    'service_request_id':service_request.id,
+                    'client_id':service_request.client_id,
+                    'message_id': message.id,
+                    'message': message.message,
+                    'is_read': notification.is_read
+                })
+            data.append({
+                'id': current_user.id,
+                'username': current_user.username,
+                'notifications': notifications,
+                'owner_image': current_user.image_file
             })
-        data.append({
-            'id': current_user.id,
-            'username': current_user.username,
-            'notifications': notifications,
-            'owner_image': current_user.image_file
-        })
     return jsonify(data)
+
+# Set read status value to True for a specific message
+@app.route('/notification/<int:client_id>/<int:request_service>/<int:notification_id>')
+def set_message_status(client_id, request_service, notification_id):
+    notification = db.session.query(Notification).get(notification_id)
+    if not notification.is_read and current_user.is_authenticated:
+        notification.is_read = True
+        db.session.commit()
+    return redirect(url_for('request_service', client_id=client_id, service_id=request_service))

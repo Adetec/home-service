@@ -36,7 +36,6 @@ let getNot = setInterval(() => {
         dataType: "json",
         success: function (response) {
             response.forEach(notifications => {
-                console.log(notifications.notifications);
                 renderNotifications(notifications.notifications)
                 $('#notif-badge').text(notifications.notifications.length)
             });
@@ -51,9 +50,11 @@ const renderNotifications =(notifs) => {
        let notElement = document.createElement('a');
        let sender = document.createElement('small');
        let msgTime = document.createElement('small');
-       let url = `/request_service/${notif.client_id}/${notif.service_request_id}/new#msg-${notif.message_id}`
+       let url = `/notification/${notif.client_id}/${notif.service_request_id}/${notif.id}`
+
+       $(notElement).attr('id', `notif-${notif.id}`);
        $(notElement).attr('href', url);
-       $(notElement).addClass('dropdown-item');
+       $(notElement).addClass('dropdown-item not-read');
        $(sender).addClass('text-primary');
        $(msgTime).addClass('text-muted');
        $(sender).text(notif.sender);
@@ -64,6 +65,13 @@ const renderNotifications =(notifs) => {
        $(container).append(notElement);
    });
 }
+
+
+
+// Set notification statut to read
+$('.not-read').mouseover((e)=> {
+    $(this).css('color', 'grey');;
+})
 
 var geojson = {
     "type": "FeatureCollection",
