@@ -36,6 +36,7 @@ let getNot = setInterval(() => {
         dataType: "json",
         success: function (response) {
             response.forEach(notifications => {
+                console.log(notifications.notifications);
                 renderNotifications(notifications.notifications)
                 $('#notif-badge').text(notifications.notifications.length)
             });
@@ -50,7 +51,8 @@ const renderNotifications =(notifs) => {
        let notElement = document.createElement('a');
        let sender = document.createElement('small');
        let msgTime = document.createElement('small');
-       $(notElement).attr('href', '/');
+       let url = `/request_service/${notif.client_id}/${notif.service_request_id}/new#msg-${notif.message_id}`
+       $(notElement).attr('href', url);
        $(notElement).addClass('dropdown-item');
        $(sender).addClass('text-primary');
        $(msgTime).addClass('text-muted');
