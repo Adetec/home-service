@@ -8,10 +8,6 @@ body {
     background-color: transparent;
 }
 
-section {
-    min-height: 100vh;
-}
-
 .counter-container {
     border-radius: 50%;
     width: 100px;

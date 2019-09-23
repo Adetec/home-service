@@ -3,23 +3,22 @@
 {% if not current_user.is_authenticated %}
 
     <section id="interface-section" class="">
-        <div class="container text-center pt-4">
-            <h1 class="display-3 font-weight-bolder mt-auto text-primary">صلح دارك</h1>
+        <div class="container text-center">
+            <h1 data-aos="fade-in" class="display-3 font-weight-bolder mt-auto text-primary">صلح دارك</h1>
             <div id="presentation" class="row text-right">
                 <div class="col-lg-6" data-aos="flip-right">
                     <h2 class="text-center">زبون</h2>
                     <p>لديك أرض وتريد بناء منزل، لديك منزل قديم وتريد ترميمه؟</p>
                     <p>مللت من ديكور منزلك وتريد تحديثه، لديك مشكل في منزلك وتريد عمل بعض التشطيبات؟</p>
-                    <p class="text-primary text-center h5">أنت في المكان المناسب</p>
-                    <p>موقع <a href="">صلح دارك</a> يتيح لك إكتشاف متعاملينا من مقاولين، شركات أو عمال أحرار، يمكنك التواصل معهم في أي وقت وفي أي مكان</p>
-                    <p>يمكنك <a href="">التسجيل</a> أو <a href="">الدخول</a> للإنظمام معنا والإستفادة من خدماتنا</p>
+                    <p>موقع <a href="/">صلح دارك</a> يتيح لك إكتشاف متعاملينا من مقاولين، شركات أو عمال أحرار، يمكنك التواصل معهم في أي وقت وفي أي مكان</p>
+                    <p>يمكنك <a href="/register">التسجيل</a> أو <a href="/login">الدخول</a> للإنظمام معنا والإستفادة من خدماتنا</p>
                 </div>
                 <div class="col-lg-6" data-aos="flip-left">
                     <h2 class="text-center">متعامل</h2>
                     <p>لديك شركة تقدم خدمات مقاولاتية؟</p>
                     <p>مقاول أو تحترف مهنة في مجال البناء، الترصيص، النجارة الخ؟</p>
-                    <p>موقع <a href="">صلح دارك</a> يتيح لك إكتشاف متعاملينا من مقاولين، شركات أو عمال أحرار، يمكنك التواصل معهم في أي وقت وفي أي مكان</p>
-                    <p>يمكنك <a href="">التسجيل</a> أو <a href="">الدخول</a> للإنظمام معنا وعرض خدماتك المميزة</p>
+                    <p>موقع <a href="/">صلح دارك</a> يتيح لك إكتشاف متعاملينا من مقاولين، شركات أو عمال أحرار، يمكنك التواصل معهم في أي وقت وفي أي مكان</p>
+                    <p>يمكنك <a href="/register">التسجيل</a> أو <a href="/login">الدخول</a> للإنظمام معنا وعرض خدماتك المميزة</p>
                 </div>
             </div>
 
@@ -29,25 +28,22 @@
                         <div class="counter-container" data-aos="flip-right">
                             <div class="counter-value">{{ statics[0] }}</div>
                         </div>
-                        <h2>المجالات</h2>
-
-                        <div data-aos="zoom-in" class="mb-2"><a class="btn btn-outline-primary" href="#" role="button">اكتشف</a></div>
+                        <h2 data-aos="slide-up">المجالات</h2>
+                        <div data-aos="zoom-in" class="mb-2"><a class="btn btn-outline-primary" href="#categories" role="button">اكتشف</a></div>
                     </div>
                     <div class="col-lg-4 mb-4 shadow-sm">
                         <div class="counter-container" data-aos="flip-down">
                             <div class="counter-value">{{ statics[1] }}</div>
                         </div>
-                        <h2>الخدمات</h2>
-
-                        <div data-aos="zoom-in" class="mb-2"><a class="btn btn-outline-primary" href="#" role="button">اكتشف</a></div>
+                        <h2 data-aos="slide-up">الخدمات</h2>
+                        <div data-aos="zoom-in" class="mb-2"><a class="btn btn-outline-primary" href="#services" role="button">اكتشف</a></div>
                     </div>
                     <div class="col-lg-4 mb-4 shadow-sm">
                         <div class="counter-container" data-aos="flip-left">
                             <div class="counter-value">{{ statics[2] }}</div>
                         </div>
-                        <h2>المتعاملين</h2>
-
-                        <div data-aos="zoom-in" class="mb-2"><a class="btn btn-outline-primary" href="#" role="button">اكتشف</a></div>
+                        <h2 data-aos="slide-up">المتعاملين</h2>
+                        <div data-aos="zoom-in" class="mb-2"><a class="btn btn-outline-primary" href="/users" role="button">اكتشف</a></div>
                     </div>
                 </div>
             </div>
@@ -59,7 +55,7 @@
     <h2 class="display-5 font-weight-bolder text-center mt-auto text-primary">مواقع متعاملينا</h2>
     <div id='main-map' class="d-flex"></div>
 </section>
-<section class="container" data-aos="flip-up">
+<section id="categories" class="container" data-aos="flip-up">
     <h1 class="display-4 text-center">المجالات</h1>
     {% if categories %}
         <div id="carouselCategoryInterval" class="carousel slide" data-ride="carousel">
@@ -88,7 +84,7 @@
         </div>
     {% endif %}
 </section>
-<section class="container" data-aos="flip-up">
+<section id="services" class="container" data-aos="flip-up">
     <h1 class="display-4 text-center">الخدمات</h1>
     {% if services %}
         <div id="carouselServiceInterval" class="carousel slide" data-ride="carousel">
