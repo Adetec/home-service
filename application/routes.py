@@ -563,22 +563,22 @@ def owners_endpoint():
 
 @app.route('/API/1.0/notifications')
 def get_notifications():
-    users = db.session.query(User).all()
     data = []
-    for user in users:
-        if user.notifications:
-            notifications = []
-            for notification in user.notifications:
-                notifications.append({
-                    'id': notification.id,
-                    'user_id': notification.user_id,
-                    'message': db.session.query(ServiceRequestMessages).get(notification.message).message,
-                    'is_read': notification.is_read
-                })
-            data.append({
-                'id': user.id,
-                'username': user.username,
-                'notifications': notifications,
-                'owner_image': user.image_file
+    if not current_user.is_authenticated:
+        return jsonify(data)
+    if current_user.notifications:
+        notifications = []
+        for notification in current_user.notifications:
+            notifications.append({
+                'id': notification.id,
+                'user_id': notification.user_id,
+                'message': db.session.query(ServiceRequestMessages).get(notification.message).message,
+                'is_read': notification.is_read
             })
+        data.append({
+            'id': current_user.id,
+            'username': current_user.username,
+            'notifications': notifications,
+            'owner_image': current_user.image_file
+        })
     return jsonify(data)

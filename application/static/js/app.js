@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    
     $('.carousel').carousel()
 
     $('#action-requests').click(() => {
@@ -19,10 +20,29 @@ $(document).ready(function(){
           easing: 'swing',
           step: function () {
             $this.text(Math.ceil(this.Counter));
+            $this.toggleClass('animated flash')
           }
         });
-      });
+    });
+    
 });
+
+// Get notifications
+let getNot = setInterval(() => {
+    $.ajax({
+        type: "GET",
+        url: "/API/1.0/notifications",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            response.forEach(notifications => {
+                console.log(notifications.notifications.length);
+                $('#notif-badge').text(notifications.notifications.length)
+            });
+        }
+    });
+}, 5000)
+
 
 
 var geojson = {
