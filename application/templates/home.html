@@ -1,42 +1,61 @@
 {% extends 'base.html' %}
 {% block main %}
-<section id="interface-section" class="">
-    <div class="container-fluid text-center">
-        <h1 class="display-3 font-weight-bolder mt-auto text-primary">صلح دارك</h1>
-        <p class="text-secondary lead">اللهم أسألك أن تيسير لي هذا الامتحان، وتجعل الخيرة فيه إنك على كل شي قدير، اللهم إني أسألك بمقاعد العز من عرشك، ومنتهى الرحمة من كتابك، واسمك الأعظم وكلماتك، أن تفتح عليّ فتوح العارفين.</p>
-        <div class="container marketing">
+{% if not current_user.is_authenticated %}
 
-            
-            <div class="row">
-                <div class="col-lg-4 mb-4 shadow-sm">
-                    <div class="counter-container" data-aos="flip-right">
-                        <div class="counter-value">{{ statics[0] }}</div>
-                    </div>
-                    <h2>المجالات</h2>
-                    <p>اللهم أسألك أن تيسير لي هذا الامتحان، وتجعل الخيرة فيه إنك على كل شي قدير، اللهم إني أسألك بمقاعد العز من عرشك، ومنتهى الرحمة من كتابك، واسمك الأعظم وكلماتك، أن تفتح عليّ فتوح العارفين.</p>
-                    <div data-aos="zoom-in" class="mb-2"><a class="btn btn-outline-primary" href="#" role="button">اكتشف</a></div>
+    <section id="interface-section" class="">
+        <div class="container text-center pt-4">
+            <h1 class="display-3 font-weight-bolder mt-auto text-primary">صلح دارك</h1>
+            <div id="presentation" class="row text-right">
+                <div class="col-lg-6" data-aos="flip-right">
+                    <h2 class="text-center">زبون</h2>
+                    <p>لديك أرض وتريد بناء منزل، لديك منزل قديم وتريد ترميمه؟</p>
+                    <p>مللت من ديكور منزلك وتريد تحديثه، لديك مشكل في منزلك وتريد عمل بعض التشطيبات؟</p>
+                    <p class="text-primary text-center h5">أنت في المكان المناسب</p>
+                    <p>موقع <a href="">صلح دارك</a> يتيح لك إكتشاف متعاملينا من مقاولين، شركات أو عمال أحرار، يمكنك التواصل معهم في أي وقت وفي أي مكان</p>
+                    <p>يمكنك <a href="">التسجيل</a> أو <a href="">الدخول</a> للإنظمام معنا والإستفادة من خدماتنا</p>
                 </div>
-                <div class="col-lg-4 mb-4 shadow-sm">
-                    <div class="counter-container" data-aos="flip-down">
-                        <div class="counter-value">{{ statics[1] }}</div>
-                    </div>
-                    <h2>الخدمات</h2>
-                    <p>اللهم أسألك أن تيسير لي هذا الامتحان، وتجعل الخيرة فيه إنك على كل شي قدير، اللهم إني أسألك بمقاعد العز من عرشك، ومنتهى الرحمة من كتابك، واسمك الأعظم وكلماتك، أن تفتح عليّ فتوح العارفين.</p>
-                    <div data-aos="zoom-in" class="mb-2"><a class="btn btn-outline-primary" href="#" role="button">اكتشف</a></div>
+                <div class="col-lg-6" data-aos="flip-left">
+                    <h2 class="text-center">متعامل</h2>
+                    <p>لديك شركة تقدم خدمات مقاولاتية؟</p>
+                    <p>مقاول أو تحترف مهنة في مجال البناء، الترصيص، النجارة الخ؟</p>
+                    <p>موقع <a href="">صلح دارك</a> يتيح لك إكتشاف متعاملينا من مقاولين، شركات أو عمال أحرار، يمكنك التواصل معهم في أي وقت وفي أي مكان</p>
+                    <p>يمكنك <a href="">التسجيل</a> أو <a href="">الدخول</a> للإنظمام معنا وعرض خدماتك المميزة</p>
                 </div>
-                <div class="col-lg-4 mb-4 shadow-sm">
-                    <div class="counter-container" data-aos="flip-left">
-                        <div class="counter-value">{{ statics[2] }}</div>
+            </div>
+
+            <div class="container">
+                <div class="row mt-4">
+                    <div class="col-lg-4 mb-4 shadow-sm">
+                        <div class="counter-container" data-aos="flip-right">
+                            <div class="counter-value">{{ statics[0] }}</div>
+                        </div>
+                        <h2>المجالات</h2>
+
+                        <div data-aos="zoom-in" class="mb-2"><a class="btn btn-outline-primary" href="#" role="button">اكتشف</a></div>
                     </div>
-                    <h2>المتعاملين</h2>
-                    <p>اللهم أسألك أن تيسير لي هذا الامتحان، وتجعل الخيرة فيه إنك على كل شي قدير، اللهم إني أسألك بمقاعد العز من عرشك، ومنتهى الرحمة من كتابك، واسمك الأعظم وكلماتك، أن تفتح عليّ فتوح العارفين.</p>
-                    <div data-aos="zoom-in" class="mb-2"><a class="btn btn-outline-primary" href="#" role="button">اكتشف</a></div>
+                    <div class="col-lg-4 mb-4 shadow-sm">
+                        <div class="counter-container" data-aos="flip-down">
+                            <div class="counter-value">{{ statics[1] }}</div>
+                        </div>
+                        <h2>الخدمات</h2>
+
+                        <div data-aos="zoom-in" class="mb-2"><a class="btn btn-outline-primary" href="#" role="button">اكتشف</a></div>
+                    </div>
+                    <div class="col-lg-4 mb-4 shadow-sm">
+                        <div class="counter-container" data-aos="flip-left">
+                            <div class="counter-value">{{ statics[2] }}</div>
+                        </div>
+                        <h2>المتعاملين</h2>
+
+                        <div data-aos="zoom-in" class="mb-2"><a class="btn btn-outline-primary" href="#" role="button">اكتشف</a></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<section class="container-fluid map-container" data-aos="fade-up">
+    </section>
+{% endif %}
+
+<section class="container map-container" data-aos="fade-up">
     <h2 class="display-5 font-weight-bolder text-center mt-auto text-primary">مواقع متعاملينا</h2>
     <div id='main-map' class="d-flex"></div>
 </section>
