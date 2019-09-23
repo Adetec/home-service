@@ -36,14 +36,32 @@ let getNot = setInterval(() => {
         dataType: "json",
         success: function (response) {
             response.forEach(notifications => {
-                console.log(notifications.notifications.length);
+                renderNotifications(notifications.notifications)
                 $('#notif-badge').text(notifications.notifications.length)
             });
         }
     });
 }, 5000)
 
-
+const renderNotifications =(notifs) => {
+   let container = $('#notifs-list')
+   $(container).children().remove();
+   notifs.forEach(notif => {
+       let notElement = document.createElement('a');
+       let sender = document.createElement('small');
+       let msgTime = document.createElement('small');
+       $(notElement).attr('href', '/');
+       $(notElement).addClass('dropdown-item');
+       $(sender).addClass('text-primary');
+       $(msgTime).addClass('text-muted');
+       $(sender).text(notif.sender);
+       $(notElement).text(` ${notif.message} `);
+       $(msgTime).text(moment(notif.created_at).fromNow());
+       $(notElement).prepend(sender);
+       $(notElement).append(msgTime);
+       $(container).append(notElement);
+   });
+}
 
 var geojson = {
     "type": "FeatureCollection",

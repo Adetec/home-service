@@ -569,10 +569,13 @@ def get_notifications():
     if current_user.notifications:
         notifications = []
         for notification in current_user.notifications:
+            message = db.session.query(ServiceRequestMessages).get(notification.message)
+            sender = db.session.query(User).get(message.sender)
             notifications.append({
                 'id': notification.id,
                 'user_id': notification.user_id,
-                'message': db.session.query(ServiceRequestMessages).get(notification.message).message,
+                'sender': sender.username,
+                'message': message.message,
                 'is_read': notification.is_read
             })
         data.append({
