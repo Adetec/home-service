@@ -35,9 +35,15 @@ let getNot = setInterval(() => {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
-            response.forEach(notifications => {
-                renderNotifications(notifications.notifications)
-                $('#notif-badge').text(notifications.notifications.length)
+            response.forEach(data => {
+                renderNotifications(data.notifications)
+                if (data.notifications.length > 0) { 
+                    $('#notif-badge').addClass('badge badge-pill badge-danger')
+                    $('#notif-badge').text(data.notifications.length)
+                    $('#notification').text('notifications')
+                } else {
+                    $('#notification').text('notifications_none')
+                }
             });
         }
     });
@@ -65,13 +71,6 @@ const renderNotifications =(notifs) => {
        $(container).append(notElement);
    });
 }
-
-
-
-// Set notification statut to read
-$('.not-read').mouseover((e)=> {
-    $(this).css('color', 'grey');;
-})
 
 var geojson = {
     "type": "FeatureCollection",
