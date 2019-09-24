@@ -12,6 +12,7 @@ from application.models import User, Category, Service, ServiceRequest, ServiceR
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 
+# Func to count how match services in DB 
 def count_service_owners():
     users = User.query.all()
     owners = []
@@ -20,14 +21,24 @@ def count_service_owners():
             owners.append(user)
     return len(owners)
 
+
+# Home page route
 @app.route("/")
 @app.route("/home")
 def home():
+    # Get all categories
     categories = Category.query.all()
+    # Get all services
     services = Service.query.all()
     statics = [len(categories), len(services), count_service_owners()]
     return render_template('home.html', categories=categories, services=services, statics=statics, title='Need Help!')
 
+
+'''
+    * * * * * * * * * * *
+    *   Mail functions  *
+    * * * * * * * * * * *
+'''
 
 def send_async_email(app, msg):
     with app.app_context():
@@ -35,10 +46,8 @@ def send_async_email(app, msg):
         print('message sent')
 
 
-
 def send_verification_email(user):
     token = user.get_reset_token(30000)
-    
     msg = Message(
         f'مرحبا {user.username} في بيتك للخدمات',
         sender='adetech.home.service@gmail.com',
@@ -61,7 +70,7 @@ def send_verification_email(user):
 
 
 
-
+# New user registration route
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     categories = Category.query.all()
@@ -79,6 +88,7 @@ def register():
     return render_template('register.html', categories=categories, form=form, title='NH | حساب جديد')
 
 
+# When new user signup successfuly send a verification email
 @app.route('/email_verification/<token>', methods=['GET', 'POST'])
 def email_verification(token):
     if current_user.is_authenticated:
@@ -96,7 +106,7 @@ def email_verification(token):
         return redirect(url_for('login'))
     return render_template('email-verification.html', form=form, title='NH | تفعيل الحساب')
 
-
+# Login route
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     categories = Category.query.all()
@@ -119,7 +129,7 @@ def login():
             flash('الرجاء التأكد من بريدك الإلكتروني أو كلمة السر', 'danger')
     return render_template('login.html', categories=categories, form=form, title='NH | تسجيل دخول')
 
-
+# Logout route
 @app.route("/logout")
 def logout():
     user = current_user
