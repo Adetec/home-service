@@ -70,11 +70,13 @@ body {
 }
 
 #notification {
+    width: 32px;
+    height: 32px;
     line-height: inherit;
 }
 
 #notif-badge {
-    font-size: 50%;
+    font-size: 12px;
 }
 
 
