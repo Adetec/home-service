@@ -247,7 +247,8 @@ def send_request_message(reciever, service, message, client_id, service_id):
     '''
 
     try:
-        mail.send(msg)
+        thr = Thread(target=send_async_email, args=[app, msg])
+        thr.start()
         flash(f'قد تم تبليغ {reciever.username} عبر البريد الالكتروني، برجاء إنتظار رده.', 'success')
     except:
         print('Error encured while sending the email! ')
@@ -270,7 +271,8 @@ def send_to_service_owner_message(reciever, service, message, client_id, service
     '''
 
     try:
-        mail.send(msg)
+        thr = Thread(target=send_async_email, args=[app, msg])
+        thr.start()
         flash(f'قد تم تبليغ {reciever.username} عبر البريد الالكتروني، برجاء إنتظار رده.', 'success')
     except:
         print('Error encured while sending the email! ')
