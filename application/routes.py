@@ -139,7 +139,6 @@ def logout():
     return redirect(url_for('home'))
 
 @app.route('/users')
-# @auth.login_required
 def display_users():
     users = User.query.all()
     categories = Category.query.all()
@@ -172,18 +171,17 @@ def save_picture(picture_from_form, folder):
     picture_path = os.path.join(app.root_path, f'static/img/{folder}', picture_filname)
     print(f'Picture path: {picture_path}')
     # resize the picture
-    # output_size = (256, 256)
-    # image = Image.open(picture_from_form)
-    # image.thumbnail(output_size)
     # Finally Save it
     picture_from_form.save(picture_path)
-
     return picture_filname
 
+
+# User profile route
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     categories = Category.query.all()
-    services = Service.query.all()   
+    services = Service.query.all()
+    # Update user profile form  
     form = UpdateProfileForm()
     if form.validate_on_submit():
         if form.picture.data:
@@ -197,6 +195,7 @@ def profile():
         db.session.commit()
         flash('قد تم تعديل معلوماتك بنجاح', 'success')
         return redirect(url_for('profile'))
+    # User info view
     elif request.method == 'GET':
         n_requests = len(current_user.requests)
         n_services = len(current_user.services)
