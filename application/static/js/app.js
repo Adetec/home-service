@@ -2,6 +2,7 @@ $(document).ready(function(){
     
     $('.carousel').carousel()
 
+    // Show and hide some sections in user profile page
     $('#action-requests').click(() => {
         $('#requests').toggleClass('hide');
     });
@@ -27,8 +28,9 @@ $(document).ready(function(){
     
 });
 
-// Get notifications
+// Get notifications every 5 seconde
 let getNot = setInterval(() => {
+    // Send a request and fetch unread notifications
     $.ajax({
         type: "GET",
         url: "/API/1.0/notifications",
@@ -36,12 +38,14 @@ let getNot = setInterval(() => {
         dataType: "json",
         success: function (response) {
             response.forEach(data => {
-                renderNotifications(data.notifications)
+                renderNotifications(data.notifications);
+                // Check if there is new unread notifications
                 if (data.notifications.length > 0) { 
                     $('#notif-badge').addClass('badge badge-pill badge-danger')
                     $('#notif-badge').text(data.notifications.length)
                     $('#notification').text('notifications')
                 } else {
+                    // Render ouline notif icon with no count badge
                     $('#notification').text('notifications_none')
                 }
             });
@@ -49,6 +53,7 @@ let getNot = setInterval(() => {
     });
 }, 5000)
 
+// Func that loop over each new fetched notif then render it
 const renderNotifications =(notifs) => {
    let container = $('#notifs-list')
    $(container).children().remove();
@@ -71,6 +76,8 @@ const renderNotifications =(notifs) => {
        $(container).append(notElement);
    });
 }
+
+//***MAP Script***
 
 var geojson = {
     "type": "FeatureCollection",
@@ -98,7 +105,6 @@ mainMap.on('load', () => {
         dataType: "json",
         success: function (response) {
             response.forEach(owner => {
-                console.log(owner.id);
                 let geoFeature = {
                     "type": "Feature",
                     "properties": {
@@ -129,10 +135,9 @@ mainMap.on('load', () => {
                 markerElement.style.height = marker.properties.iconSize[1] + 'px';
                 markerElement.style.backgroundSize = 'cover';
                 
-                 
+                // Display a toast element and list all owner's services
                 markerElement.addEventListener('click', function() {
                     
-
                     serviceToast = document.createElement('div');
                     serviceToast.classList.add('toast');
                     serviceToast.setAttribute('data-delay', '20000');
@@ -167,12 +172,6 @@ mainMap.on('load', () => {
                     $('.toast').remove();
                     $(markerElement).append(serviceToast);
                     $('.toast').toast('show');
-                    
-                    
-                    
-                    // console.log(serviceToast);
-                    
-                // window.alert(marker.properties.message);
                 });
 
                 // create the service owner marker icon
@@ -187,4 +186,4 @@ mainMap.on('load', () => {
                 });
         }
     });
-})
+});
