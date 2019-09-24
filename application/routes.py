@@ -591,4 +591,4 @@ def set_message_status(client_id, request_service, notification_id):
     if not notification.is_read and current_user.is_authenticated:
         notification.is_read = True
         db.session.commit()
-    return redirect(url_for('request_service', client_id=client_id, service_id=request_service))
+    return redirect(url_for('request_service', client_id=client_id, service_id=request_service, _anchor=f'msg-{notification.message}'))
