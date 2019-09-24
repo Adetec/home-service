@@ -69,144 +69,6 @@ def send_verification_email(user):
         print('Error encured while sending a verification email! ')
 
 
-
-# New user registration route
-@app.route("/register", methods=['GET', 'POST'])
-def register():
-    categories = Category.query.all()
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password, user_type=form.user_type.data)
-        db.session.add(user)
-        db.session.commit()
-        flash('قد تم تسجيلك بنجاح، برجاء تفقد بريدك الالكتروني', 'success')
-        send_verification_email(user)
-        return redirect(url_for('login'))
-    return render_template('register.html', categories=categories, form=form, title='NH | حساب جديد')
-
-
-# When new user signup successfuly send a verification email
-@app.route('/email_verification/<token>', methods=['GET', 'POST'])
-def email_verification(token):
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    user = User.verify_reset_token(token)
-    if not user:
-        flash('طلب التفعيل غير صحيح أو قد انتهت صلاحيته', 'warning')
-        return redirect(url_for('reset_request'))
-    form = EmailVerificationForm()
-    if form.validate_on_submit():
-        
-        user.is_active = True
-        db.session.commit()
-        flash('قد تم تفعيل حسابك بنجاح', 'success')
-        return redirect(url_for('login'))
-    return render_template('email-verification.html', form=form, title='NH | تفعيل الحساب')
-
-# Login route
-@app.route("/login", methods=['GET', 'POST'])
-def login():
-    categories = Category.query.all()
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-            if not user.is_active:
-                flash('حسابك ليس مفعل بعد، تفقد بريدك الإلكتروني من أجل تفعيل حسابك', 'info')
-                send_verification_email(user)
-            login_user(user, remember=form.remember.data)
-            next_page = request.args.get('next')
-            user.last_login = datetime.now()
-            user.is_connected = True
-            db.session.commit()
-            return redirect(next_page) if next_page else redirect(url_for('home'))
-        else:
-            flash('الرجاء التأكد من بريدك الإلكتروني أو كلمة السر', 'danger')
-    return render_template('login.html', categories=categories, form=form, title='NH | تسجيل دخول')
-
-# Logout route
-@app.route("/logout")
-def logout():
-    user = current_user
-    user.is_connected = False
-    db.session.commit()
-    logout_user()
-    return redirect(url_for('home'))
-
-@app.route('/users')
-def display_users():
-    users = User.query.all()
-    categories = Category.query.all()
-    return render_template('users.html', users=users, categories=categories, title='NH | المستخدمين')
-
-def save_profile_picture(picture_from_form):
-    # Generate hex picture filename
-    hex_random = secrets.token_hex(8)
-    _ , file_extension = os.path.splitext(picture_from_form.filename)
-    picture_filname = f'profile-{hex_random}{file_extension}'
-    # Set the picture path
-    picture_path = os.path.join(app.root_path, 'static/img/users-profile', picture_filname)
-    print(f'Picture path: {picture_path}')
-    # resize the picture
-    output_size = (256, 256)
-    image = Image.open(picture_from_form)
-    image.thumbnail(output_size)
-    # Finally Save it
-    image.save(picture_path)
-
-    return picture_filname
-
-
-def save_picture(picture_from_form, folder):
-    # Generate hex picture filename
-    hex_random = secrets.token_hex(8)
-    _ , file_extension = os.path.splitext(picture_from_form.filename)
-    picture_filname = f'{hex_random}{file_extension}'
-    # Set the picture path
-    picture_path = os.path.join(app.root_path, f'static/img/{folder}', picture_filname)
-    print(f'Picture path: {picture_path}')
-    # resize the picture
-    # Finally Save it
-    picture_from_form.save(picture_path)
-    return picture_filname
-
-
-# User profile route
-@app.route('/profile', methods=['GET', 'POST'])
-def profile():
-    categories = Category.query.all()
-    services = Service.query.all()
-    # Update user profile form  
-    form = UpdateProfileForm()
-    if form.validate_on_submit():
-        if form.picture.data:
-            picture_file = save_profile_picture(form.picture.data)
-            current_user.image_file = picture_file
-        current_user.username = form.username.data
-        current_user.full_name = form.full_name.data
-        current_user.address_first_line = form.address_first_line.data
-        current_user.address_second_line = form.address_second_line.data
-        current_user.city = form.city.data
-        db.session.commit()
-        flash('قد تم تعديل معلوماتك بنجاح', 'success')
-        return redirect(url_for('profile'))
-    # User info view
-    elif request.method == 'GET':
-        n_requests = len(current_user.requests)
-        n_services = len(current_user.services)
-        form.username.data = current_user.username
-        form.full_name.data = current_user.full_name
-        form.address_first_line.data = current_user.address_first_line
-        form.address_second_line.data = current_user.address_second_line
-        form.city.data = current_user.city
-    return render_template('profile.html', form=form, n_services=n_services, n_requests=n_requests, categories=categories, services=services, title='NH | حسابي')
-
-
 def send_reset_email(user):
     token = user.get_reset_token(30000)
     # '<div dir="rtl"><p> مرحبا بك <strong style="color:darkslateblue;">' + username + '</strong> في تطبيقنا المتواضع HOME SERVICE ،</p><p> يجب عليك تفعيل حسابك لللإستفادة من خدماتنا <strong style="color:darkslateblue;">' + code + '</strong></p></div>', subtype='html'
@@ -299,6 +161,145 @@ def send_service_request_email(client, service, message, client_id, service_id):
         flash(f'قد تم تبليغ {service.owner.username} عبر البريد الالكتروني، برجاء إنتظار رده.', 'success')
     except:
         print('Error encured while sending the email! ')
+
+
+# New user registration route
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    categories = Category.query.all()
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password, user_type=form.user_type.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('قد تم تسجيلك بنجاح، برجاء تفقد بريدك الالكتروني', 'success')
+        send_verification_email(user)
+        return redirect(url_for('login'))
+    return render_template('register.html', categories=categories, form=form, title='NH | حساب جديد')
+
+
+# When new user signup successfuly send a verification email
+@app.route('/email_verification/<token>', methods=['GET', 'POST'])
+def email_verification(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    user = User.verify_reset_token(token)
+    if not user:
+        flash('طلب التفعيل غير صحيح أو قد انتهت صلاحيته', 'warning')
+        return redirect(url_for('reset_request'))
+    form = EmailVerificationForm()
+    if form.validate_on_submit():
+        
+        user.is_active = True
+        db.session.commit()
+        flash('قد تم تفعيل حسابك بنجاح', 'success')
+        return redirect(url_for('login'))
+    return render_template('email-verification.html', form=form, title='NH | تفعيل الحساب')
+
+# Login route
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    categories = Category.query.all()
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            if not user.is_active:
+                flash('حسابك ليس مفعل بعد، تفقد بريدك الإلكتروني من أجل تفعيل حسابك', 'info')
+                send_verification_email(user)
+            login_user(user, remember=form.remember.data)
+            next_page = request.args.get('next')
+            user.last_login = datetime.now()
+            user.is_connected = True
+            db.session.commit()
+            return redirect(next_page) if next_page else redirect(url_for('home'))
+        else:
+            flash('الرجاء التأكد من بريدك الإلكتروني أو كلمة السر', 'danger')
+    return render_template('login.html', categories=categories, form=form, title='NH | تسجيل دخول')
+
+
+# Logout route
+@app.route("/logout")
+def logout():
+    user = current_user
+    user.is_connected = False
+    db.session.commit()
+    logout_user()
+    return redirect(url_for('home'))
+
+# Display all users info for admin
+@app.route('/users')
+def display_users():
+    users = User.query.all()
+    categories = Category.query.all()
+    return render_template('users.html', users=users, categories=categories, title='NH | المستخدمين')
+
+def save_profile_picture(picture_from_form):
+    # Generate hex picture filename
+    hex_random = secrets.token_hex(8)
+    _ , file_extension = os.path.splitext(picture_from_form.filename)
+    picture_filname = f'profile-{hex_random}{file_extension}'
+    # Set the picture path
+    picture_path = os.path.join(app.root_path, 'static/img/users-profile', picture_filname)
+    print(f'Picture path: {picture_path}')
+    # resize the picture
+    output_size = (256, 256)
+    image = Image.open(picture_from_form)
+    image.thumbnail(output_size)
+    # Finally Save it
+    image.save(picture_path)
+
+    return picture_filname
+
+
+def save_picture(picture_from_form, folder):
+    # Generate hex picture filename
+    hex_random = secrets.token_hex(8)
+    _ , file_extension = os.path.splitext(picture_from_form.filename)
+    picture_filname = f'{hex_random}{file_extension}'
+    # Set the picture path
+    picture_path = os.path.join(app.root_path, f'static/img/{folder}', picture_filname)
+    print(f'Picture path: {picture_path}')
+    # resize the picture
+    # Finally Save it
+    picture_from_form.save(picture_path)
+    return picture_filname
+
+
+# User profile route
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    categories = Category.query.all()
+    services = Service.query.all()
+    # Update user profile form  
+    form = UpdateProfileForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_profile_picture(form.picture.data)
+            current_user.image_file = picture_file
+        current_user.username = form.username.data
+        current_user.full_name = form.full_name.data
+        current_user.address_first_line = form.address_first_line.data
+        current_user.address_second_line = form.address_second_line.data
+        current_user.city = form.city.data
+        db.session.commit()
+        flash('قد تم تعديل معلوماتك بنجاح', 'success')
+        return redirect(url_for('profile'))
+    # User info view
+    elif request.method == 'GET':
+        n_requests = len(current_user.requests)
+        n_services = len(current_user.services)
+        form.username.data = current_user.username
+        form.full_name.data = current_user.full_name
+        form.address_first_line.data = current_user.address_first_line
+        form.address_second_line.data = current_user.address_second_line
+        form.city.data = current_user.city
+    return render_template('profile.html', form=form, n_services=n_services, n_requests=n_requests, categories=categories, services=services, title='NH | حسابي')
 
 
 @app.route('/reset_request', methods=['GET', 'POST'])
