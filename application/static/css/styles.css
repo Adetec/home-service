@@ -4,6 +4,10 @@ body {
     font-family: 'Changa', serif;
 }
 
+nav a:hover {
+    color: #607D8B;
+}
+
 #interface-section {
     background-color: transparent;
 }
