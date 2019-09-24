@@ -65,7 +65,7 @@ const renderNotifications =(notifs) => {
        $(msgTime).addClass('text-muted');
        $(sender).text(notif.sender);
        $(notElement).text(` ${notif.message} `);
-       $(msgTime).text(moment(notif.created_at).fromNow());
+       $(msgTime).text(moment(notif.message_created_at).fromNow());
        $(notElement).prepend(sender);
        $(notElement).append(msgTime);
        $(container).append(notElement);

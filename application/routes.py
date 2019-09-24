@@ -573,6 +573,7 @@ def get_notifications():
                     'client_id':service_request.client_id,
                     'message_id': message.id,
                     'message': message.message,
+                    'message_created_at': message.created_at,
                     'is_read': notification.is_read
                 })
             data.append({
