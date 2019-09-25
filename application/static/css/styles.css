@@ -8,6 +8,10 @@ nav a:hover {
     color: #607D8B;
 }
 
+#app-logo {
+    width: 200px;
+}
+
 #interface-section {
     background-color: transparent;
 }
