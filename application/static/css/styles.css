@@ -119,3 +119,7 @@ nav a:hover {
     top: 36px;
 }
 
+/* Override some bootsrap rules */
+.text-primary, nav a {
+    color: #333;
+}
