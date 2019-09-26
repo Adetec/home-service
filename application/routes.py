@@ -614,6 +614,6 @@ def send_user_phone():
     else:
         response = {
             'username': current_user.username,
-            'phone_number': '06-66-66-66'
+            'phone_number': current_user.phone_number
         }
         return jsonify(response)

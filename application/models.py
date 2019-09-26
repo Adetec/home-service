@@ -27,6 +27,7 @@ class User(db.Model, UserMixin):
     address_first_line = db.Column(db.String(64), default='')
     address_second_line = db.Column(db.String(64), default='')
     city = db.Column(db.String(20), default='')
+    phone_number = db.Column(db.String(14), default='')
     lat = db.Column(db.Float(20))
     lon = db.Column(db.Float(20))
     requests = db.relationship('ServiceRequest', backref='client', lazy=True)
@@ -66,6 +67,7 @@ class User(db.Model, UserMixin):
             'address_first_line': self.address_first_line,
             'address_second_line': self.address_second_line,
             'city': self.city,
+            'phone_number': self.phone_number,
             'lat': self.lat,
             'lon': self.lon,
             'password': self.password,
