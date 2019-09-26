@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
 {% block main %}
-    <div class="mt-4 row">
-        
-        <form class="col form-group col-sm-8 text-right" method="POST" action="">
+    <div class="container mt-4 mx-auto row">
+        <form class="col-sm-6 form-group text-right" method="POST" action="">
                 {{ form.hidden_tag() }}
             <div class="form-group">
                 {{ form.username.label(class="form-control-label") }}
                 {% if form.username.errors %}
                     {{ form.username(class="form-control") }}
-                    <div class="red-text darken-3-text center-align pulse">
+                    <div class=alert alert-danger text-center">
                         {% for error in form.username.errors %}
                             <div class="alert alert-danger">
                                 <span>{{ error }}</span>
@@ -24,7 +23,7 @@
                 {{ form.email.label(class="form-control-label") }}
                 {% if form.email.errors %}
                     {{ form.email(class="form-control", type="email") }}
-                    <div class="red-text darken-3-text center-align pulse">
+                    <div class="alert alert-danger text-center">
                         {% for error in form.email.errors %}
                             <div class="alert alert-danger">
                                 <span>{{ error }}</span>
@@ -40,7 +39,7 @@
                 {{ form.password.label(class="form-control-label") }}
                 {% if form.password.errors %}
                     {{ form.password(class="form-control", type="password") }}
-                    <div class="red-text darken-3-text center-align pulse">
+                    <div class="alert alert-danger text-center">
                         {% for error in form.password.errors %}
                             <div class="alert alert-danger">
                                 <span>{{ error }}</span>
@@ -55,7 +54,7 @@
                 {{ form.confirm_password.label(class="form-control-label") }}
                 {% if form.confirm_password.errors %}
                     {{ form.confirm_password(class="form-control", type="password") }}
-                    <div class="red-text darken-3-text center-align pulse">
+                    <div class="alert alert-danger text-center">
                         {% for error in form.confirm_password.errors %}
                             <div class="alert alert-danger">
                                 <span>{{ error }}</span>
@@ -80,14 +79,15 @@
                     {{ form.user_type(class="") }}
                 {% endif %}
             </div>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-secondary float-left") }}
+            <div class="form-group float-left">
+                <a href="{{ url_for('login') }}">لديك حساب؟</a>
+                {{ form.submit(class="btn btn-outline-secondary") }}
             </div>
         </form>
 
-        <div class="col-sm-4 mt-auto mb-auto">
+        <div class="col-sm-6 my-auto">
             <h2 class="text-secondary text-center">سعداء بلحاقك</h2>
-            <img class="img-fluid mx-auto d-block" src="static/img/app-logo.png" alt="">
+            <img class="img-fluid mx-auto" src="static/img/app-logo.png" alt="">
         </div>
     </div>
             
