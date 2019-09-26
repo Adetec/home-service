@@ -1,19 +1,33 @@
 
-
+/* * {
+    outline: #333 .2px solid;
+} */
 body {
     font-family: 'Changa', serif;
 }
 
-nav a:hover {
-    color: #607D8B;
+.nav-effect, .dropdown-toggle {
+    font-size: 1.2em;
+    background-image: linear-gradient(#ff8257, #ff8257);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: all .3s ease-in-out;
 }
+
+.nav-effect:hover, .dropdown-toggle:hover {
+    position: relative;
+    color: #ff8257;
+    background-size: 100% 2px;
+}
+
 
 #app-logo {
     width: 200px;
 }
 
 #interface-section {
-    background-color: transparent;
+    height: 100vh;
 }
 
 .counter-container {
@@ -120,6 +134,15 @@ nav a:hover {
 }
 
 /* Override some bootsrap rules */
-.text-primary, nav a {
+.text-primary, a {
+    color: #ff8257;
+}
+
+a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+nav a {
     color: #333;
 }

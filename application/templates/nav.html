@@ -4,21 +4,21 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     
+    <!-- Brand -->
+    <a class="" href="/">
+        <img id="app-logo" src="{{ url_for('static', filename='img/banner.png') }}" alt="" class="img-fluid">
+    </a>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <!-- Brand -->
-        <a class="navbar-brand" href="/">
-            <img id="app-logo" src="{{ url_for('static', filename='img/banner.png') }}" alt="" class="img-fluid">
-        </a>
         <!-- Links -->
         <ul class="navbar-nav mx-auto d-flex">
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('display_users') }}">المستخدمين</a>
+                <a class="nav-link nav-effect" href="{{ url_for('display_users') }}">المستخدمين</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('add_category') }}">صنف جديد</a>
+                <a class="nav-link nav-effect" href="{{ url_for('add_category') }}">صنف جديد</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('add_service') }}">خدمة جديدة</a>
+                <a class="nav-link nav-effect" href="{{ url_for('add_service') }}">خدمة جديدة</a>
             </li>
         
             <!-- Dropdown -->
