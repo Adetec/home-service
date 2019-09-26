@@ -604,3 +604,16 @@ def set_message_status(client_id, request_service, notification_id):
         notification.is_read = True
         db.session.commit()
     return redirect(url_for('request_service', client_id=client_id, service_id=request_service, _anchor=f'msg-{notification.message}'))
+
+
+# API endpoint for sending phone number
+@app.route('/API/1.0/user_phone')
+def send_user_phone():
+    if not current_user.is_authenticated:
+        return jsonify({data: 'Sorry, Access denied!'})
+    else:
+        response = {
+            'username': current_user.username,
+            'phone_number': '06-66-66-66'
+        }
+        return jsonify(response)

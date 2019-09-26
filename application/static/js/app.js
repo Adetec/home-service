@@ -187,3 +187,24 @@ mainMap.on('load', () => {
         }
     });
 });
+
+
+// Send phone number
+var sendPhoneNum = () => {
+    let phoneNumber;
+    $.ajax({
+        type: "GET",
+        url: "/API/1.0/user_phone",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: (response) => {
+            phoneNumber = response.phone_number
+            const result = `إليك رقم هاتفي: ${phoneNumber}`
+            $('#message').val(result);
+        }
+    });
+}
+
+$('#send-phone').on('click', ()=> {
+    sendPhoneNum();
+});
