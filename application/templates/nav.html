@@ -57,14 +57,14 @@
                         </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('logout') }}">خروج</a>
+                    <a class="nav-link nav-effect" href="{{ url_for('logout') }}">خروج</a>
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('login') }}">دخول</a>
+                    <a class="nav-link nav-effect" href="{{ url_for('login') }}">دخول</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('register') }}">تسجيل الدخول</a>
+                    <a class="nav-link nav-effect" href="{{ url_for('register') }}">تسجيل الدخول</a>
                 </li>
             {% endif %}
         </ul>
