@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block main %}
-    <div class="container media mt-3">
+    <div class="container media col-lg-6 mt-3">
         <img src="static/img/users-profile/{{ current_user.image_file }}" class="align-self-start mr-3" alt="current_user.username">
         <div class="media-body mr-3 mb-3 text-right">
             <h5 class="text-primary text-center">{{ current_user.username }}</h5>
@@ -13,8 +13,8 @@
                 <span class="text-info">{{ current_user.address_first_line }} {{ current_user.address_second_line }} - {{ current_user.city }}</span>
             </p>
             <div id="action-profile">
-                <a id="action-requests" class="btn btn-primary float-left" href="#list-tab"><span class="badge badge-light">{{ n_requests }}</span> طلباتي</a>
-                <a id="action-services" class="btn btn-primary ml-3 float-center" href="#list-tab2"><span class="badge badge-light">{{ n_services }}</span> خدماتي</a>
+                <a id="action-requests" class="btn btn-secondary float-left" href="#list-tab"><span class="badge badge-light">{{ n_requests }}</span> طلباتي</a>
+                <a id="action-services" class="btn btn-secondary ml-3 float-left" href="#list-tab2"><span class="badge badge-light">{{ n_services }}</span> خدماتي</a>
                 <a id="action-edit-profile" class="btn btn-info float-right" href="#edit-profile">تعديل معلوماتي</a>
             </div>
         </div>
@@ -43,7 +43,7 @@
                                     <h5>{{service.service_name}}</h5>
                                     <p class="text-muted">صاحب الخدمة: <span class="text-info">{{ service.owner.username }}</span></p>
                                     <p class="text-muted">تاريخ الطلب: <span class="text-info">{{ moment(request.requested_at).fromNow() }}</span></p>
-                                    <a class="btn btn-primary float-left" href="#">تفاصيل الطلب</a>
+                                    <a class="btn btn-secondary float-left" href="#">تفاصيل الطلب</a>
                                 </div>
                                 {% endif %}
                         {% endfor %}
@@ -72,7 +72,7 @@
                     <div class="tab-pane fade" id="list-{{service.id}}" role="tabpanel" aria-labelledby="{{ service.id }}-list">
                         <h5>{{service.service_name}}</h5>
                         <p class="text-muted">صاحب الخدمة: <span class="text-info">{{ service.owner.username }}</span></p>
-                        <a class="btn btn-primary float-left" href="#">تفاصيل الطلب</a>
+                        <a class="btn btn-secondary float-left" href="#">تفاصيل الطلب</a>
                     </div>
                     {% endfor %}
                 </div>

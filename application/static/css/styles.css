@@ -137,8 +137,21 @@ nav {
 }
 
 /* Override some bootsrap rules */
+.text-primary {
+    color: #ff8257 !important;
+}
 .text-primary, a {
     color: #ff8257;
+}
+
+.btn-primary {
+    background-color: #ff8257;
+    border-color: #ff8257;
+}
+
+.btn-primary:hover {
+    background-color: #333;
+    border-color: #333;
 }
 
 a:hover {
