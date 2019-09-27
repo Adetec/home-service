@@ -149,7 +149,6 @@ nav a {
 
 /* Presentation style */
 .presentation-style-one {
-    background: transparent url(../img/prest-bg.png) center top no-repeat;
     padding-top: 530px;
     padding-bottom: 120px;
     background-size: cover;
@@ -362,21 +361,9 @@ nav a {
     transition: all .4s ease;
   }
 
-  .pager-item {
-    background: #f7f7f7 url(../img/bg-lines.png) 24px repeat;
-    background-size: 20.6px;
-      
-  }
-
   .pager-item img {
-    -webkit-transition: all .2s ease;
-    transition: all .2s ease;
-  }
-
-  .pager-item img:hover {
-      position: relative;
-      top: 15px;
-      left: 15px;
+    /* background:#f7f7f7 url(../images/bg-lines.png) 24px repeat */
+      
   }
 
   #presentation-slider-pager .presentation-slider-pager-one .pager-item.active {
