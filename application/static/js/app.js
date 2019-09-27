@@ -26,6 +26,18 @@ $(document).ready(function(){
         });
     });
 
+    // Bix Slider trigger
+    if ($('.presentation-slider').length) {
+        $('.presentation-slider').bxSlider({
+            adaptiveHeight: true,
+            auto: true,
+            pause: 5000,
+            speed: 500,
+            pager: true,
+            pagerCustom: '.presentation-slider-pager-one'
+        });
+    }
+
     // Send phone number
     const sendPhoneNum = () => {
         let phoneNumber;

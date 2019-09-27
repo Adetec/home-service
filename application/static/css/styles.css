@@ -146,3 +146,230 @@ a:hover {
 nav a {
     color: #333;
 }
+
+/* Presentation style */
+.presentation-style-one {
+    background: transparent url(../images/pres-bg-1-1.png) center top no-repeat;
+    padding-top: 530px;
+    padding-bottom: 120px;
+    background-size: cover;
+    position: relative;
+    margin-top: -380px;
+  }
+  .presentation-style-one .block-title {
+    margin-bottom: 45px;
+  }
+  .presentation-style-one .single-pres-one p {
+    margin: 0;
+    color: #666E82;
+    font-size: 22px;
+    line-height: 46px;
+  }
+  .presentation-style-one .single-pres-one h3 {
+    color: #FF8257;
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0;
+    margin-top: 40px;
+  }
+  .presentation-style-one .bx-wrapper {
+    border: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    background-color: transparent;
+    margin-bottom: 0;
+  }
+  .presentation-style-one .bx-wrapper ul.slider {
+    padding: 0;
+    margin: 0;
+  }
+  .presentation-style-one .bx-wrapper .bx-controls-direction {
+    position: absolute;
+    bottom: -10px;
+    right: 0;
+  }
+  .presentation-style-one .bx-wrapper .bx-controls-direction a {
+    text-indent: 0;
+    background-image: none;
+    font-size: 32px;
+    position: relative;
+    top: 0px;
+    opacity: .3;
+    color: #666E82;
+    z-index: 10;
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
+  }
+  .presentation-style-one .bx-wrapper .bx-controls-direction a:hover {
+    opacity: 1;
+    color: #FF8257;
+  }
+  .presentation-style-one .bx-wrapper .bx-prev {
+    left: 0px;
+    margin-right: 25px;
+  }
+  .presentation-style-one .bx-wrapper .bx-next {
+    right: 0px;
+  }
+  
+  #presentation-slider-pager {
+    width: 536px;
+    height: 536px;
+    position: relative;
+    margin-top: -80px;
+    -webkit-animation-name: tesiMove;
+            animation-name: tesiMove;
+    -webkit-animation-duration: 5s;
+            animation-duration: 5s;
+    -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
+    -webkit-transform-origin: center center;
+            transform-origin: center center;
+  }
+  @-webkit-keyframes tesiMove {
+    0% {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+    }
+    15% {
+      -webkit-transform: rotate(2deg);
+              transform: rotate(2deg);
+    }
+    33% {
+      -webkit-transform: rotate(4deg);
+              transform: rotate(4deg);
+    }
+    66% {
+      -webkit-transform: rotate(2deg);
+              transform: rotate(2deg);
+    }
+    100% {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+    }
+  }
+  @keyframes tesiMove {
+    0% {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+    }
+    15% {
+      -webkit-transform: rotate(2deg);
+              transform: rotate(2deg);
+    }
+    33% {
+      -webkit-transform: rotate(4deg);
+              transform: rotate(4deg);
+    }
+    66% {
+      -webkit-transform: rotate(2deg);
+              transform: rotate(2deg);
+    }
+    100% {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+    }
+  }
+  #presentation-slider-pager .pres-icon {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+            transform: translateY(-50%) translateX(-50%);
+    width: 99px;
+    height: 99px;
+    border-radius: 50%;
+    background-color: #FF8257;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    z-index: 10;
+  }
+
+  .pres-icon .material-icons {
+      font-size: 2em;
+      color: #fff;
+      z-index: 1;
+  }
+
+  #presentation-slider-pager .pres-icon:after, #presentation-slider-pager .pres-icon:before {
+    width: 99px;
+    height: 99px;
+    border-radius: 50%;
+    background-color: #FF8257;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    -webkit-animation-delay: .9s;
+            animation-delay: .9s;
+    content: "";
+    position: absolute;
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+    -webkit-animation: ripple 3s infinite;
+            animation: ripple 3s infinite;
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
+  }
+  #presentation-slider-pager .pres-icon:after {
+    -webkit-animation-delay: .6s;
+            animation-delay: .6s;
+  }
+  @-webkit-keyframes ripple {
+    70% {
+      -webkit-box-shadow: 0 0 0 40px rgba(0, 0, 0, 0);
+              box-shadow: 0 0 0 40px rgba(0, 0, 0, 0);
+    }
+    100% {
+      -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+              box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+  }
+  @keyframes ripple {
+    70% {
+      -webkit-box-shadow: 0 0 0 40px rgba(0, 0, 0, 0);
+              box-shadow: 0 0 0 40px rgba(0, 0, 0, 0);
+    }
+    100% {
+      -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+              box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+  }
+  #presentation-slider-pager .pres-icon img {
+    position: relative;
+    z-index: 11;
+  }
+  #presentation-slider-pager .presentation-slider-pager-one .pager-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%) scale(0);
+            transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
+  }
+
+  .pager-item img {
+      box-shadow: #ff82575e 20px -17px 2px;
+      width: 536px;
+  }
+
+  #presentation-slider-pager .presentation-slider-pager-one .pager-item.active {
+    opacity: 1;
+    -webkit-transform: translate(-50%, -50%) scale(1);
+            transform: translate(-50%, -50%) scale(1);
+  }
+  
