@@ -3,7 +3,7 @@
 <div class="card-deck">
     {% if users %}
         {% for user in users %}
-            <div class="card text-right">
+            <div class="card m-2 text-right">
                 <img src="static/img/users-profile/{{ user.image_file }}" class="card-img-top" alt="user.username">
                 <h5 class="card-title text-primary text-center">{{ user.username }}</h5>
                 <div class="card-body">
