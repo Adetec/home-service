@@ -6,7 +6,7 @@ body {
     font-family: 'Changa', serif;
 }
 
-.nav-effect, .dropdown-toggle, a.text-secondary {
+.nav-effect, .dropdown-toggle {
     font-size: 1.2em;
     background-image: linear-gradient(#ff8257, #ff8257);
     background-position: 0% 100%;
