@@ -29,7 +29,7 @@ $(document).ready(function(){
     // Bix Slider trigger
     if ($('.presentation-slider').length) {
         $('.presentation-slider').bxSlider({
-            adaptiveHeight: true,
+            // adaptiveHeight: true,
             auto: true,
             pause: 5000,
             speed: 500,

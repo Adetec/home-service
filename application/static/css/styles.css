@@ -149,7 +149,7 @@ nav a {
 
 /* Presentation style */
 .presentation-style-one {
-    background: transparent url(../images/pres-bg-1-1.png) center top no-repeat;
+    background: transparent url(../img/prest-bg.png) center top no-repeat;
     padding-top: 530px;
     padding-bottom: 120px;
     background-size: cover;
@@ -363,8 +363,8 @@ nav a {
   }
 
   .pager-item img {
-      box-shadow: #ff82575e 20px -17px 2px;
-      width: 536px;
+      box-shadow: #ff82575e 20px -17px 27px;
+      
   }
 
   #presentation-slider-pager .presentation-slider-pager-one .pager-item.active {
