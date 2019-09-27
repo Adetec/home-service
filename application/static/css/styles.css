@@ -6,7 +6,7 @@ body {
     font-family: 'Changa', serif;
 }
 
-.nav-effect, .dropdown-toggle {
+.nav-effect, .dropdown-toggle, a.text-secondary {
     font-size: 1.2em;
     background-image: linear-gradient(#ff8257, #ff8257);
     background-position: 0% 100%;
@@ -15,9 +15,9 @@ body {
     transition: all .3s ease-in-out;
 }
 
-.nav-effect:hover, .dropdown-toggle:hover {
+.nav-effect:hover, .dropdown-toggle:hover, a.text-secondary:hover {
     position: relative;
-    color: #ff8257;
+    color: #ff8257 !important;
     background-size: 100% 2px;
 }
 
@@ -48,6 +48,9 @@ body {
 
 
 /* Nav */
+nav {
+    z-index: 1;
+}
 .navbar-brand {
     font-size: 2rem;
 }
