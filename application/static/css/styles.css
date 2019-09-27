@@ -382,6 +382,7 @@ nav a {
     }
 
     #presentation-slider-pager {
+        width: 60%;
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 30px;
@@ -389,5 +390,9 @@ nav a {
 
     .presentation-style-one .my-auto {
         width: 100%;
+    }
+
+    #presentation-slider-pager .pres-icon {
+        display: none;
     }
 }
