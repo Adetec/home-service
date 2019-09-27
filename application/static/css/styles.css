@@ -375,3 +375,19 @@ nav a {
             transform: translate(-50%, -50%) scale(1);
   }
   
+
+@media (max-width: 991px) {
+    #presentation-slider-pager .presentation-slider-pager-one .pager-item img {
+        width: 400px;
+    }
+
+    #presentation-slider-pager {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+    }
+
+    .presentation-style-one .my-auto {
+        width: 100%;
+    }
+}
