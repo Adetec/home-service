@@ -219,8 +219,8 @@ nav a {
     height: 536px;
     position: relative;
     margin-top: -80px;
-    -webkit-animation-name: tesiMove;
-            animation-name: tesiMove;
+    -webkit-animation-name: presMove;
+            animation-name: presMove;
     -webkit-animation-duration: 5s;
             animation-duration: 5s;
     -webkit-animation-timing-function: linear;
@@ -232,7 +232,7 @@ nav a {
     -webkit-transform-origin: center center;
             transform-origin: center center;
   }
-  @-webkit-keyframes tesiMove {
+  @-webkit-keyframes presMove {
     0% {
       -webkit-transform: rotate(0deg);
               transform: rotate(0deg);
@@ -254,7 +254,7 @@ nav a {
               transform: rotate(0deg);
     }
   }
-  @keyframes tesiMove {
+  @keyframes presMove {
     0% {
       -webkit-transform: rotate(0deg);
               transform: rotate(0deg);

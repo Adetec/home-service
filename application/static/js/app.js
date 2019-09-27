@@ -31,6 +31,7 @@ $(document).ready(function(){
         $('.presentation-slider').bxSlider({
             // adaptiveHeight: true,
             auto: true,
+            controls: false,
             pause: 5000,
             speed: 500,
             pager: true,
