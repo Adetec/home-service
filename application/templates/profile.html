@@ -43,7 +43,7 @@
                                     <h5>{{service.service_name}}</h5>
                                     <p class="text-muted">صاحب الخدمة: <span class="text-info">{{ service.owner.username }}</span></p>
                                     <p class="text-muted">تاريخ الطلب: <span class="text-info">{{ moment(request.requested_at).fromNow() }}</span></p>
-                                    <a class="btn btn-secondary float-left" href="#">تفاصيل الطلب</a>
+                                    <a class="btn btn-secondary float-left" href="{{ (url_for('request_service', client_id=current_user.id, service_id=service.id)) }}">تفاصيل الخدمة</a>
                                 </div>
                                 {% endif %}
                         {% endfor %}
@@ -72,7 +72,7 @@
                     <div class="tab-pane fade" id="list-{{service.id}}" role="tabpanel" aria-labelledby="{{ service.id }}-list">
                         <h5>{{service.service_name}}</h5>
                         <p class="text-muted">صاحب الخدمة: <span class="text-info">{{ service.owner.username }}</span></p>
-                        <a class="btn btn-secondary float-left" href="#">تفاصيل الطلب</a>
+                        <a class="btn btn-secondary float-left" href="{{ (url_for('service_details', id=service.id)) }}">تفاصيل الخدمة</a>
                     </div>
                     {% endfor %}
                 </div>
