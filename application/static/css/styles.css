@@ -376,13 +376,13 @@ nav a {
   }
   
 
-@media (max-width: 991px) {
+@media (max-width: 699px) {
     #presentation-slider-pager .presentation-slider-pager-one .pager-item img {
-        width: 400px;
+        width: 300px;
     }
 
     #presentation-slider-pager {
-        width: 60%;
+        width: 50%;
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 30px;
