@@ -27,7 +27,33 @@
         </div>
     </section>
 
-    <section dir="ltr" id="presentation" class="presentation-style-one text-right">
+    <section class="container">
+            <div class="row mt-4 text-center">
+                <div class="col-lg-4 mb-4">
+                    <div class="counter-container" data-aos="flip-right">
+                        <div class="counter-value">{{ statics[0] }}</div>
+                    </div>
+                    <h2 class="py-3" data-aos="slide-up">عدد المجالات المتاحة</h2>
+                    <div data-aos="zoom-in" class="mb-2"><a class="" href="#categories" role="button">اكتشف</a></div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="counter-container" data-aos="flip-left">
+                        <div class="counter-value">{{ statics[2] }}</div>
+                    </div>
+                    <h2 class="py-3" data-aos="slide-up">عدد المتعاملين</h2>
+                    <div data-aos="zoom-in" class="mb-2"><a class="" href="/users" role="button">اكتشف</a></div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="counter-container" data-aos="flip-down">
+                        <div class="counter-value">{{ statics[1] }}</div>
+                    </div>
+                    <h2 class="py-3" data-aos="slide-up">خدمات المتعاملين</h2>
+                    <div data-aos="zoom-in" class="mb-2"><a class="" href="#services" role="button">اكتشف</a></div>
+                </div>
+            </div>
+        </section>
+
+    <section dir="ltr" id="presentation" class="presentation-style-one my-4 text-right">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 d-flex">
@@ -83,4 +109,6 @@
                 </div><!-- /.row -->
             </div><!-- /.container -->
     </section>
+
+    
 {% endif %}

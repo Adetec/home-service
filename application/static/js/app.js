@@ -14,10 +14,13 @@ $(document).ready(function(){
     });
 
     // Animate counting
+    $('.counter-value').on('scroll', function() {
+        console.log('done');
+        });
     $('.counter-value').each(function () {
         const $this = $(this);
         jQuery({ Counter: 0 }).animate({ Counter: $this.text() }, {
-          duration: 3500,
+          duration: 100,
           easing: 'swing',
           step: function () {
             $this.text(Math.ceil(this.Counter));

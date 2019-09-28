@@ -195,17 +195,21 @@ body {
     
 }
 
+.screen-height {
+  height: 100vh;
+}
+
 .counter-container {
     border-radius: 50%;
     width: 100px;
     height: 100px;
     margin: 0 auto;
-    border: #007bff 4px solid;
+    border: #007bff .5px solid;
 }
 
 .counter-value {
     position: relative;
-    padding: 1.25rem;
+    padding: 1.6rem;
     color: #007bff;
     font-size: 2em;
 }
