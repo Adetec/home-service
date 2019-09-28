@@ -1,29 +1,20 @@
 {% extends 'base.html' %}
 {% block main %}
-    <div class="container row">
-        <div class="">
-            <h2 class="card-title">{{ service.service_name }}</h2>
-            <div class="card-body">
-                <img class="card-img-top" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
-                <div class="card-stacked">
-                    <div class="card-content">
-                        <p class="indigo-text">الرقم: <span class="blue-text">{{ service.id }}</span></p>
-                        <p class="indigo-text">الصنف: <span class="blue-text">{{ service.service_name }}</span></p>
-                        <p class="indigo-text">وصف الصنف: <span class="blue-text">{{ service.description }}</span></p>
-                        <ul>
-                            
-                        </ul>
-                    </div>
-                    <div class="card-action">
-                        {% if current_user.user_type == 'admin' or current_user.id == service.user_id %}
-                            <a class="indigo-text left" href="{{ url_for('update_service', id=service.id) }}">تعديل</a>
-                            <a class="red-text left" href="#">حذف</a>
-                        {% else %}
-                            <a class="indigo-text left" href="{{ url_for('request_service', client_id=current_user.id, service_id=service.id) }}">طلب الخدمة</a>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
+<div class="container media col-lg-6 mt-3">
+    <img src="{{ url_for('static', filename='img/services/'+service.image_file) }}" class="align-self-start mr-3" alt="current_user.username">
+    <div class="media-body mr-3 mb-3 text-right">
+        <h5 class="text-primary text-center">{{ service.service_name }}</h5>
+        <p class="text-muted">الرقم: <span class="text-info">{{ service.id }}</span></p>
+        <p class="text-muted">الخدمة: <span class="text-info">{{ service.service_name }}</span></p>
+        <p class="text-muted">وصف الصنف: <span class="text-info">{{ service.description }}</span></p>
+        <div id="action-profile">
+            {% if current_user.user_type == 'admin' or current_user.id == service.user_id %}
+                <a id="action-requests" class="btn btn-secondary float-right" href="{{ url_for('update_service', id=service.id) }}">تعديل</a>
+                <a id="action-edit-profile" class="btn btn-primary float-left" href="#delete">حذف</a>
+            {% else %}
+            <a id="action-requests" class="btn btn-outline-secondary float-left" href="{{ url_for('request_service', client_id=current_user.id, service_id=service.id) }}">طلب الخدمة</a>
+            {% endif %}
         </div>
     </div>
+</div>
 {% endblock %}
