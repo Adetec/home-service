@@ -59,13 +59,14 @@ body {
     margin-bottom: 35px;
   }
   .banner-one .block-title__text {
+    padding-top: 20px;
     font-size: 60px;
     line-height: 70px;
   }
   .banner-one__text {
     margin: 0;
     font-size: 16px;
-    line-height: 34px;
+    line-height: 10px;
     color: #666E82;
     margin-bottom: 50px;
   }
