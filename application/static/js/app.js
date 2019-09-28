@@ -39,6 +39,8 @@ $(document).ready(function(){
         });
     }
 
+    
+
     // Send phone number
     const sendPhoneNum = () => {
         let phoneNumber;

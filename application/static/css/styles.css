@@ -4,7 +4,11 @@
 } */
 body {
     font-family: 'Changa', serif;
+    color: #2E3D62;
 }
+
+/* General rules */
+
 
 .nav-effect, .dropdown-toggle {
     font-size: 1.2em;
@@ -142,6 +146,10 @@ nav {
 }
 .text-primary, a {
     color: #ff8257;
+}
+
+.text-secondary {
+    color: #2E3D62 !important;
 }
 
 .btn-primary {
