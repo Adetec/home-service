@@ -199,18 +199,37 @@ body {
   height: 100vh;
 }
 
+#counters {
+  position: relative;
+  top: 20%;
+}
+
+.counter-title {
+  color: #6a6e82;
+}
+
 .counter-container {
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 160px;
+    height: 160px;
     margin: 0 auto;
-    border: #007bff .5px solid;
+    color: #efc11b;
+    border: #efc11b 2px solid;
+}
+
+#counter-1 {
+  border-color: #ff8257;
+  color: #ff8257
+}
+
+#counter-3 {
+  border-color: #158d2f;
+  color: #158d2f;
 }
 
 .counter-value {
     position: relative;
-    padding: 1.6rem;
-    color: #007bff;
+    padding: 3.5rem;
     font-size: 2em;
 }
 
