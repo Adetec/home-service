@@ -74,13 +74,13 @@ body {
   .banner-one__btn {
     display: inline-block;
     vertical-align: middle;
-    border-radius: 32px;
+    /* border-radius: 32px; */
     text-align: center;
     background-color: #FF8257;
     color: #FFFFFF;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
-    padding: 15px 40px;
+    padding: 13px 40px;
     -webkit-transition: all .4s ease;
     transition: all .4s ease;
     -webkit-box-shadow: 0px 10px 30px 0px rgba(255, 130, 87, 0.3);
