@@ -19,7 +19,7 @@ body {
     transition: all .3s ease-in-out;
 }
 
-.nav-effect:hover, .dropdown-toggle:hover, a.text-secondary:hover {
+.nav-effect:hover, .dropdown-toggle:hover {
     position: relative;
     color: #ff8257 !important;
     /* background-size: 100% 2px; */
@@ -30,8 +30,9 @@ body {
     width: 200px;
 }
 
-#interface-section {
+#cover {
     height: 100vh;
+    background: url(../img/cle-bg.jpg) no-repeat right;
 }
 
 .counter-container {
@@ -62,19 +63,19 @@ nav {
     width : 32px;
 }
 
-#interface-section::before {
-    /* background-image: url(https://i.dlpng.com/static/png/1697233_thumb.png); */
-    /* background-size: cover; */
-    content: "";
-    display: block;
-    position: absolute;
-    background-repeat: no-repeat;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    opacity: 0.2;
+nav .dropdown-menu {
+    background-color: #2e3d62;
+    top: 54px;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-item, .dropdown-item:hover {
+    color: #fff;
+}
+
+.dropdown-item:hover {
+    background-color: #ff8257;
 }
 
 .diag {

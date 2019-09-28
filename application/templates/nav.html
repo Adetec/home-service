@@ -29,7 +29,7 @@
                 <div class="dropdown-menu border-0 text-right">
                     {% if categories %}
                         {% for cat in categories %}
-                            <a class="dropdown-item text-secondary" href="{{ url_for('category_details', id=cat.id) }}">{{ cat.category_name }}</a>
+                            <a class="dropdown-item" href="{{ url_for('category_details', id=cat.id) }}">{{ cat.category_name }}</a>
                         {% endfor %}
                     {% endif %}
                 </div>
