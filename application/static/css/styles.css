@@ -51,7 +51,7 @@ body {
     top: 10%;
     right: 15%;
   }
-  .banner-one .bubble-6 {
+  .bubble-6 {
     top: 30%;
     right: 40%;
   }
@@ -202,6 +202,7 @@ body {
 #counters {
   position: relative;
   top: 20%;
+  background-color: rgba(235, 235, 235, 0.23)
 }
 
 .counter-title {
