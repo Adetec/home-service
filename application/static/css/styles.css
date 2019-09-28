@@ -17,6 +17,7 @@ body {
   }
   .banner-one [class*=bubble-] {
     position: absolute;
+    z-index: 99;
     -webkit-animation-name: bubbleMover;
             animation-name: bubbleMover;
     -webkit-animation-duration: 4s;
@@ -60,7 +61,7 @@ body {
   }
   .banner-one .block-title__text {
     padding-top: 20px;
-    font-size: 60px;
+    font-size: 42px;
     line-height: 70px;
   }
   .banner-one__text {
