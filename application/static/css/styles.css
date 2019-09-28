@@ -4,7 +4,7 @@
 } */
 body {
     font-family: 'Changa', serif;
-    color: #2E3D62;
+    color: #2e3d62;
 }
 
 /* General rules */
@@ -12,7 +12,7 @@ body {
 
 .nav-effect, .dropdown-toggle {
     font-size: 1.2em;
-    background-image: linear-gradient(#ff8257, #ff8257);
+    /* background-image: linear-gradient(#ff8257, #ff8257); */
     background-position: 0% 100%;
     background-repeat: no-repeat;
     background-size: 0% 2px;
@@ -22,7 +22,7 @@ body {
 .nav-effect:hover, .dropdown-toggle:hover, a.text-secondary:hover {
     position: relative;
     color: #ff8257 !important;
-    background-size: 100% 2px;
+    /* background-size: 100% 2px; */
 }
 
 
@@ -168,7 +168,7 @@ a:hover {
 }
 
 nav a {
-    color: #333;
+    color: #2e3d62;
 }
 
 /* Presentation style */
