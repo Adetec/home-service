@@ -617,3 +617,8 @@ def send_user_phone():
             'phone_number': current_user.phone_number
         }
         return jsonify(response)
+
+# Service worker
+@app.route('/sw.js', methods=['GET'])
+def sw():
+    return app.send_static_file('sw.js')

@@ -1,0 +1,31 @@
+{
+    "name": "Pro Handy Home Service",
+    "short_name": "Pro Handy",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ff8257",
+    "theme_color": "#2e3d62",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "img/app-logo.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "img/app-logo-72x72.png",
+            "type": "image/png",
+            "sizes": "72x72"
+        },
+        {
+            "src": "img/app-logo-96x96.png",
+            "type": "image/png",
+            "sizes": "96x96"
+        },
+        {
+            "src": "img/app-logo-128x128.png",
+            "type": "image/png",
+            "sizes": "128x128"
+        }
+    ]
+}

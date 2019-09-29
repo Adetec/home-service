@@ -1,3 +1,9 @@
+if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('sw.js')
+      .then(reg => console.log('service worker registered for PRo handy app'))
+      .catch(err => console.log('Oops, service worker not registered', err));
+}
+
 $(document).ready(function(){
     
     $('.carousel').carousel()
@@ -116,7 +122,7 @@ const renderNotifications =(notifs) => {
 }
 
 //***MAP Script***
-
+/* 
 var geojson = {
     "type": "FeatureCollection",
     "features": []
@@ -226,4 +232,4 @@ mainMap.on('load', () => {
     });
 });
 
-
+ */
