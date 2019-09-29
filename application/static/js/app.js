@@ -26,7 +26,7 @@ $(document).ready(function(){
     $('.counter-value').each(function () {
         const $this = $(this);
         jQuery({ Counter: 0 }).animate({ Counter: $this.text() }, {
-          duration: 100,
+          duration: 1000,
           easing: 'swing',
           step: function () {
             $this.text(Math.ceil(this.Counter));
@@ -169,6 +169,11 @@ mainMap.on('load', () => {
                 geojson.features.push(geoFeature)
                 
             });
+            const markerColors = ['445d9a','ff8257','bbd4a6']
+            let getRandColor = (colors) => {
+                let color = `#${colors[Math.floor(Math.random() * colors.length)]}`
+                return color;
+             }
             geojson.features.forEach(function(marker) {
                 
                 // create a DOM element for the marker
@@ -217,9 +222,9 @@ mainMap.on('load', () => {
                     $(markerElement).append(serviceToast);
                     $('.toast').toast('show');
                 });
-
+                
                 // create the service owner marker icon
-                new mapboxgl.Marker()
+                new mapboxgl.Marker({color: getRandColor(markerColors)})
                 .setLngLat(marker.geometry.coordinates)
                 .addTo(mainMap)
                 

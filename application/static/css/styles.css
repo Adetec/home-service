@@ -28,8 +28,8 @@ footer {
 
 /* Banner */
 .banner-one {
-    /* background: transparent url(../img/cle-vis_1048-2467.jpg) right no-repeat; */
-    /* background-size: cover; */
+    background: transparent url(../img/banner-bg-1.png) center no-repeat;
+    background-size: cover;
     padding-top: 10%;
     padding-bottom: 10%;
     position: relative;
@@ -217,14 +217,19 @@ footer {
   height: 100vh;
 }
 
+.bg-counter {
+  background: transparent url(../img/ctr-bg-1.png) center no-repeat;
+  background-size: cover;
+}
+
 #counters {
   position: relative;
-  top: 20%;
-  background-color: rgba(235, 235, 235, 0.23)
+  top: 28%;
 }
 
 .counter-title {
   color: #6a6e82;
+  padding: 3rem 0;
 }
 
 .counter-container {
@@ -232,24 +237,42 @@ footer {
     width: 160px;
     height: 160px;
     margin: 0 auto;
-    color: #efc11b;
-    border: #efc11b 2px solid;
+    color: #fff;
+    background-color: #445d9a;
+    border: #445d9a 2px solid;
+}
+
+.counter-container:hover {
+  border-color: #fff !important;
+  background-color: #fff !important;
+  color: #445d9a;
 }
 
 #counter-1 {
   border-color: #ff8257;
-  color: #ff8257
+  background-color: #ff8257;
+  color: #fff;
 }
 
+#counter-1:hover {
+  color: #FF8257;
+}
+
+
 #counter-3 {
-  border-color: #158d2f;
-  color: #158d2f;
+  border-color: #bbd4a6;
+  background-color: #bbd4a6;
+  color: #fff;
+}
+
+#counter-3:hover {
+  color: #bbd4a6;
 }
 
 .counter-value {
     position: relative;
-    padding: 3.5rem;
-    font-size: 2em;
+    padding: 2.6rem;
+    font-size: 3em;
 }
 
 
@@ -380,7 +403,7 @@ nav a {
     padding-bottom: 120px;
     background-size: cover;
     position: relative;
-    margin-top: 20px;
+    margin-top: 80px;
   }
   .presentation-style-one .block-title {
     margin-bottom: 45px;
