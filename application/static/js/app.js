@@ -122,7 +122,7 @@ const renderNotifications =(notifs) => {
 }
 
 //***MAP Script***
-/* 
+
 var geojson = {
     "type": "FeatureCollection",
     "features": []
@@ -232,4 +232,4 @@ mainMap.on('load', () => {
     });
 });
 
- */
+
