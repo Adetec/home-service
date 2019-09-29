@@ -13,10 +13,10 @@ $(document).ready(function(){
         $('#edit-profile').toggleClass('hide');
     });
 
+    
+
     // Animate counting
-    $('.counter-value').on('scroll', function() {
-        console.log('done');
-        });
+    
     $('.counter-value').each(function () {
         const $this = $(this);
         jQuery({ Counter: 0 }).animate({ Counter: $this.text() }, {
