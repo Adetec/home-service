@@ -20,6 +20,7 @@ const assets = [
     'https://code.jquery.com/jquery-3.3.1.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js',
     'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js',
+    'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
     'https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js',
     'https://unpkg.com/aos@next/dist/aos.js',
 ];
@@ -60,7 +61,7 @@ self.addEventListener('activate', evt => {
 
 // fetch events
 self.addEventListener('fetch', evt => {
-    if (evt.request.url.indexOf('/home') === -1) {
+    if (evt.request.url.indexOf('/') === -1) {
         evt.respondWith(
             caches.match(evt.request).then(cacheRes => {
                 return cacheRes || fetch(evt.request).then(fetchRes => {

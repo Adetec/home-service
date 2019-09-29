@@ -23,7 +23,7 @@ $(document).ready(function(){
 
     // Animate counting
     
-    $('.counter-value').each(function () {
+    /* $('.counter-value').each(function () {
         const $this = $(this);
         jQuery({ Counter: 0 }).animate({ Counter: $this.text() }, {
           duration: 1000,
@@ -33,7 +33,7 @@ $(document).ready(function(){
             $this.toggleClass('animated flash')
           }
         });
-    });
+    }); */
 
     // Bix Slider trigger
     if ($('.presentation-slider').length) {
