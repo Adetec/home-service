@@ -297,7 +297,11 @@ nav .dropdown-menu {
     padding: 0;
 }
 
-.dropdown-item, .dropdown-item:hover {
+#notif-drop {
+  top: 100%
+}
+
+.dropdown-item, #all-notifs, .dropdown-item:hover {
     color: #fff;
 }
 

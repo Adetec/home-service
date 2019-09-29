@@ -111,7 +111,7 @@ const renderNotifications =(notifs) => {
        $(notElement).attr('href', url);
        $(notElement).addClass('dropdown-item not-read');
        $(sender).addClass('text-primary');
-       $(msgTime).addClass('text-muted');
+       $(msgTime).addClass('text-info');
        $(sender).text(notif.sender);
        $(notElement).text(` ${notif.message} `);
        $(msgTime).text(moment(notif.message_created_at).fromNow());

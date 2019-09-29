@@ -42,18 +42,18 @@
                         <img id="user-nav-img" class="align-self-center mr-3 rounded-circle" src="{{ url_for('static', filename='img/users-profile/') }}{{ current_user.image_file }}" alt="">
                     </a>
                 </li>
-                <li class="nav-item mr-2">
+                <li class="nav-item">
                         <a class="" href="#" id="notdrop" data-toggle="dropdown">
                             <span id="notif-badge" class="position-absolute">
                                 
                             </span>
                             <i id="notification" class="material-icons align-middle">notifications_none</i>
                         </a>
-                        <div class="dropdown-menu border-0 bg-light text-right position-absolute" aria-labelledby="notdrop">
+                        <div id="notif-drop" class="dropdown-menu border-0 text-right" aria-labelledby="notdrop">
                             <!-- list of notifications content -->
                             <div id="notifs-list"></div>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-center text-info" href="#">كل الشعارات</a>
+                            <a id="all-notifs" class="dropdown-item text-center" href="#">كل الشعارات</a>
                         </div>
                 </li>
                 <li class="nav-item">
