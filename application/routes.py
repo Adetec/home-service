@@ -31,7 +31,7 @@ def home():
     # Get all services
     services = Service.query.all()
     statics = [len(categories), len(services), count_service_owners()]
-    return render_template('home.html', categories=categories, services=services, statics=statics, title='Need Help!')
+    return render_template('home.html', categories=categories, services=services, statics=statics, title='ProHandy Home Service')
 
 
 '''
