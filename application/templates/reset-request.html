@@ -1,27 +1,27 @@
 {% extends 'base.html' %}
 {% block main %}
-    <div class="row container">
-        <form class="col s12 m12" method="POST" action="">
-                {{ form.hidden_tag() }}
+    <div class="row container mt-5 mx-auto">
+        <form class="col-6 MT-3 mx-auto form-group text-right" method="POST" action="">
+            {{ form.hidden_tag() }}
 
-            <div class="input-field col s12 m12">
+            <div class="form-group">
+                {{ form.email.label(class="form-control-label text-center") }}
                 {% if form.email.errors %}
-                    {{ form.email(class="", type="email") }}
-                    <div class="red-text darken-3-text center-align pulse">
+                    {{ form.email(class="form-control", type="email") }}
+                    <div class="alert alert-danger text-center">
                         {% for error in form.email.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.email(class="", type="email") }}
+                    {{ form.email(class="form-control", type="email") }}
                 {% endif %}
-                {{ form.email.label }}
             </div>
-            <div class="row">
-                <div class="file-field input-field col s12 m12">
-                    {{ form.submit(class="btn-large indigo") }}
-                </div>
+            
+            <div class="form-group">
+                {{ form.submit(class="form-control btn btn-primary") }}
             </div>
+        
         </form>
     </div>
             
