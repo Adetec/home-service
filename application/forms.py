@@ -15,7 +15,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('كلمة السر', validators=[DataRequired()])
     confirm_password = PasswordField('تأكيد كلمة السر',
                                      validators=[DataRequired(), EqualTo('password')])
-    user_type = SelectField('طبيعة الحساب', validators=[DataRequired()], choices=[(None, 'طبيعة الحساب'), ('client', 'زبون'), ('worker', 'مهني'), ('enterprener', 'مقاول'), ('company', 'شركة')])
+    user_type = SelectField('طبيعة الحساب', validators=[DataRequired()], choices=[(None, 'طبيعة الحساب'), ('client', 'زبون'), ('worker', 'مهني'), ('enterprener', 'مقاول'), ('company', 'شركة'), ('admin', 'مدير الموقع')])
     submit = SubmitField('تسجيل')
 
     def validate_username(self, username):
