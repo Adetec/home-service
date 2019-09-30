@@ -41,7 +41,7 @@
         trackUserLocation: true
     }));
     // create the service owner marker icon
-    let marker = new mapboxgl.Marker()
+    let marker = new mapboxgl.Marker({color: '#ff8257'})
     .setLngLat(getUserCoor())
     .addTo(map)
     console.log(getUserCoor());
