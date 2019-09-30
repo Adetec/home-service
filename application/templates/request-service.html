@@ -1,76 +1,146 @@
 {% extends 'base.html' %}
 {% block main %}
-    <div class="container media mt-3 mb-4 shadow-sm">
-        <img class="img-fluid align-self-start mr-3" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
-        <div class="media-body mr-3 text-right">
-            <h2 class="text-primary text-center">{{ service.service_name }}</h2>  
-            <p class="text-muted">الرقم: <span class="text-info">{{ service.id }}</span></p>
-            <p class="text-muted">الصنف: <span class="text-info">{{ service.service_name }}</span></p>
-            <p class="text-muted">وصف الصنف: <span class="text-info">{{ service.description }}</span></p>
+<section class="container-fluid mt-4 row">
+    <div class="card border-0 pt-4 col-lg-6 mx-auto">
+        <img data-aos="fade" class="card-img-top mx-auto" src="{{ url_for('static', filename='img/services/'+service.image_file) }}" alt="current_user.username">
+        <div class="card-body text-right">
+            <h5 data-aos="zoom-in" class="text-primary text-center">{{ service.service_name }}</h5>
+            <p data-aos="fade-left" class="text-muted">الرقم: <span class="text-info">{{ service.id }}</span></p>
+            <p data-aos="fade-rigt" class="text-muted">الخدمة: <span class="text-info">{{ service.service_name }}</span></p>
+            <p data-aos="fade-up" class="text-muted">وصف الخدمة: <span class="text-info">{{ service.description }}</span></p>
         </div>
     </div>
+    <div class="col-lg-6">
+            {% if service_request.service_id == service.id %}
+            <h3 class="text-right pt-3">محادثة</h3>
+            <ul class="list-unstyled pr-0 text-right overflow-auto">
+                {% for m in service_request.messages %}
+                    {% if service_request.id == service_request.id %}
+                        {% if m.message_sender.id == current_user.id %}
+                            <li id="msg-{{ m.id }}" class="media p-3">
+                                <img src="{{ url_for('static', filename='img/users-profile/'+ m.message_sender.image_file) }}" class="img-comment mr-3 img-fluid shadow" alt="{{ m.message_sender.username}}">
+                                <div class="media-body mr-3">
+                                    <h5 class="mt-0 mb-1 text-info"> أنا <small class="text-muted text-center">{{ moment(m.created_at).fromNow() }}</small></h5>
+                                    {{ m.message}}
+                                </div>
+                            </li>
     
-    
-    <div class="container shadow-sm">
-        {% if service_request.service_id == service.id %}
-        <ul class="list-unstyled pr-0 text-right overflow-auto">
-            {% for m in service_request.messages %}
-                {% if service_request.id == service_request.id %}
-                    {% if m.message_sender.id == current_user.id %}
-                        <li id="msg-{{ m.id }}" class="media p-3">
-                            <img src="{{ url_for('static', filename='img/users-profile/'+ m.message_sender.image_file) }}" class="img-comment mr-3 img-fluid shadow" alt="{{ m.message_sender.username}}">
-                            <div class="media-body mr-3">
-                                <h5 class="mt-0 mb-1 text-info"> أنا <small class="text-muted text-center">{{ moment(m.created_at).fromNow() }}</small></h5>
-                                {{ m.message}}
-                            </div>
-                        </li>
-
-                    {% elif (m.message_sender.id == service.user_id) or  (m.message_sender.id != client_id and current_user.id == service.user_id) %}
-                        <li id="msg-{{ m.id }}" class="media p-3">
-                            <img src="{{ url_for('static', filename='img/users-profile/'+ m.message_sender.image_file) }}" class="img-comment mr-3 img-fluid shadow" alt="{{ m.message_sender.username}}">
-                            <div class="media-body mr-3">
-                                <h5 class="mt-0 mb-1 text-info">{{ m.message_sender.username }} <small class="text-muted text-center">{{ moment(m.created_at).fromNow() }}</small></h5>
-                                {{ m.message}}
-                            </div>
-                        </li>
-                    {% endif %}             
-                {% else %}
-                {% endif %}
-            {% endfor %}
-        </ul>
-{% endif %}
-    </div>
-
-    <form class="form-group container text-right" method="POST" action="">
-            {{ form.hidden_tag() }}
-    
-            <div class="form-group">
-                {{ form.message.label(class="form-control-label") }}
-                {% if form.message.errors %}
-                    {{ form.message(class="form-control") }}
-                    <div class="form-group">
-                        {% for error in form.message.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.message(class="form-control") }}
-                {% endif %}
+                        {% elif (m.message_sender.id == service.user_id) or  (m.message_sender.id != client_id and current_user.id == service.user_id) %}
+                            <li id="msg-{{ m.id }}" class="media p-3">
+                                <img src="{{ url_for('static', filename='img/users-profile/'+ m.message_sender.image_file) }}" class="img-comment mr-3 img-fluid shadow" alt="{{ m.message_sender.username}}">
+                                <div class="media-body mr-3">
+                                    <h5 class="mt-0 mb-1 text-info">{{ m.message_sender.username }} <small class="text-muted text-center">{{ moment(m.created_at).fromNow() }}</small></h5>
+                                    {{ m.message}}
+                                </div>
+                            </li>
+                        {% endif %}             
+                    {% else %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form class="form-group text-right" method="POST" action="">
+                {{ form.hidden_tag() }}
+        
+                <div class="form-group">
+                    {{ form.message.label(class="form-control-label") }}
+                    {% if form.message.errors %}
+                        {{ form.message(class="form-control") }}
+                        <div class="form-group">
+                            {% for error in form.message.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.message(class="form-control", rows="10") }}
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-secondary float-left") }}
+                </div>
+                
+            </form>
+            <div id="action-reques" class="container mb-5">
+                <a id="send-phone" class="btn btn-outline-secondary" href="#list-tab">ارسل هاتفي</a>
+                <a id="send-coordinates" class="btn btn-outline-secondary ml-3" href="#list-tab2">احداثيات عنواني</a>
             </div>
-            
-            <div class="row">
-            <div class="input-field col s12 m12">
-                {{ form.submit(class="btn btn-outline-dark float-left") }}
-            </div>
-            </div>
-        </form>
-        <div id="action-reques" class="container mb-5">
-            <a id="send-phone" class="btn btn-secondary float-left" href="#list-tab">ارسل رقم هاتفي</a>
-            <a id="send-coordinates" class="btn btn-secondary ml-3 float-right" href="#list-tab2">ارسل احداثيات عنواني</a>
         </div>
-
-        <!-- Map modal -->
+    </section>
+    <!-- Map Element -->
+    <section class="col-lg-8 mt-4 mx-auto">
         {% include 'map.html' %}
+        <script>
+            // get user coordinates
+            let getUserCoor = () => {
+                let userCoor = {
+                    lat: $('#user-lat')[0].textContent,
+                    lng: $('#user-lon')[0].textContent
+                }
+                if (userCoor.lat == 'None') {
+                    userCoor.lat = 35.54707630042317;
+                    userCoor.lng = 6.126066400000013;
+                }
+                return userCoor;
+            }
+        
+        
+            // Mapbox
+            mapboxgl.accessToken = 'pk.eyJ1IjoiaG9tZXNlcnZpY2UiLCJhIjoiY2swcGh4eTk5MDEzczNtcG9laGh5eWx1biJ9.3FOluiVDosFsTuG9Ps6YGw';
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v10',
+                center: [getUserCoor().lng, getUserCoor().lat], // starting position [lng, lat]
+                zoom: 12 // starting zoom
+            });
+        
+            // Add geolocate control to the map.
+            map.addControl(new mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true   
+                },
+                trackUserLocation: true
+            }));
+            // create the service owner marker icon
+            let marker = new mapboxgl.Marker()
+            .setLngLat(getUserCoor())
+            .addTo(map)
+            console.log(getUserCoor());
+        
+            map.on('click', function (e) {
+                newCoor = e.lngLat
+                document.getElementById('info').innerHTML =
+                // e.point is the x, y coordinates of the click event relative
+                // to the top-left corner of the map
+                JSON.stringify(e.point) + '<br />' +
+                // e.lngLat is the longitude, latitude geographical position of the event
+                JSON.stringify(newCoor.wrap());
+                console.log(newCoor.lng);
+                // Send coordinates to the server side:
+                
+                $.ajax({
+                    type : 'POST',
+                    url : "/map",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data : JSON.stringify({
+                        lat: newCoor.lat,
+                        lng: newCoor.lng
+                    }),
+                    success: (response) => {
+                        console.log(newCoor);
+                        marker.setLngLat(newCoor)
+                        .addTo(map)
+                    },
+                });
+                
+                //console.log(getUserCoor());
+                
+            });
+            console.log(marker);
+        </script>
+    </section>
+
 
 {% endblock %}
 
