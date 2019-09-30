@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block main %}
-<div class="card-deck">
+<div class="row mt-4">
     {% if users %}
         {% for user in users %}
-            <div class="card m-2 text-right">
+            <div class="card col-5 mx-auto mb-2 px-3 text-right">
                 <img src="static/img/users-profile/{{ user.image_file }}" class="card-img-top" alt="user.username">
                 <h5 class="card-title text-primary text-center">{{ user.username }}</h5>
                 <div class="card-body">
