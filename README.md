@@ -13,7 +13,7 @@ Service owner can post his work for everyone and make offers for interested clie
 ### Features
 Progressive web App
 Neiberhood location services offers for clients 
-Authentication & Authoeization
+Authentication & Authorization
 
 
 
@@ -85,3 +85,16 @@ app.config['MAIL_PASSWORD'] = 'dummypassword'
 Open the app on your browser at `http://localhost:5000` and have fun
 
 **ps**: If doesn't work, try to uncomment one of options in `run.py` file
+
+
+### Thanks to:
+* My wife for her huge patience and help :rose:
+* His Highness **Sheikh Mohammed bin Rashid Al Maktoum**, UAE Vice President, Prime Minister and Ruler of Dubai
+* [The 1 Million Arab Coders](/http://www.arabcoders.ae) initiative
+* [Udacity](https://udacity.com)
+* [Stackoverflow](https://stackoverflow.com)
+* [Google](https://google.com)
+
+
+## Images credits to:
+[FreePix](freepik.com) image web library
