@@ -333,6 +333,43 @@ def reset_token(token):
     return render_template('reset-token.html', form=form, title='NH | تغيير كلمة المرور')
 
 
+@app.route('/delete_me/<int:id>')
+def delete_user(id):
+    if not current_user.is_authenticated:
+        flash('أنت لست مصرح للقيام بحذف المستخدمين', 'warning')
+        return redirect(url_for('home'))
+
+    user = User.query.get(id)
+    if user.id == current_user.id:
+        # Delete all relationship models
+        notifications = Notification.query.filter_by(user_id=id).all()
+        messages = ServiceRequestMessages.query.filter_by(sender=id).all()
+        service_request = ServiceRequest.query.filter_by(client_id=id).all()
+        service = Service.query.filter_by(user_id=id).all()
+
+        if service:
+            for item in service:
+                db.session.delete(item)
+        if service_request:
+            for item in service_request:
+                db.session.delete(item)
+        if messages:
+            for item in messages:
+                db.session.delete(item)
+        if notifications:
+            for item in notifications:
+                db.session.delete(item)
+        # Then delete the user
+        db.session.delete(user)
+        db.session.commit()
+        flash('قد تم حذف حسابك من موقعنا، شكرا على استخدام موقعنا', 'success')
+        return redirect(url_for('home'))
+    else:
+        flash('ليس لديك صلاحية لحذف حساب غيرك', 'warning')
+        return redirect(url_for('home'))
+
+    
+
 # Category routes:
 @app.route('/category/new', methods=['GET', 'POST'])
 def add_category():
@@ -443,6 +480,40 @@ def update_service(id):
     return render_template('new-service.html', form=form, categories=categories, title='NH | تفيير الخدمة')
 
 
+@app.route('/service/<int:id>/delete')
+def delete_service(id):
+    if not current_user.is_authenticated:
+        flash('يجب عليك تسجيل الدخول أولا', 'warning')
+        return redirect(url_for('home'))
+
+    service = Service.query.get(id)
+    if current_user.id == service.user_id:
+        # Delete all relationship models
+        
+        service_request = ServiceRequest.query.filter_by(service_id=id).all()
+
+        if service_request:
+            for item in service_request:
+                messages = ServiceRequestMessages.query.filter_by(service_request_id=item.id).all()
+                if messages:
+                    for message in messages:
+                        notifications = Notification.query.filter_by(message=message.id)
+
+                        for notif in notifications:
+                            print(notif.id)
+                            db.session.delete(notif)
+
+                        db.session.delete(message)
+
+                db.session.delete(item)
+        
+        # Then delete the service
+        db.session.delete(service)
+        db.session.commit()
+        flash('قد تم حذف الخدمة من موقعنا', 'success')
+        return redirect(url_for('profile'))
+
+
 @app.route('/request_service/<int:client_id>/<int:service_id>/new', methods=['GET', 'POST'])
 def request_service(client_id, service_id):
     categories = Category.query.all()
@@ -487,6 +558,32 @@ def request_service(client_id, service_id):
     return render_template('request-service.html', client=client, service=service, form=form, service_request=service_request, categories=categories, title='NH | التواصل مع مقدم الخدمة')
 
 
+@app.route('/request_service/<int:client_id>/<int:service_id>/delete')
+def delete_service_request(client_id, service_id):
+    if not current_user.is_authenticated:
+        flash('يجب عليك تسجيل الدخول أولا', 'warning')
+        return redirect(url_for('home'))
+
+    service_request = ServiceRequest.query.filter_by(service_id=service_id).first()
+    if current_user.id == client_id:
+        # Delete all relationship models
+        messages = ServiceRequestMessages.query.filter_by(service_request_id=service_request.id).all()
+        for message in messages:
+
+            notifications = Notification.query.filter_by(message=message.id).all()
+            for notif in notifications:
+                db.session.delete(notif)
+
+            db.session.delete(message)
+
+        # Then delete the service
+        db.session.delete(service_request)
+        db.session.commit()
+        flash('قد تم حذف طلبك من موقعنا', 'success')
+        return redirect(url_for('profile'))
+
+
+
 @app.route('/map', methods=['GET', 'POST'])
 def map():
     if request.method == 'POST':
@@ -497,6 +594,7 @@ def map():
         return jsonify(data)
 
     return render_template('map.html')
+
 
 '''
     * * * * * * * * * * *

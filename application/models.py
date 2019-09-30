@@ -30,9 +30,9 @@ class User(db.Model, UserMixin):
     phone_number = db.Column(db.String(14), default='')
     lat = db.Column(db.Float(20))
     lon = db.Column(db.Float(20))
-    requests = db.relationship('ServiceRequest', backref='client', lazy=True)
-    request_messages = db.relationship('ServiceRequestMessages', backref='message_sender', lazy=True)
-    notifications = db.relationship('Notification', backref='user_notified', lazy=True)
+    requests = db.relationship('ServiceRequest', cascade="all, delete", backref='client', lazy=True)
+    request_messages = db.relationship('ServiceRequestMessages', cascade="all, delete", backref='message_sender', lazy=True)
+    notifications = db.relationship('Notification', cascade="all, delete", backref='user_notified', lazy=True)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
@@ -99,7 +99,7 @@ class Category(db.Model):
     category_name = db.Column(db.String(20), unique=True, nullable=False)
     description = db.Column(db.Text)
     image_file = db.Column(db.String(20), nullable=False, default='category.svg')
-    services = db.relationship('Service', backref='parent', lazy=True)
+    services = db.relationship('Service', cascade="all, delete", backref='parent', lazy=True)
 
     def __repr__(self):
         return f"Category('{self.category_name}', '{self.id}', '{self.image_file}')"
@@ -122,7 +122,7 @@ class Service(db.Model):
     image_file = db.Column(db.String(20), nullable=False, default='profile.svg')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
-    requests = db.relationship('ServiceRequest', backref='requested', lazy=True)
+    requests = db.relationship('ServiceRequest', cascade="all, delete", backref='requested', lazy=True)
 
     def __repr__(self):
         return f"Service('{self.service_name}', '{self.id}', '{self.image_file}')"
@@ -145,7 +145,7 @@ class ServiceRequest(db.Model):
     client_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     service_id = db.Column(db.Integer, db.ForeignKey('service.id'), nullable=False)
     requested_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    messages = db.relationship('ServiceRequestMessages', backref='discussion', lazy=True)
+    messages = db.relationship('ServiceRequestMessages', cascade="all, delete", backref='discussion', lazy=True)
 
     def __repr__(self):
         return f"RequestService('{self.id}', '{self.service_id}', '{self.client_id}')"
