@@ -1,12 +1,12 @@
 <div id='map' class="container d-flex"></div>
 <div class="text-center">
-    {% if current_user.lat < 0 or current_user.lat >0 %}
+    {% if current_user.lat %}
     <h2 id="position-title">موقعي الحالي:</h2>
     <p><span id="user-lat">{{ current_user.lat }}</span>, <span id="user-lon">{{ current_user.lon }}</span></p>
     {% endif %}
 </div>
 <div class="alert alert-info text-center" id="info">
-    يمكنك تحديد موقعك الحديث عبر الضغط <a href="#">الزر</a> الموجود أعلى يمين الخريطة
+    يمكنك تحديد موقعك الحديث عبر الضغط على الزر الموجود أعلى يمين الخريطة
 </div>
 
 <script>

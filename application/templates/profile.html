@@ -161,10 +161,17 @@
                     {{ form.city(class="form-control") }}
                 {% endif %}
             </div>
-    
+            
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-secondary float-left") }}
             </div>
         </form>
+
+    </div>
+    <div class="container my-3">
+        <h4 class="text-center">تحديد موقعي على الخريطة</h4>
+        <div>
+            {% include 'map.html' %}
+        </div>
     </div>
 {% endblock %}
