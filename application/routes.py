@@ -49,7 +49,7 @@ def send_async_email(app, msg):
 def send_verification_email(user):
     token = user.get_reset_token(30000)
     msg = Message(
-        f'مرحبا {user.username} في بيتك للخدمات',
+        f'مرحبا {user.username} في موقع Pro Handy home service',
         sender='adetech.home.service@gmail.com',
         recipients=[user.email],
     )
