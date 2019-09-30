@@ -11,9 +11,10 @@ User can reach out every neiberhood handyman, company or entreprener and get con
 Service owner can post his work for everyone and make offers for interested client, he also can react with him by sending messages to each other
 
 ### Features
-Progressive web App
-Neiberhood location services offers for clients 
-Authentication & Authorization
+* **Progressive web App**, Means that can be downloadable on mobile devices as a real app
+* Service worker, for offline availaibility
+* Neiberhood location services offers for clients 
+* Authentication & Authorization
 
 
 
