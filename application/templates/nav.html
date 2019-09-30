@@ -20,11 +20,9 @@
                         <a class="nav-link nav-effect" href="{{ url_for('add_category') }}">صنف جديد</a>
                     </li>
                 {% endif %}
-                {% if not current_user.user_type == 'client' %}
                 <li class="nav-item">
                     <a class="nav-link nav-effect" href="{{ url_for('add_service') }}">خدمة جديدة</a>
                 </li>
-                {% endif %}
             {% endif %}
         
             <!-- Dropdown -->

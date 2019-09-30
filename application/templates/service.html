@@ -13,10 +13,10 @@
 
             <div id="card-footer">
                 {% if current_user.user_type == 'admin' or current_user.id == service.user_id %}
-                    <a data-aos="flip-down" class="btn btn-secondary float-right" href="{{ url_for('update_service', id=service.id) }}">تعديل</a>
-                    <a data-aos="flip-down" class="btn btn-primary float-left" href="#delete">حذف</a>
+                    <a class="btn btn-secondary float-right" href="{{ url_for('update_service', id=service.id) }}">تعديل</a>
+                    <a class="btn btn-primary float-left" href="{{ url_for('delete_service', id=service.id) }}">حذف</a>
                 {% else %}
-                <a data-aos="flip-down" class="btn btn-primary float-left" href="{{ url_for('request_service', client_id=current_user.id, service_id=service.id) }}">طلب الخدمة</a>
+                <a class="btn btn-primary float-left" href="{{ url_for('request_service', client_id=current_user.id, service_id=service.id) }}">طلب الخدمة</a>
                 {% endif %}
             </div>
         </div>
