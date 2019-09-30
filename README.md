@@ -16,7 +16,12 @@ Service owner can post his work for everyone and make offers for interested clie
 * Neiberhood location services offers for clients 
 * Authentication & Authorization
 
+### Full Main page screenshot on devices
+#### Laptop
+![](imgs-doc/screen-laptop.png?raw=true)
 
+#### Mobile
+![](imgs-doc/screen-mobile.png?raw=true)
 
 
 ### Techs used:
