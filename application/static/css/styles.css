@@ -404,14 +404,25 @@ nav .dropdown-menu {
     color: #2E3D62 !important;
 }
 
+
 .btn-primary {
     background-color: #ff8257;
     border-color: #ff8257;
 }
 
 .btn-primary:hover {
-    background-color: #333;
-    border-color: #333;
+    background-color: #2E3D62;
+    border-color: #2E3D62;
+}
+
+.btn-secondary {
+  background-color: #2e3d62;
+  border-color: #2e3d62;
+}
+
+.btn-secondary:hover {
+  background-color: #ff8257;
+  border-color: #ff8257;
 }
 
 a:hover {
