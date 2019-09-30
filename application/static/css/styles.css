@@ -34,7 +34,7 @@ footer {
     padding-bottom: 10%;
     position: relative;
   }
-  .banner-one [class*=bubble-] {
+  .banner-one [class*=bubble-], footer [class*=bubble-] {
     position: absolute;
     z-index: 99;
     -webkit-animation-name: bubbleMover;
@@ -70,9 +70,27 @@ footer {
     top: 10%;
     right: 15%;
   }
-  .bubble-6 {
-    top: 30%;
-    right: 40%;
+
+  footer .bubble-6 {
+    bottom: 25%;
+    left: 35%;
+  }
+  footer .bubble-7 {
+    bottom: 60%;
+    left: 15%;
+  }
+  footer .bubble-8 {
+    bottom: 20%;
+    left: 45%;
+  }
+  footer .bubble-9 {
+    bottom: -10%;
+    right: 15%;
+  }
+  
+  footer .bubble-10 {
+    bottom: -50px;
+    left: 0;
   }
   
   .banner-one .block-title {
