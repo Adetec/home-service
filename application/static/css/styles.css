@@ -434,6 +434,12 @@ nav a {
     color: #2e3d62;
 }
 
+.list-group-item.active {
+  background-color: #f3f3f3 !important;
+  border-color: #f3f3f3 !important;
+  color: #2E3D62;
+}
+
 /* Presentation style */
 .presentation-style-one {
 
