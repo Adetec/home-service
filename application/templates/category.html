@@ -2,7 +2,9 @@
 {% block main %}
     <section class="container row mx-auto">
         <div class="card col-lg-6 mx-auto">
-            <img data-aos="fade" class="card-img-top pt-2" src="{{ url_for('static', filename='img/categories/'+category.image_file) }}">
+            <div class="hover-effect">
+                <img data-aos="fade" class="card-img-top pt-2" src="{{ url_for('static', filename='img/categories/'+category.image_file) }}">
+            </div>
             <h2 class="card-title text-center">{{ category.category_name }}</h2>
                 <div class="card-body text-right">
                     <p data-aos="slide-up" class="card-text">الرقم: <span class="text-info">{{ category.id }}</span></p>
@@ -23,7 +25,9 @@
         <div class="card-group">
             {% for service in category.services %}
                 <div class="card">
-                    <img data-aos="flip-down" class="card-img-top p-2" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
+                    <div class="hover-effect">
+                        <img data-aos="flip-down" class="card-img-top p-2" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
+                    </div>
                     <h3 class="card-title text-center">{{ service.service_name }}</h3>
             
                 <div class="card-body text-right">

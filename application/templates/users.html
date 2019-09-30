@@ -4,7 +4,9 @@
     {% if users %}
         {% for user in users %}
             <div class="card col-5 mx-auto mb-2 px-3 text-right">
-                <img src="static/img/users-profile/{{ user.image_file }}" class="card-img-top" alt="user.username">
+                <div class="hover-effect">
+                    <img src="static/img/users-profile/{{ user.image_file }}" class="card-img-top" alt="user.username">
+                </div>
                 <h5 class="card-title text-primary text-center">{{ user.username }}</h5>
                 <div class="card-body">
                     <p class="card-text">البريد الإلكتروني: <span class="text-muted">{{ user.email }}</span></p>

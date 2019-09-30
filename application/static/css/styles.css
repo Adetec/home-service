@@ -206,6 +206,8 @@ footer {
   }
   
 
+
+
 /* General rules */
 
 
@@ -643,6 +645,59 @@ nav a {
             transform: translate(-50%, -50%) scale(1);
   }
   
+
+
+  /*
+***              ***
+    Hover effect
+***              ***
+*/
+.hover-effect {
+  position:relative;
+  overflow:hidden;
+}
+
+.hover-effect::before, .hover-effect::after {
+  content:"";
+  background:#fff;
+  height:0;
+  width:0;
+  z-index:1;
+  position:absolute;
+  -webkit-transition-duration:1.3s;
+  -o-transition-duration:1.3s;
+  transition-duration:1.3s;
+}
+
+.hover-effect:hover::after, .hover-effect:hover::before {
+  height:100%;
+  opacity:0;
+  width:100%;
+}
+
+.hover-effect::after {
+  bottom:0;
+  opacity:.7;
+  left:0;
+}
+
+.hover-effect::before {
+  right:0;
+  opacity:1;
+  top:0
+}
+
+.hover-effect::before, .hover-effect::after {
+  content:"";
+  background:#fff;
+  height:0;
+  width:0;
+  z-index:1;
+  position:absolute;
+  -webkit-transition-duration:1.3s;
+  -o-transition-duration:1.3s;
+  transition-duration:1.3s;
+}
 
 
   

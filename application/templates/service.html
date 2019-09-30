@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block main %}
-<section class="container mt-4 row">
+<section class="container mt-4 row mx-auto">
     <div class="card pt-4 col-lg-6 mx-auto">
-        <img data-aos="fade" class="card-img-top mx-auto" src="{{ url_for('static', filename='img/services/'+service.image_file) }}" alt="current_user.username">
+        <div class="hover-effect">
+            <img data-aos="fade" class="card-img-top mx-auto" src="{{ url_for('static', filename='img/services/'+service.image_file) }}" alt="current_user.username">
+        </div>
         <div class="card-body text-right">
             <h5 data-aos="zoom-in" class="text-primary text-center">{{ service.service_name }}</h5>
             <p data-aos="fade-left" class="text-muted">الرقم: <span class="text-info">{{ service.id }}</span></p>
