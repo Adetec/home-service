@@ -1,6 +1,6 @@
 __pycache__
 *.pyc
-*.db
+db
 .VSCODE
 application/static/img/users-profile
 application/static/img/categories
