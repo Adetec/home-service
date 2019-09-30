@@ -237,6 +237,8 @@ def logout():
 def display_users():
     users = User.query.all()
     categories = Category.query.all()
+    if not users:
+        flash('لايوجد أي مستخدم في قاعدة البيانات', 'info')
     return render_template('users.html', users=users, categories=categories, title='NH | المستخدمين')
 
 def save_profile_picture(picture_from_form):
