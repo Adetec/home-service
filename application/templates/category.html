@@ -1,40 +1,40 @@
 {% extends 'base.html' %}
 {% block main %}
-    <section class="container card">
-        <img class="card-img-top" src="{{ url_for('static', filename='img/categories/'+category.image_file) }}">
-        <h2 class="card-title text-center">{{ category.category_name }}</h2>
-            <div class="card-body text-right">
-                <p class="card-text">الرقم: <span class="blue-text">{{ category.id }}</span></p>
-                <p class="card-text">الصنف: <span class="blue-text">{{ category.category_name }}</span></p>
-                <p class="card-text">وصف الصنف: <span class="blue-text">{{ category.description }}</span></p>
-                <ul>
-                    
-                </ul>
-            </div>
-            <div class="card-footer">
-                {% if current_user.user_type == 'admin' %}
-                    <a class="card-link left" href="{{ url_for('update_category', id=category.id) }}">تعديل</a>
-                    <a class="card-link left" href="#">حذف</a>
-                {% else %}
-                    <a class="card-link left" href="#">المزيد من التفاصيل</a>
-                {% endif %}
-            </div>
+    <section class="container row">
+        <div class="card col-lg-6 mx-auto">
+            <img data-aos="fade" class="card-img-top pt-2" src="{{ url_for('static', filename='img/categories/'+category.image_file) }}">
+            <h2 class="card-title text-center">{{ category.category_name }}</h2>
+                <div class="card-body text-right">
+                    <p data-aos="slide-up" class="card-text">الرقم: <span class="text-info">{{ category.id }}</span></p>
+                    <p data-aos="slide-up" class="card-text">الصنف: <span class="text-info">{{ category.category_name }}</span></p>
+                    <p data-aos="slide-up" class="card-text">وصف الصنف: <span class="text-info">{{ category.description }}</span></p>
+                </div>
+                <div data-aos="fade-up" class="card-footer">
+                    {% if current_user.user_type == 'admin' %}
+                        <a class="card-link left" href="{{ url_for('update_category', id=category.id) }}">تعديل</a>
+                    {% else %}
+                        <a class="card-link left" href="#services">المزيد من التفاصيل</a>
+                    {% endif %}
+                </div>
+        </div>
     </section>
-    <h2 class="card-header text-center">الخدمات</h2>
-    <section class="card-group container">
-        {% for service in category.services %}
-            <div class="card">
-                <img class="card-img-top" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
-                <h3 class="card-title text-center">{{ service.service_name }}</h3>
-        
-            <div class="card-body text-right">
-                <p class="card-text">{{ service.user_id }}</p>
-                <p class="card-text">{{ service.description }}</p>
-            </div>
-            <div class="card-footer">
-                <a href="{{ url_for('service_details', id=service.id) }}">مهتم</a>
-            </div>
-            </div>
-        {% endfor %}
+    <section class="container pt-4">
+        <h2 id="services" class="card-header text-center">الخدمات</h2>
+        <div class="card-group">
+            {% for service in category.services %}
+                <div class="card">
+                    <img data-aos="flip-down" class="card-img-top p-2" src="{{ url_for('static', filename='img/services/'+service.image_file) }}">
+                    <h3 class="card-title text-center">{{ service.service_name }}</h3>
+            
+                <div class="card-body text-right">
+                    <p data-aos="slide-up" class="card-text">صاحب الخدمة: <span class="text-info">{{ service.owner.username }}</span></p>
+                    <p data-aos="slide-up" class="card-text">وصف الخدمة: <span class="text-info">{{ service.description }}</span></p>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url_for('service_details', id=service.id) }}">مهتم</a>
+                </div>
+                </div>
+            {% endfor %}
+        </div>
     </section>
 {% endblock %}
