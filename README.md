@@ -34,7 +34,7 @@ https://www.youtube.com/watch?v=rQ4uE6ra_mQ&list=PLbBoIyVwGwnKkEeTBku6gNQltgGitR
 * [SQLAlchemy](https://www.sqlalchemy.org/): Is the Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL. It provides a full suite of well known enterprise-level persistence patterns, designed for efficient and high-performing database access, adapted into a simple and Pythonic domain language.
 * [Jinja2](https://jinja.palletsprojects.com/en/2.10.x/): is a modern and designer-friendly templating language for Python, modelled after Django’s templates. It is fast, widely used and secure with the optional sandboxed template execution environment
 * [Flask moment](https://github.com/miguelgrinberg/Flask-Moment): Formatting of dates and times in Flask templates using moment.js.
-* [FTW](https://flask-wtf.readthedocs.io/en/stable/): Simple integration of Flask and WTForms, including CSRF, file upload, and reCAPTCHA.
+* [WTF](https://flask-wtf.readthedocs.io/en/stable/): Simple integration of Flask and WTForms, including CSRF, file upload, and reCAPTCHA.
 * [Mail Message](https://pythonhosted.org/Flask-Mail/): One of the most basic functions in a web application is the ability to send emails to your users
 * Flask RestAPI
 * 
