@@ -11,15 +11,19 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <!-- Links -->
         <ul class="navbar-nav mx-auto d-flex">
-            <li class="nav-item">
-                <a class="nav-link nav-effect" href="{{ url_for('display_users') }}">المستخدمين</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link nav-effect" href="{{ url_for('add_category') }}">صنف جديد</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link nav-effect" href="{{ url_for('add_service') }}">خدمة جديدة</a>
-            </li>
+            {% if current_user.user_type == 'admin' %}
+                <li class="nav-item">
+                    <a class="nav-link nav-effect" href="{{ url_for('display_users') }}">المستخدمين</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-effect" href="{{ url_for('add_category') }}">صنف جديد</a>
+                </li>
+            {% endif %}
+            {% if current_user.user_type == 'client' %}
+                <li class="nav-item">
+                    <a class="nav-link nav-effect" href="{{ url_for('add_service') }}">خدمة جديدة</a>
+                </li>
+                {% endif %}
         
             <!-- Dropdown -->
             <li class="nav-item dropdown">
@@ -33,6 +37,9 @@
                         {% endfor %}
                     {% endif %}
                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-effect" href="#contact">تواصل معنا</a>
             </li>
         </ul>
         <ul class="navbar-nav d-flex justify-content-around flex-row mr-auto justify-content-end">
