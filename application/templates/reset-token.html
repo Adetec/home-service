@@ -1,39 +1,37 @@
 {% extends 'base.html' %}
 {% block main %}
-    <div class="row container">
-        <form class="col s12 m12" method="POST" action="">
+    <div class="row container my-5 pt-4 mx-auto">
+        <form class="col-6 mx-auto text-right" method="POST" action="">
                 {{ form.hidden_tag() }}
 
-            <div class="input-field col s12 m12">
+            <div class="form-group">
+                {{ form.password.label(class="form-control-label") }}
                 {% if form.password.errors %}
-                    {{ form.password(class="", type="email") }}
+                    {{ form.password(class="form-control", type="email") }}
                     <div class="red-text darken-3-text center-align pulse">
                         {% for error in form.password.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.password(class="", type="password") }}
+                    {{ form.password(class="form-control", type="password") }}
                 {% endif %}
-                {{ form.password.label }}
             </div>
-            <div class="input-field col s12 m12">
+            <div class="form-group">
+                {{ form.confirm_password.label(class="form-control-label") }}
                 {% if form.confirm_password.errors %}
-                    {{ form.confirm_password(class="", type="email") }}
-                    <div class="red-text darken-3-text center-align pulse">
+                    {{ form.confirm_password(class="form-control", type="password") }}
+                    <div class="alert alert-danger text center">
                         {% for error in form.confirm_password.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.confirm_password(class="", type="password") }}
+                    {{ form.confirm_password(class="form-control", type="password") }}
                 {% endif %}
-                {{ form.confirm_password.label }}
             </div>
-            <div class="row">
-                <div class="file-field input-field col s12 m12">
-                    {{ form.submit(class="btn-large indigo") }}
-                </div>
+            <div class="form-group float-left">
+                {{ form.submit(class="btn btn-outline-secondary") }}
             </div>
         </form>
     </div>
