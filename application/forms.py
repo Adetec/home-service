@@ -47,6 +47,7 @@ class UpdateProfileForm(FlaskForm):
     address_first_line = StringField('العنوان', validators=[])
     address_second_line = StringField('2العنوان', validators=[])
     city = StringField('الولاية', validators=[])
+    phone = StringField('رقم الهاتف', validators=[])
     submit = SubmitField('تعديل')
 
     def validate_username(self, username):
@@ -72,7 +73,7 @@ class ServiceForm(FlaskForm):
     description = TextAreaField('وصف الخدمة', validators=[DataRequired()])
     picture = FileField('تحميل صورة الخدمة', validators=[FileAllowed(['jpg', 'png', 'svg'])])
     category_id = SelectField('الصنف', validators=[], choices=cat_ids)
-    submit = SubmitField('تحديث')
+    submit = SubmitField('إضافة')
 
 class ServiceRequestMessagesForm(FlaskForm):
     message = TextAreaField('رسالة', validators=[DataRequired()])

@@ -287,6 +287,7 @@ def profile():
         current_user.address_first_line = form.address_first_line.data
         current_user.address_second_line = form.address_second_line.data
         current_user.city = form.city.data
+        current_user.phone_number = form.phone.data
         db.session.commit()
         flash('قد تم تعديل معلوماتك بنجاح', 'success')
         return redirect(url_for('profile'))
@@ -299,6 +300,7 @@ def profile():
         form.address_first_line.data = current_user.address_first_line
         form.address_second_line.data = current_user.address_second_line
         form.city.data = current_user.city
+        form.phone.data = current_user.phone_number
     return render_template('profile.html', form=form, n_services=n_services, n_requests=n_requests, categories=categories, services=services, title='NH | حسابي')
 
 
