@@ -16,8 +16,8 @@ class User(db.Model, UserMixin):
     full_name = db.Column(db.String(64), default='no full name')
     email = db.Column(db.String(120), unique=True, nullable=False)
     user_type = db.Column(db.String(20))
-    # Default Image credit is licensed by CC BY 3.0 "https://www.onlinewebfonts.com/icon/191958"
-    image_file = db.Column(db.String(20), nullable=False, default='profile.svg')
+    # Default Image credit is licensed by Wikipedia "https://fr.wikipedia.org/wiki/Fichier:Circle-icons-profile.svg#/media/Fichier:Circle-icons-profile.svg"
+    image_file = db.Column(db.String(20), nullable=False, default='profile.png')
     password = db.Column(db.String(64), nullable=False)
     services = db.relationship('Service', backref='owner', lazy=True)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
