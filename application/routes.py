@@ -56,7 +56,7 @@ def send_verification_email(user):
     msg.html = f'''
     <div dir="rtl">
     <h3>مرحبا <strong>{user.username}</strong></h3>
-    <p>بناء على تسجيلكم في موقعنا بيتي للخدمات، نريد منكم تأكيد بريدكم الإلكتروني من أجل تفعيل حسابكم والإستفادة من خدماتنا </p>
+    <p>بناء على تسجيلكم في موقعنا Pro Handy home service، نريد منكم تأكيد بريدكم الإلكتروني من أجل تفعيل حسابكم والإستفادة من خدماتنا </p>
     <p> يمكنكم فعل ذلك بالضغط من  <a href="{url_for('email_verification', token=token, _external=True)}" target="_BLANK">هنا</a></p>
     <p>إذا لم تقم بذلك، برجاء تجاهل هذه الرسالة</p>
     </div>
