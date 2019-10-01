@@ -73,7 +73,7 @@ https://www.youtube.com/watch?v=rQ4uE6ra_mQ&list=PLbBoIyVwGwnKkEeTBku6gNQltgGitR
 12 Pillow
 ```
 
-* Open your terminal and run ```pip3 freeze > reuirements.txt```
+* Open your terminal and run ```pip3 install -r requirements.txt```
 * Open `application/__init__.py`
 * Create a google mail or if you want to set your own Email and password
 
