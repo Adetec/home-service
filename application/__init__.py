@@ -11,7 +11,7 @@ app = Flask(__name__)
 CORS(app)
 moment = Moment(app)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://prohandy:password@localhost/prohandy'
 db = SQLAlchemy(app)
 db.session.configure(autoflush=False)
 bcrypt = Bcrypt(app)
