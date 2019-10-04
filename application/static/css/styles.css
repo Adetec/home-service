@@ -1,7 +1,3 @@
-
-/* * {
-    outline: #333 .2px solid;
-} */
 html {
   height: 100%;
 }
@@ -231,9 +227,6 @@ footer {
     width: 200px;
 }
 
-#cover {
-    height: 96vh;  
-}
 
 .screen-height {
   height: 100vh;
@@ -318,6 +311,7 @@ nav .dropdown-menu {
 }
 
 #notif-drop {
+  position: absolute;
   top: 100%
 }
 
@@ -355,6 +349,7 @@ nav .dropdown-menu {
     height: 32px;
     line-height: inherit;
 }
+
 
 #notif-badge {
     font-size: 12px;
@@ -716,13 +711,26 @@ nav a {
   transition-duration:1.3s;
 }
 
+@media (min-width: 769px) {
+
+  #cover {
+    height: 100vh;  
+  }
+}
+
 
   
 
-@media (max-width: 699px) {
-    #presentation-slider-pager .presentation-slider-pager-one .pager-item img, #cle-vis {
-        width: 300px;
+@media (max-width: 768px) {
+
+    #notif-drop {
+      width: 100%;
     }
+
+    #presentation-slider-pager .presentation-slider-pager-one .pager-item img, #cle-vis {
+        width: 250px;
+    }
+
     .banner-one .block-title__text {
       padding-top: 0;
       text-align: center;
@@ -735,7 +743,7 @@ nav a {
 
 
     #counters {
-      top: 10%;
+      top: 10px;
     }
 
     .counter-title {

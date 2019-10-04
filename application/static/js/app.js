@@ -229,7 +229,7 @@ const renderNotifications =(notifs) => {
 
        $(notElement).attr('id', `notif-${notif.id}`);
        $(notElement).attr('href', url);
-       $(notElement).addClass('dropdown-item not-read');
+       $(notElement).addClass('dropdown-item not-read overflow-hidden');
        $(sender).addClass('text-primary');
        $(msgTime).addClass('text-info');
        $(sender).text(notif.sender);
